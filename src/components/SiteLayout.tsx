@@ -1,0 +1,113 @@
+import { Link, Outlet, useLocation } from "@tanstack/react-router";
+import logo from "@/assets/logo.png";
+import { Leaf, Menu, X } from "lucide-react";
+import { useState } from "react";
+
+const NAV = [
+  { to: "/", label: "O problema" },
+  { to: "/alimentos", label: "Alimentos" },
+  { to: "/jogo", label: "Jogo" },
+  { to: "/informe-se", label: "Informe-se!" },
+] as const;
+
+export function SiteLayout() {
+  const { pathname } = useLocation();
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="min-h-screen flex flex-col bg-background">
+      <header className="sticky top-0 z-40 backdrop-blur-md bg-background/80 border-b border-border">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+          <Link to="/" className="flex items-center gap-3 group">
+            <img src={logo} alt="Saúde em Ação" className="w-12 h-12 rounded-xl shadow-sm group-hover:scale-105 transition" />
+            <div className="leading-tight">
+              <div className="font-display text-lg font-bold text-primary">Saúde em Ação</div>
+              <div className="text-[11px] text-muted-foreground -mt-0.5">ODS 3 · Alimentação consciente</div>
+            </div>
+          </Link>
+          <nav className="hidden md:flex items-center gap-1">
+            {NAV.map((n) => {
+              const active = pathname === n.to;
+              return (
+                <Link
+                  key={n.to}
+                  to={n.to}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition ${
+                    active
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-foreground hover:bg-secondary"
+                  }`}
+                >
+                  {n.label}
+                </Link>
+              );
+            })}
+          </nav>
+          <button
+            className="md:hidden p-2 rounded-lg hover:bg-secondary"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Menu"
+          >
+            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+        {open && (
+          <div className="md:hidden border-t border-border bg-background">
+            <div className="px-4 py-2 flex flex-col gap-1">
+              {NAV.map((n) => (
+                <Link
+                  key={n.to}
+                  to={n.to}
+                  onClick={() => setOpen(false)}
+                  className={`px-4 py-3 rounded-lg text-sm font-semibold ${
+                    pathname === n.to ? "bg-primary text-primary-foreground" : "hover:bg-secondary"
+                  }`}
+                >
+                  {n.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </header>
+
+      <main className="flex-1">
+        <Outlet />
+      </main>
+
+      <footer className="border-t border-border mt-16 bg-secondary/40">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 grid sm:grid-cols-3 gap-6 text-sm">
+          <div>
+            <div className="flex items-center gap-2 font-display font-bold text-primary text-lg">
+              <Leaf className="w-5 h-5" /> Saúde em Ação
+            </div>
+            <p className="mt-2 text-muted-foreground">
+              Projeto educativo alinhado à ODS 3 — Saúde e Bem-Estar — sobre os
+              riscos dos agrotóxicos nos alimentos.
+            </p>
+          </div>
+          <div>
+            <div className="font-semibold mb-2">Navegue</div>
+            <ul className="space-y-1 text-muted-foreground">
+              {NAV.map((n) => (
+                <li key={n.to}>
+                  <Link to={n.to} className="hover:text-primary">{n.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <div className="font-semibold mb-2">Inspirado em</div>
+            <p className="text-muted-foreground">
+              Dados públicos de Anvisa, INCA, IDEC, Ministério da Saúde e
+              UFMG. Conteúdo com fim educativo.
+            </p>
+          </div>
+        </div>
+        <div className="text-center text-xs text-muted-foreground pb-6">
+          © {new Date().getFullYear()} Saúde em Ação
+        </div>
+      </footer>
+    </div>
+  );
+}
