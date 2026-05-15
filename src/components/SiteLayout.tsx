@@ -4,7 +4,7 @@ import { Leaf, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 const NAV = [
-  { to: "/", label: "O problema" },
+  { to: "/", label: "Saúde em Ação" },
   { to: "/alimentos", label: "Alimentos" },
   { to: "/jogo", label: "Jogo" },
   { to: "/informe-se", label: "Informe-se!" },
@@ -104,8 +104,13 @@ export function SiteLayout() {
             </p>
           </div>
         </div>
-        <div className="text-center text-xs text-muted-foreground pb-6">
-          © {new Date().getFullYear()} Saúde em Ação
+        <div className="border-t border-border/60 mt-4 pt-5 pb-6 text-center">
+          <p className="text-sm font-semibold text-primary">
+            Feito por Alessandra Paixão e Lara Breda
+          </p>
+          <p className="text-xs text-muted-foreground mt-1">
+            © {new Date().getFullYear()} Saúde em Ação · Projeto educativo ODS 3
+          </p>
         </div>
       </footer>
     </div>
