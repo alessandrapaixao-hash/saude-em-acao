@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AlertCircle } from "lucide-react";
+import { useMemo, useState } from "react";
 
 export const Route = createFileRoute("/_site/alimentos")({
   head: () => ({
     meta: [
       { title: "Alimentos e agrotóxicos — Saúde em Ação" },
-      { name: "description", content: "Conheça os alimentos mais contaminados por agrotóxicos no Brasil, segundo a Anvisa, e seus riscos à saúde." },
+      { name: "description", content: "60 alimentos brasileiros, os agrotóxicos mais encontrados e os riscos à saúde — segundo Anvisa, IDEC, INCA, Greenpeace e reportagens." },
       { property: "og:title", content: "Alimentos com mais agrotóxicos" },
       { property: "og:description", content: "Os principais alimentos contaminados, os agrotóxicos usados e os riscos." },
       { property: "og:url", content: "/alimentos" },
@@ -15,127 +16,225 @@ export const Route = createFileRoute("/_site/alimentos")({
   component: AlimentosPage,
 });
 
+type Categoria = "Frutas" | "Verduras" | "Legumes" | "Tubérculos" | "Grãos" | "Outros";
+
 type Card = {
   emoji: string;
   nome: string;
   rank: string;
+  categoria: Categoria;
   agrotoxicos: string[];
   riscos: string[];
   cor: string;
 };
 
+const TOMATE = "var(--tomato)";
+const FOLHA = "var(--leaf)";
+const SOL = "var(--sun)";
+const BERRY = "var(--berry)";
+const ACCENT = "var(--accent)";
+
 const ALIMENTOS: Card[] = [
-  {
-    emoji: "🍓",
-    nome: "Morango",
-    rank: "Campeão de contaminação",
-    cor: "var(--tomato)",
+  // ====== FRUTAS ======
+  { emoji: "🍓", nome: "Morango", rank: "Campeão de contaminação", categoria: "Frutas", cor: TOMATE,
     agrotoxicos: ["Carbendazim", "Clorpirifós", "Captana", "Procimidona"],
-    riscos: [
-      "Distúrbios hormonais e endócrinos",
-      "Suspeita de carcinogenicidade",
-      "Toxicidade neurológica",
-    ],
-  },
-  {
-    emoji: "🫑",
-    nome: "Pimentão",
-    rank: "Top 3 da Anvisa",
-    cor: "var(--leaf)",
-    agrotoxicos: ["Acefato", "Cipermetrina", "Endosulfan", "Metamidofós"],
-    riscos: [
-      "Intoxicação aguda (náuseas, vômitos, convulsões)",
-      "Danos ao sistema nervoso",
-      "Substâncias proibidas em vários países",
-    ],
-  },
-  {
-    emoji: "🍅",
-    nome: "Tomate",
-    rank: "Alta exposição diária",
-    cor: "var(--tomato)",
-    agrotoxicos: ["Clorotalonil", "Mancozebe", "Tebuconazol"],
-    riscos: [
-      "Possível ação carcinogênica",
-      "Disrupção endócrina",
-      "Irritação respiratória crônica",
-    ],
-  },
-  {
-    emoji: "🥬",
-    nome: "Alface",
-    rank: "Folhas que retêm resíduos",
-    cor: "var(--leaf)",
-    agrotoxicos: ["Carbofurano", "Permetrina", "Deltametrina"],
-    riscos: [
-      "Toxicidade aguda alta",
-      "Efeitos neurológicos em longo prazo",
-      "Risco para crianças e gestantes",
-    ],
-  },
-  {
-    emoji: "🥔",
-    nome: "Batata",
-    rank: "Consumo massivo",
-    cor: "var(--accent)",
-    agrotoxicos: ["Glufosinato", "Imidacloprido", "Clorpirifós"],
-    riscos: [
-      "Toxicidade reprodutiva",
-      "Neurotoxicidade",
-      "Danos ao sistema imunológico",
-    ],
-  },
-  {
-    emoji: "🍇",
-    nome: "Uva",
-    rank: "Múltiplas aplicações",
-    cor: "var(--berry)",
+    riscos: ["Distúrbios hormonais e endócrinos", "Suspeita de carcinogenicidade", "Toxicidade neurológica"] },
+  { emoji: "🍇", nome: "Uva", rank: "Múltiplas aplicações", categoria: "Frutas", cor: BERRY,
     agrotoxicos: ["Tiametoxam", "Procimidona", "Captana"],
-    riscos: [
-      "Provável carcinógeno humano",
-      "Distúrbios hormonais",
-      "Toxicidade hepática",
-    ],
-  },
-  {
-    emoji: "🥕",
-    nome: "Cenoura",
-    rank: "Absorção pelas raízes",
-    cor: "var(--accent)",
-    agrotoxicos: ["Difenoconazol", "Linuron", "Aldicarbe"],
-    riscos: [
-      "Suspeita de causar câncer",
-      "Toxicidade no fígado e rins",
-      "Resíduos persistentes no solo",
-    ],
-  },
-  {
-    emoji: "🍍",
-    nome: "Abacaxi",
-    rank: "Cultivo intensivo",
-    cor: "var(--sun)",
+    riscos: ["Provável carcinógeno humano", "Distúrbios hormonais", "Toxicidade hepática"] },
+  { emoji: "🍊", nome: "Laranja", rank: "Topo da lista Anvisa 2024", categoria: "Frutas", cor: SOL,
+    agrotoxicos: ["Imidacloprido", "Tiametoxam", "Acefato", "Carbendazim"],
+    riscos: ["Risco ao desenvolvimento infantil", "Toxicidade neurológica", "Resíduos passam para o suco"] },
+  { emoji: "🍍", nome: "Abacaxi", rank: "Topo da contaminação (O Globo)", categoria: "Frutas", cor: SOL,
     agrotoxicos: ["Diuron", "Bromacila", "Etoprofós"],
-    riscos: [
-      "Contaminação de águas subterrâneas",
-      "Disrupção endócrina",
-      "Toxicidade aguda",
-    ],
-  },
-  {
-    emoji: "🍊",
-    nome: "Laranja",
-    rank: "Pulverização frequente",
-    cor: "var(--sun)",
-    agrotoxicos: ["Imidacloprido", "Tiametoxam", "Acefato"],
-    riscos: [
-      "Risco para o desenvolvimento infantil",
-      "Toxicidade neurológica",
-      "Resíduos atingem o suco",
-    ],
-  },
+    riscos: ["Contamina águas subterrâneas", "Disrupção endócrina", "Toxicidade aguda"] },
+  { emoji: "🍎", nome: "Maçã", rank: "Aplicações repetidas", categoria: "Frutas", cor: TOMATE,
+    agrotoxicos: ["Captana", "Tiabendazol", "Carbendazim"],
+    riscos: ["Suspeita de carcinogenicidade", "Disrupção endócrina", "Resíduos na casca"] },
+  { emoji: "🍌", nome: "Banana", rank: "Pulverização aérea", categoria: "Frutas", cor: SOL,
+    agrotoxicos: ["Clorotalonil", "Tiabendazol", "Imazalil"],
+    riscos: ["Toxicidade respiratória", "Suspeita de câncer", "Risco aos trabalhadores rurais"] },
+  { emoji: "🥭", nome: "Manga", rank: "Resíduos acima do limite", categoria: "Frutas", cor: SOL,
+    agrotoxicos: ["Carbendazim", "Tebuconazol", "Imidacloprido"],
+    riscos: ["Disrupção endócrina", "Toxicidade reprodutiva", "Neurotoxicidade"] },
+  { emoji: "🥑", nome: "Abacate", rank: "Acumula resíduos na polpa", categoria: "Frutas", cor: FOLHA,
+    agrotoxicos: ["Difenoconazol", "Abamectina", "Clorpirifós"],
+    riscos: ["Toxicidade hepática", "Efeitos neurológicos", "Risco gestacional"] },
+  { emoji: "🍈", nome: "Melão", rank: "Cultivo intensivo no NE", categoria: "Frutas", cor: SOL,
+    agrotoxicos: ["Acefato", "Metomil", "Imidacloprido"],
+    riscos: ["Intoxicação aguda", "Neurotoxicidade", "Toxicidade imunológica"] },
+  { emoji: "🍉", nome: "Melancia", rank: "Alta carga de água", categoria: "Frutas", cor: TOMATE,
+    agrotoxicos: ["Mancozebe", "Clorpirifós", "Lambda-cialotrina"],
+    riscos: ["Disrupção tireoidiana", "Neurotoxicidade", "Possível carcinógeno"] },
+  { emoji: "🍐", nome: "Pera", rank: "Alta detecção (PARA)", categoria: "Frutas", cor: FOLHA,
+    agrotoxicos: ["Carbendazim", "Tebuconazol", "Imidacloprido"],
+    riscos: ["Suspeita de carcinogenicidade", "Disrupção endócrina", "Toxicidade reprodutiva"] },
+  { emoji: "🍑", nome: "Pêssego", rank: "Pulverização frequente", categoria: "Frutas", cor: TOMATE,
+    agrotoxicos: ["Iprodiona", "Carbendazim", "Diazinona"],
+    riscos: ["Neurotoxicidade", "Disrupção hormonal", "Risco em crianças"] },
+  { emoji: "🍈", nome: "Goiaba", rank: "Campeã (A Pública)", categoria: "Frutas", cor: TOMATE,
+    agrotoxicos: ["Abamectina", "Carbendazim", "Clorpirifós"],
+    riscos: ["Toxicidade nervosa", "Provável câncer", "Risco em gestantes"] },
+  { emoji: "🍋", nome: "Limão", rank: "Pulverização pesada", categoria: "Frutas", cor: SOL,
+    agrotoxicos: ["Imidacloprido", "Acefato", "Tiametoxam"],
+    riscos: ["Neurotoxicidade", "Toxicidade reprodutiva", "Risco infantil"] },
+  { emoji: "🍊", nome: "Mexerica / Tangerina", rank: "Citros com resíduos", categoria: "Frutas", cor: SOL,
+    agrotoxicos: ["Carbendazim", "Imazalil", "Clorpirifós"],
+    riscos: ["Disrupção endócrina", "Neurotoxicidade", "Provável carcinógeno"] },
+  { emoji: "🥭", nome: "Mamão", rank: "Resíduos detectados", categoria: "Frutas", cor: SOL,
+    agrotoxicos: ["Mancozebe", "Tebuconazol", "Cipermetrina"],
+    riscos: ["Disrupção tireoidiana", "Risco reprodutivo", "Toxicidade hepática"] },
+  { emoji: "🍈", nome: "Maracujá", rank: "Aplicação contínua", categoria: "Frutas", cor: SOL,
+    agrotoxicos: ["Mancozebe", "Difenoconazol", "Abamectina"],
+    riscos: ["Disrupção endócrina", "Neurotoxicidade", "Toxicidade hepática"] },
+  { emoji: "🥝", nome: "Kiwi", rank: "Importação com resíduos", categoria: "Frutas", cor: FOLHA,
+    agrotoxicos: ["Iprodiona", "Boscalida", "Fludioxonil"],
+    riscos: ["Suspeita de carcinogenicidade", "Toxicidade hepática", "Disrupção endócrina"] },
+  { emoji: "🍑", nome: "Ameixa", rank: "Resíduos persistentes", categoria: "Frutas", cor: BERRY,
+    agrotoxicos: ["Carbendazim", "Tebuconazol", "Iprodiona"],
+    riscos: ["Disrupção hormonal", "Risco reprodutivo", "Suspeita de câncer"] },
+  { emoji: "🥥", nome: "Caju", rank: "Cultivo no Nordeste", categoria: "Frutas", cor: TOMATE,
+    agrotoxicos: ["Mancozebe", "Endosulfan", "Cipermetrina"],
+    riscos: ["Neurotoxicidade", "Disrupção tireoidiana", "Substância proibida em vários países"] },
+  { emoji: "🍒", nome: "Acerola", rank: "Pulverização intensa", categoria: "Frutas", cor: TOMATE,
+    agrotoxicos: ["Abamectina", "Imidacloprido", "Tiametoxam"],
+    riscos: ["Toxicidade neurológica", "Risco infantil", "Disrupção endócrina"] },
+  { emoji: "🫐", nome: "Mirtilo / Amora", rank: "Cultivo intensivo", categoria: "Frutas", cor: BERRY,
+    agrotoxicos: ["Boscalida", "Iprodiona", "Fenhexamida"],
+    riscos: ["Disrupção endócrina", "Toxicidade hepática", "Suspeita de câncer"] },
+
+  // ====== VERDURAS (folhas) ======
+  { emoji: "🥬", nome: "Alface", rank: "Folhas retêm resíduos", categoria: "Verduras", cor: FOLHA,
+    agrotoxicos: ["Carbofurano", "Permetrina", "Deltametrina"],
+    riscos: ["Toxicidade aguda alta", "Efeitos neurológicos", "Risco a crianças e gestantes"] },
+  { emoji: "🥬", nome: "Couve", rank: "Aplicações frequentes", categoria: "Verduras", cor: FOLHA,
+    agrotoxicos: ["Cipermetrina", "Lambda-cialotrina", "Acefato"],
+    riscos: ["Neurotoxicidade", "Toxicidade reprodutiva", "Risco infantil"] },
+  { emoji: "🌿", nome: "Espinafre", rank: "Resíduos retidos nas folhas", categoria: "Verduras", cor: FOLHA,
+    agrotoxicos: ["Clorpirifós", "Permetrina", "Imidacloprido"],
+    riscos: ["Dano neurológico", "Disrupção hormonal", "Risco em gestantes"] },
+  { emoji: "🌱", nome: "Rúcula", rank: "Folhas finas, alta retenção", categoria: "Verduras", cor: FOLHA,
+    agrotoxicos: ["Permetrina", "Deltametrina", "Acefato"],
+    riscos: ["Neurotoxicidade", "Toxicidade aguda", "Disrupção endócrina"] },
+  { emoji: "🌿", nome: "Agrião", rank: "Cultivo úmido, alta absorção", categoria: "Verduras", cor: FOLHA,
+    agrotoxicos: ["Clorpirifós", "Permetrina", "Carbofurano"],
+    riscos: ["Neurotoxicidade severa", "Risco gestacional", "Toxicidade aguda"] },
+  { emoji: "🥬", nome: "Repolho", rank: "Múltiplas pulverizações", categoria: "Verduras", cor: FOLHA,
+    agrotoxicos: ["Cipermetrina", "Acefato", "Deltametrina"],
+    riscos: ["Neurotoxicidade", "Disrupção hormonal", "Risco infantil"] },
+  { emoji: "🥦", nome: "Brócolis", rank: "Resíduos nos floretes", categoria: "Verduras", cor: FOLHA,
+    agrotoxicos: ["Clorpirifós", "Cipermetrina", "Lambda-cialotrina"],
+    riscos: ["Toxicidade neurológica", "Disrupção endócrina", "Risco infantil"] },
+  { emoji: "🥦", nome: "Couve-flor", rank: "Aplicações repetidas", categoria: "Verduras", cor: FOLHA,
+    agrotoxicos: ["Cipermetrina", "Acefato", "Deltametrina"],
+    riscos: ["Neurotoxicidade", "Toxicidade reprodutiva", "Disrupção hormonal"] },
+  { emoji: "🌿", nome: "Chicória / Almeirão", rank: "Retém resíduos nas folhas", categoria: "Verduras", cor: FOLHA,
+    agrotoxicos: ["Permetrina", "Deltametrina", "Acefato"],
+    riscos: ["Neurotoxicidade", "Disrupção endócrina", "Risco gestacional"] },
+  { emoji: "🌿", nome: "Mostarda (folha)", rank: "Cultivo com pesticidas", categoria: "Verduras", cor: FOLHA,
+    agrotoxicos: ["Clorpirifós", "Cipermetrina", "Acefato"],
+    riscos: ["Neurotoxicidade", "Disrupção hormonal", "Risco infantil"] },
+  { emoji: "🌿", nome: "Salsa / Coentro", rank: "Folhas finas com alta retenção", categoria: "Verduras", cor: FOLHA,
+    agrotoxicos: ["Clorpirifós", "Permetrina", "Deltametrina"],
+    riscos: ["Neurotoxicidade", "Toxicidade aguda", "Risco gestacional"] },
+
+  // ====== LEGUMES ======
+  { emoji: "🫑", nome: "Pimentão", rank: "Top 3 da Anvisa", categoria: "Legumes", cor: FOLHA,
+    agrotoxicos: ["Acefato", "Cipermetrina", "Endosulfan", "Metamidofós"],
+    riscos: ["Intoxicação aguda (náuseas, convulsões)", "Danos neurológicos", "Substâncias proibidas em vários países"] },
+  { emoji: "🍅", nome: "Tomate", rank: "Alta exposição diária", categoria: "Legumes", cor: TOMATE,
+    agrotoxicos: ["Clorotalonil", "Mancozebe", "Tebuconazol"],
+    riscos: ["Ação carcinogênica possível", "Disrupção endócrina", "Irritação respiratória"] },
+  { emoji: "🥒", nome: "Pepino", rank: "Campeão Anvisa 2024", categoria: "Legumes", cor: FOLHA,
+    agrotoxicos: ["Acefato", "Carbendazim", "Clorotalonil"],
+    riscos: ["Disrupção endócrina", "Provável carcinógeno", "Toxicidade reprodutiva"] },
+  { emoji: "🥒", nome: "Abobrinha", rank: "Resíduos detectados", categoria: "Legumes", cor: FOLHA,
+    agrotoxicos: ["Mancozebe", "Clorpirifós", "Lambda-cialotrina"],
+    riscos: ["Neurotoxicidade", "Disrupção tireoidiana", "Risco infantil"] },
+  { emoji: "🍆", nome: "Berinjela", rank: "Pulverização frequente", categoria: "Legumes", cor: BERRY,
+    agrotoxicos: ["Acefato", "Cipermetrina", "Endosulfan"],
+    riscos: ["Neurotoxicidade", "Disrupção hormonal", "Substância proibida em vários países"] },
+  { emoji: "🥒", nome: "Chuchu", rank: "Resíduos detectados (PARA)", categoria: "Legumes", cor: FOLHA,
+    agrotoxicos: ["Acefato", "Clorpirifós", "Carbendazim"],
+    riscos: ["Neurotoxicidade", "Disrupção endócrina", "Toxicidade reprodutiva"] },
+  { emoji: "🌶️", nome: "Quiabo", rank: "Pulverização constante", categoria: "Legumes", cor: FOLHA,
+    agrotoxicos: ["Cipermetrina", "Acefato", "Lambda-cialotrina"],
+    riscos: ["Neurotoxicidade", "Disrupção hormonal", "Risco infantil"] },
+  { emoji: "🎃", nome: "Abóbora", rank: "Resíduos persistentes", categoria: "Legumes", cor: SOL,
+    agrotoxicos: ["Mancozebe", "Clorpirifós", "Imidacloprido"],
+    riscos: ["Disrupção tireoidiana", "Neurotoxicidade", "Risco gestacional"] },
+  { emoji: "🫛", nome: "Vagem", rank: "Resíduos detectados", categoria: "Legumes", cor: FOLHA,
+    agrotoxicos: ["Cipermetrina", "Lambda-cialotrina", "Acefato"],
+    riscos: ["Neurotoxicidade", "Disrupção hormonal", "Risco infantil"] },
+  { emoji: "🫛", nome: "Ervilha", rank: "Cultivo intensivo", categoria: "Legumes", cor: FOLHA,
+    agrotoxicos: ["Clorpirifós", "Lambda-cialotrina", "Imidacloprido"],
+    riscos: ["Neurotoxicidade", "Risco infantil", "Disrupção endócrina"] },
+  { emoji: "🌽", nome: "Milho verde", rank: "Cultura geneticamente modificada", categoria: "Legumes", cor: SOL,
+    agrotoxicos: ["Atrazina", "Glifosato", "Clorpirifós"],
+    riscos: ["Disrupção endócrina", "Provável carcinógeno (IARC)", "Neurotoxicidade"] },
+
+  // ====== TUBÉRCULOS / RAÍZES ======
+  { emoji: "🥕", nome: "Cenoura", rank: "Absorção pelas raízes", categoria: "Tubérculos", cor: ACCENT,
+    agrotoxicos: ["Difenoconazol", "Linuron", "Aldicarbe"],
+    riscos: ["Suspeita de câncer", "Toxicidade hepática e renal", "Resíduos persistentes no solo"] },
+  { emoji: "🥔", nome: "Batata", rank: "Consumo massivo", categoria: "Tubérculos", cor: ACCENT,
+    agrotoxicos: ["Glufosinato", "Imidacloprido", "Clorpirifós"],
+    riscos: ["Toxicidade reprodutiva", "Neurotoxicidade", "Dano imunológico"] },
+  { emoji: "🍠", nome: "Batata-doce", rank: "Absorção no solo", categoria: "Tubérculos", cor: ACCENT,
+    agrotoxicos: ["Clorpirifós", "Carbofurano", "Imidacloprido"],
+    riscos: ["Neurotoxicidade", "Toxicidade aguda", "Risco infantil"] },
+  { emoji: "🍠", nome: "Beterraba", rank: "Raiz com retenção", categoria: "Tubérculos", cor: BERRY,
+    agrotoxicos: ["Clorpirifós", "Lambda-cialotrina", "Carbendazim"],
+    riscos: ["Neurotoxicidade", "Disrupção endócrina", "Suspeita de câncer"] },
+  { emoji: "🥔", nome: "Mandioca", rank: "Cultivo amplo", categoria: "Tubérculos", cor: ACCENT,
+    agrotoxicos: ["Glifosato", "2,4-D", "Atrazina"],
+    riscos: ["Provável carcinógeno (IARC)", "Disrupção endócrina", "Neurotoxicidade"] },
+  { emoji: "🥔", nome: "Inhame", rank: "Resíduos no solo", categoria: "Tubérculos", cor: ACCENT,
+    agrotoxicos: ["Glifosato", "Carbofurano", "Clorpirifós"],
+    riscos: ["Neurotoxicidade", "Possível câncer", "Toxicidade reprodutiva"] },
+  { emoji: "🌶️", nome: "Rabanete", rank: "Raiz rápida e contaminada", categoria: "Tubérculos", cor: TOMATE,
+    agrotoxicos: ["Clorpirifós", "Permetrina", "Acefato"],
+    riscos: ["Neurotoxicidade", "Disrupção hormonal", "Risco infantil"] },
+
+  // ====== GRÃOS / CEREAIS ======
+  { emoji: "🌾", nome: "Arroz", rank: "Base da alimentação", categoria: "Grãos", cor: SOL,
+    agrotoxicos: ["Glifosato", "Carbofurano", "Tebuconazol"],
+    riscos: ["Provável carcinógeno", "Neurotoxicidade", "Disrupção endócrina"] },
+  { emoji: "🫘", nome: "Feijão", rank: "Resíduos detectados (PARA)", categoria: "Grãos", cor: ACCENT,
+    agrotoxicos: ["Glifosato", "Clorpirifós", "Carbendazim"],
+    riscos: ["Suspeita de câncer", "Neurotoxicidade", "Disrupção endócrina"] },
+  { emoji: "🌾", nome: "Trigo", rank: "Aplicação pré-colheita", categoria: "Grãos", cor: SOL,
+    agrotoxicos: ["Glifosato", "Tebuconazol", "Clorpirifós"],
+    riscos: ["Provável carcinógeno (IARC)", "Disrupção hormonal", "Toxicidade hepática"] },
+  { emoji: "🌱", nome: "Soja", rank: "Cultivo com mais agrotóxicos no Brasil", categoria: "Grãos", cor: FOLHA,
+    agrotoxicos: ["Glifosato", "2,4-D", "Imidacloprido"],
+    riscos: ["Provável carcinógeno", "Disrupção endócrina", "Contaminação ambiental"] },
+  { emoji: "🌾", nome: "Aveia", rank: "Resíduos pré-colheita", categoria: "Grãos", cor: SOL,
+    agrotoxicos: ["Glifosato", "Clorpirifós", "Tebuconazol"],
+    riscos: ["Provável carcinógeno", "Neurotoxicidade", "Disrupção endócrina"] },
+  { emoji: "🌽", nome: "Milho (grão)", rank: "Transgênico majoritário", categoria: "Grãos", cor: SOL,
+    agrotoxicos: ["Glifosato", "Atrazina", "Clorpirifós"],
+    riscos: ["Provável carcinógeno", "Disrupção endócrina", "Neurotoxicidade"] },
+
+  // ====== OUTROS ======
+  { emoji: "🧅", nome: "Cebola", rank: "Cultivo com resíduos", categoria: "Outros", cor: BERRY,
+    agrotoxicos: ["Iprodiona", "Mancozebe", "Clorpirifós"],
+    riscos: ["Disrupção endócrina", "Neurotoxicidade", "Toxicidade tireoidiana"] },
+  { emoji: "🧄", nome: "Alho", rank: "Aplicações em campo", categoria: "Outros", cor: ACCENT,
+    agrotoxicos: ["Mancozebe", "Tebuconazol", "Clorpirifós"],
+    riscos: ["Disrupção tireoidiana", "Neurotoxicidade", "Risco hepático"] },
 ];
 
+const CATEGORIAS: ("Todos" | Categoria)[] = ["Todos", "Frutas", "Verduras", "Legumes", "Tubérculos", "Grãos", "Outros"];
+
 function AlimentosPage() {
+  const [filtro, setFiltro] = useState<"Todos" | Categoria>("Todos");
+
+  const lista = useMemo(
+    () => (filtro === "Todos" ? ALIMENTOS : ALIMENTOS.filter((a) => a.categoria === filtro)),
+    [filtro],
+  );
+
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-24">
       <div className="text-center max-w-2xl mx-auto">
@@ -146,23 +245,47 @@ function AlimentosPage() {
           O que tem no seu prato?
         </h1>
         <p className="mt-4 text-foreground/75">
-          Estes são os alimentos com maior nível de contaminação por agrotóxicos
-          identificados em estudos da Anvisa, IDEC e do Ministério da Saúde.
-          Cada card mostra os principais princípios ativos encontrados e os
-          riscos associados.
+          {ALIMENTOS.length} alimentos brasileiros analisados a partir de dados
+          da Anvisa (PARA 2024), IDEC, INCA, Greenpeace e reportagens de
+          veículos como G1, O Globo, A Pública, Repórter Brasil e Metrópoles.
+          Filtre por categoria para encontrar o que você procura.
         </p>
       </div>
 
-      <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {ALIMENTOS.map((a) => (
+      {/* Filtros */}
+      <div className="mt-10 flex flex-wrap justify-center gap-2">
+        {CATEGORIAS.map((c) => {
+          const ativo = c === filtro;
+          const count = c === "Todos" ? ALIMENTOS.length : ALIMENTOS.filter((a) => a.categoria === c).length;
+          return (
+            <button
+              key={c}
+              onClick={() => setFiltro(c)}
+              className={`text-sm font-semibold px-4 py-2 rounded-full border transition ${
+                ativo
+                  ? "bg-primary text-primary-foreground border-primary shadow"
+                  : "bg-card text-foreground/80 border-border hover:border-primary hover:text-primary"
+              }`}
+            >
+              {c} <span className="opacity-60 ml-1 text-xs">({count})</span>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {lista.map((a) => (
           <article
             key={a.nome}
             className="group bg-card border border-border rounded-3xl overflow-hidden hover:-translate-y-1 hover:shadow-xl transition flex flex-col"
           >
             <div
-              className="h-32 flex items-center justify-center text-7xl"
+              className="h-32 flex items-center justify-center text-7xl relative"
               style={{ background: `color-mix(in oklab, ${a.cor} 18%, var(--background))` }}
             >
+              <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-background/80 text-foreground/70">
+                {a.categoria}
+              </span>
               <span className="drop-shadow-sm group-hover:scale-110 transition">
                 {a.emoji}
               </span>
@@ -179,10 +302,7 @@ function AlimentosPage() {
                 </div>
                 <div className="mt-2 flex flex-wrap gap-1.5">
                   {a.agrotoxicos.map((t) => (
-                    <span
-                      key={t}
-                      className="text-xs font-semibold px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground"
-                    >
+                    <span key={t} className="text-xs font-semibold px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground">
                       {t}
                     </span>
                   ))}
@@ -208,8 +328,10 @@ function AlimentosPage() {
       </div>
 
       <p className="text-center text-xs text-muted-foreground mt-12 max-w-xl mx-auto">
-        Fontes: Anvisa (PARA), IDEC, INCA, Ministério da Saúde. Os dados podem
-        variar a cada safra. Consulte sempre fontes oficiais.
+        Fontes: Anvisa (PARA 2024), IDEC, INCA, Greenpeace, Ministério da Saúde,
+        UFMG, UFLA, SciELO e reportagens de G1, O Globo, A Pública, Repórter
+        Brasil, Metrópoles, Saúde Abril e UOL. Os dados variam por safra —
+        consulte sempre fontes oficiais.
       </p>
     </section>
   );

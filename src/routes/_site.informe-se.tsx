@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ExternalLink, FileText, Globe, Newspaper, Play } from "lucide-react";
+import { useMemo, useState } from "react";
 import newsVideo from "@/assets/news-video.jpg";
 import newsIdec from "@/assets/news-idec.jpg";
 import newsAnvisa from "@/assets/news-anvisa.jpg";
@@ -13,9 +14,9 @@ export const Route = createFileRoute("/_site/informe-se")({
   head: () => ({
     meta: [
       { title: "Informe-se! — Saúde em Ação" },
-      { name: "description", content: "Notícias e fontes confiáveis sobre os impactos dos agrotóxicos na saúde humana." },
+      { name: "description", content: "Reportagens, artigos científicos e vídeos sobre agrotóxicos e saúde no Brasil. Filtre por tipo de fonte." },
       { property: "og:title", content: "Informe-se! — Agrotóxicos e saúde" },
-      { property: "og:description", content: "Reportagens, estudos e cartilhas oficiais sobre agrotóxicos no Brasil." },
+      { property: "og:description", content: "Reportagens, estudos e vídeos sobre agrotóxicos no Brasil." },
       { property: "og:url", content: "/informe-se" },
     ],
     links: [{ rel: "canonical", href: "/informe-se" }],
@@ -23,90 +24,122 @@ export const Route = createFileRoute("/_site/informe-se")({
   component: InformePage,
 });
 
+type Tipo = "video" | "reportagem" | "artigo";
+
 type Source = {
   title: string;
   publisher: string;
   url: string;
-  type: "video" | "article" | "pdf" | "official";
+  tipo: Tipo;
   description: string;
-  image: string;
+  image?: string;
 };
 
 const SOURCES: Source[] = [
-  {
-    title: "Agrotóxicos: o veneno que chega à mesa",
-    publisher: "YouTube",
-    url: "https://youtu.be/6-Qwqm5ozPs",
-    type: "video",
-    description: "Reportagem em vídeo sobre o uso de agrotóxicos no Brasil e seus efeitos sobre a saúde.",
-    image: newsVideo,
-  },
-  {
-    title: "Agrotóxicos no Brasil: impactos na saúde humana e ambiental",
-    publisher: "IDEC — Instituto de Defesa do Consumidor",
-    url: "https://idec.org.br/dicas-e-direitos/agrotoxicos-no-brasil-seus-impactos-na-saude-humana-e-ambiental",
-    type: "article",
-    description: "Panorama do IDEC sobre como os agrotóxicos afetam a saúde da população e o meio ambiente.",
-    image: newsIdec,
-  },
-  {
-    title: "Anvisa divulga lista de alimentos com maior contaminação por agrotóxicos",
-    publisher: "Tommasi Laboratório",
-    url: "https://tommasi.com.br/blog/anvisa-divulga-lista-de-alimentos-com-maior-nivel-de-contaminacao-por-agrotoxicos/",
-    type: "article",
-    description: "Resumo do Programa de Análise de Resíduos de Agrotóxicos em Alimentos (PARA) da Anvisa.",
-    image: newsAnvisa,
-  },
-  {
-    title: "Agrotóxicos causam problemas que só serão percebidos no futuro",
-    publisher: "Faculdade de Medicina UFMG",
-    url: "https://www.medicina.ufmg.br/agrotoxicos-causam-problemas-que-so-serao-percebidos-no-futuro/",
-    type: "article",
-    description: "Pesquisadores da UFMG alertam sobre os efeitos crônicos e cumulativos dos agrotóxicos.",
-    image: newsUfmg,
-  },
-  {
-    title: "Intoxicação Aguda por Agrotóxicos",
-    publisher: "Secretaria de Saúde do Paraná",
-    url: "https://www.saude.pr.gov.br/Pagina/Intoxicacao-Aguda-por-Agrotoxicos",
-    type: "official",
-    description: "Página oficial do governo do PR explicando sinais, sintomas e protocolos de intoxicação aguda.",
-    image: newsPr,
-  },
-  {
-    title: "Agrotóxicos e saúde — análise crítica",
-    publisher: "SciELO · Saúde em Debate",
-    url: "https://www.scielo.br/j/sdeb/a/bGBYRZvVVKMrV4yzqfwwKtP/?lang=pt",
-    type: "article",
-    description: "Artigo científico revisado por pares sobre saúde pública e agrotóxicos no Brasil.",
-    image: newsScielo,
-  },
-  {
-    title: "Intoxicação por agrotóxicos — Cartilha",
-    publisher: "BVS / Ministério da Saúde",
-    url: "https://bvsms.saude.gov.br/intoxicacao-por-agrotoxicos/",
-    type: "official",
-    description: "Conteúdo oficial do Ministério da Saúde sobre prevenção, reconhecimento e atendimento.",
-    image: newsMs,
-  },
-  {
-    title: "Um alerta sobre os impactos dos agrotóxicos na saúde",
-    publisher: "INCA — Instituto Nacional de Câncer",
-    url: "https://ninho.inca.gov.br/jspui/bitstream/123456789/12520/1/Um%20alerta%20sobre%20os%20impactos%20dos%20agrot%C3%B3xicos%20na%20sa%C3%BAde..pdf",
-    type: "pdf",
-    description: "Documento técnico do INCA que reúne evidências científicas sobre câncer e agrotóxicos.",
-    image: newsInca,
-  },
+  // Originais (com imagens)
+  { title: "Agrotóxicos: o veneno que chega à mesa", publisher: "YouTube", url: "https://youtu.be/6-Qwqm5ozPs",
+    tipo: "video", description: "Reportagem em vídeo sobre o uso de agrotóxicos no Brasil e seus efeitos sobre a saúde.", image: newsVideo },
+  { title: "Agrotóxicos no Brasil: impactos na saúde humana e ambiental", publisher: "IDEC", url: "https://idec.org.br/dicas-e-direitos/agrotoxicos-no-brasil-seus-impactos-na-saude-humana-e-ambiental",
+    tipo: "artigo", description: "Panorama do IDEC sobre como os agrotóxicos afetam a saúde da população e o meio ambiente.", image: newsIdec },
+  { title: "Anvisa divulga lista de alimentos com maior contaminação", publisher: "Tommasi Laboratório", url: "https://tommasi.com.br/blog/anvisa-divulga-lista-de-alimentos-com-maior-nivel-de-contaminacao-por-agrotoxicos/",
+    tipo: "reportagem", description: "Resumo do Programa de Análise de Resíduos de Agrotóxicos em Alimentos (PARA) da Anvisa.", image: newsAnvisa },
+  { title: "Agrotóxicos causam problemas que só serão percebidos no futuro", publisher: "Faculdade de Medicina UFMG", url: "https://www.medicina.ufmg.br/agrotoxicos-causam-problemas-que-so-serao-percebidos-no-futuro/",
+    tipo: "artigo", description: "Pesquisadores da UFMG alertam sobre os efeitos crônicos e cumulativos dos agrotóxicos.", image: newsUfmg },
+  { title: "Intoxicação Aguda por Agrotóxicos", publisher: "Secretaria de Saúde do Paraná", url: "https://www.saude.pr.gov.br/Pagina/Intoxicacao-Aguda-por-Agrotoxicos",
+    tipo: "artigo", description: "Página oficial do governo do PR sobre sinais, sintomas e protocolos de intoxicação aguda.", image: newsPr },
+  { title: "Agrotóxicos e saúde — análise crítica", publisher: "SciELO · Saúde em Debate", url: "https://www.scielo.br/j/sdeb/a/bGBYRZvVVKMrV4yzqfwwKtP/?lang=pt",
+    tipo: "artigo", description: "Artigo científico revisado por pares sobre saúde pública e agrotóxicos no Brasil.", image: newsScielo },
+  { title: "Intoxicação por agrotóxicos — Cartilha", publisher: "BVS / Ministério da Saúde", url: "https://bvsms.saude.gov.br/intoxicacao-por-agrotoxicos/",
+    tipo: "artigo", description: "Conteúdo oficial do Ministério da Saúde sobre prevenção, reconhecimento e atendimento.", image: newsMs },
+  { title: "Um alerta sobre os impactos dos agrotóxicos na saúde", publisher: "INCA — Instituto Nacional de Câncer", url: "https://ninho.inca.gov.br/jspui/bitstream/123456789/12520/1/Um%20alerta%20sobre%20os%20impactos%20dos%20agrot%C3%B3xicos%20na%20sa%C3%BAde..pdf",
+    tipo: "artigo", description: "Documento técnico do INCA com evidências científicas sobre câncer e agrotóxicos.", image: newsInca },
+
+  // Novas reportagens
+  { title: "Quais são os alimentos mais contaminados por agrotóxicos no Brasil", publisher: "Saúde Abril",
+    url: "https://saude.abril.com.br/alimentacao/quais-sao-os-alimentos-mais-contaminados-por-agrotoxicos-e-os-mais-seguros-no-brasil/",
+    tipo: "reportagem", description: "Lista dos alimentos com mais e menos resíduos detectados pela Anvisa." },
+  { title: "Alimentos com mais agrotóxicos — riscos à saúde", publisher: "Metrópoles",
+    url: "https://www.metropoles.com/saude/alimentos-mais-agrotoxicos-riscos",
+    tipo: "reportagem", description: "Especialistas explicam os riscos por trás do consumo frequente de alimentos contaminados." },
+  { title: "Laranja, pimentão e goiaba: campeões de agrotóxicos acima do limite", publisher: "Agência Pública",
+    url: "https://apublica.org/2020/10/laranja-pimentao-e-goiaba-alimentos-campeoes-de-agrotoxicos-acima-do-limite/",
+    tipo: "reportagem", description: "Investigação independente sobre os alimentos com mais resíduos irregulares." },
+  { title: "Anvisa alerta: 2 frutas populares no Brasil têm agrotóxicos em excesso", publisher: "UOL VivaBem",
+    url: "https://www.uol.com.br/vivabem/noticias/redacao/2025/01/07/anvisa-alerta-2-frutas-populares-no-brasil-tem-agrotoxicos-em-excesso.htm",
+    tipo: "reportagem", description: "Alerta da Anvisa sobre frutas amplamente consumidas e com níveis irregulares." },
+  { title: "Anvisa divulga lista com os 10 alimentos mais afetados por agrotóxicos", publisher: "O Tempo",
+    url: "https://www.otempo.com.br/brasil/anvisa-divulga-lista-com-os-dez-alimentos-mais-afetados-por-agrotoxicos-1.436431",
+    tipo: "reportagem", description: "Ranking oficial dos alimentos mais contaminados segundo o PARA da Anvisa." },
+  { title: "Pepino e laranja: alimentos campeões de agrotóxicos (Anvisa 2024)", publisher: "Repórter Brasil",
+    url: "https://reporterbrasil.org.br/2025/12/pepino-laranja-alimentos-campeoes-agrotoxicos-anvisa/",
+    tipo: "reportagem", description: "Análise dos dados mais recentes do Programa de Análise de Resíduos da Anvisa." },
+  { title: "Quais frutas acumulam mais agrotóxicos e como se proteger", publisher: "R7 Notícias",
+    url: "https://noticias.r7.com/giro-10/quais-frutas-acumulam-mais-agrotoxicos-e-como-proteger-se-18032026/",
+    tipo: "reportagem", description: "Lista prática das frutas com mais resíduos e dicas para reduzir a exposição." },
+  { title: "Anvisa divulga resultados do monitoramento de agrotóxicos — Ciclo 2024", publisher: "G1 Saúde",
+    url: "https://g1.globo.com/saude/noticia/2025/12/17/anvisa-divulga-resultados-do-monitoramento-de-agrotoxicos-em-alimentos-ciclo-2024.ghtml",
+    tipo: "reportagem", description: "Cobertura do G1 sobre os números oficiais do monitoramento de agrotóxicos." },
+  { title: "A fruta brasileira com maior teor de agrotóxicos, segundo a Anvisa", publisher: "TudoGostoso",
+    url: "https://www.tudogostoso.com.br/noticias/a-fruta-brasileira-com-maior-teor-de-agrotoxicos-segundo-a-anvisa-a24169.htm",
+    tipo: "reportagem", description: "Matéria sobre a fruta líder em resíduos de agrotóxicos no monitoramento da Anvisa." },
+  { title: "Veneno no prato dos outros é refresco", publisher: "Greenpeace Brasil",
+    url: "https://www.greenpeace.org/brasil/blog/veneno-no-prato-dos-outros-e-refresco/",
+    tipo: "artigo", description: "Análise crítica do Greenpeace sobre a flexibilização das regras de agrotóxicos no Brasil." },
+  { title: "Núcleo de Estudos NUQUALI — Agrotóxicos em alimentos", publisher: "UFLA",
+    url: "http://www.nucleoestudo.ufla.br/nuquali/?p=357",
+    tipo: "artigo", description: "Estudo acadêmico da Universidade Federal de Lavras sobre qualidade dos alimentos." },
+  { title: "Laranja e abacaxi no topo da contaminação por agrotóxicos", publisher: "O Globo",
+    url: "https://oglobo.globo.com/brasil/sustentabilidade/laranja-abacaxi-estao-no-topo-da-contaminacao-por-agrotoxicos-20542450",
+    tipo: "reportagem", description: "Reportagem do O Globo sobre as frutas com maior detecção de resíduos." },
+  { title: "As frutas mais venenosas que os brasileiros adoram", publisher: "TudoGostoso",
+    url: "https://www.tudogostoso.com.br/noticias/poucos-sabem-mas-essas-sao-as-frutas-mais-venenosas-elas-estao-cheia-de-pesticidas-mas-os-brasileiros-as-adoram-a18752.htm",
+    tipo: "reportagem", description: "Frutas amplamente consumidas no país com altos níveis de pesticidas." },
+
+  // Vídeos
+  { title: "Reportagem especial sobre agrotóxicos (Globoplay)", publisher: "Globoplay",
+    url: "https://globoplay.globo.com/v/6737676/",
+    tipo: "video", description: "Reportagem em vídeo sobre o cenário dos agrotóxicos no Brasil." },
+  { title: "Agrotóxicos no Brasil — documentário", publisher: "YouTube",
+    url: "https://www.youtube.com/watch?v=dPwDVAqZdG4",
+    tipo: "video", description: "Conteúdo audiovisual com depoimentos e dados sobre contaminação alimentar." },
+  { title: "Impacto dos agrotóxicos na saúde", publisher: "YouTube",
+    url: "https://www.youtube.com/watch?v=v-77ASNWPHY",
+    tipo: "video", description: "Vídeo explicativo sobre os efeitos dos agrotóxicos no organismo." },
+  { title: "Reportagem Globoplay — agrotóxicos no campo", publisher: "Globoplay",
+    url: "https://globoplay.globo.com/v/5564567/",
+    tipo: "video", description: "Cobertura televisiva sobre o uso de agrotóxicos no agronegócio brasileiro." },
+  { title: "Agrotóxicos e câncer — debate", publisher: "YouTube",
+    url: "https://www.youtube.com/watch?v=UYJwEK-XwRk",
+    tipo: "video", description: "Debate com especialistas sobre a relação entre agrotóxicos e câncer." },
+  { title: "Reportagem Globoplay — alimentos contaminados", publisher: "Globoplay",
+    url: "https://globoplay.globo.com/v/2921523/",
+    tipo: "video", description: "Reportagem investigativa sobre alimentos com resíduos de agrotóxicos." },
+  { title: "Como os agrotóxicos chegam ao seu prato", publisher: "YouTube",
+    url: "https://www.youtube.com/watch?v=R5-2t6VJDAg",
+    tipo: "video", description: "Vídeo que explica o caminho dos agrotóxicos da lavoura até a mesa do consumidor." },
 ];
 
-const TYPE_META = {
-  video: { label: "Vídeo", icon: Play, color: "var(--tomato)" },
-  article: { label: "Artigo", icon: Newspaper, color: "var(--leaf)" },
-  pdf: { label: "PDF", icon: FileText, color: "var(--berry)" },
-  official: { label: "Fonte oficial", icon: Globe, color: "var(--primary)" },
-} as const;
+const TYPE_META: Record<Tipo, { label: string; icon: typeof Play; color: string; bg: string }> = {
+  video: { label: "Vídeo", icon: Play, color: "var(--tomato)", bg: "linear-gradient(135deg, var(--tomato), var(--sun))" },
+  reportagem: { label: "Reportagem", icon: Newspaper, color: "var(--berry)", bg: "linear-gradient(135deg, var(--berry), var(--accent))" },
+  artigo: { label: "Artigo", icon: FileText, color: "var(--leaf)", bg: "linear-gradient(135deg, var(--leaf), var(--primary))" },
+};
+
+const FILTROS: ("todos" | Tipo)[] = ["todos", "reportagem", "artigo", "video"];
+const FILTRO_LABEL: Record<"todos" | Tipo, string> = {
+  todos: "Todos",
+  reportagem: "Reportagens",
+  artigo: "Artigos",
+  video: "Vídeos",
+};
 
 function InformePage() {
+  const [filtro, setFiltro] = useState<"todos" | Tipo>("todos");
+  const lista = useMemo(
+    () => (filtro === "todos" ? SOURCES : SOURCES.filter((s) => s.tipo === filtro)),
+    [filtro],
+  );
+
   return (
     <section className="relative max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-24">
       <div aria-hidden className="absolute top-0 right-0 w-72 h-72 rounded-full bg-[var(--leaf)]/15 blur-3xl -z-10" />
@@ -120,15 +153,36 @@ function InformePage() {
           Informe-se!
         </h1>
         <p className="mt-4 text-foreground/75">
-          Reunimos reportagens, estudos científicos e cartilhas oficiais para
-          você se aprofundar nos impactos dos agrotóxicos na saúde humana e
-          ambiental. Todas as fontes são públicas e confiáveis.
+          {SOURCES.length} fontes confiáveis entre reportagens, artigos
+          científicos e vídeos sobre os impactos dos agrotóxicos na saúde.
+          Use os filtros para encontrar o formato que você prefere.
         </p>
       </div>
 
-      <div className="mt-12 grid md:grid-cols-2 gap-6">
-        {SOURCES.map((s) => {
-          const meta = TYPE_META[s.type];
+      {/* Filtros */}
+      <div className="mt-10 flex flex-wrap justify-center gap-2">
+        {FILTROS.map((t) => {
+          const ativo = t === filtro;
+          const count = t === "todos" ? SOURCES.length : SOURCES.filter((s) => s.tipo === t).length;
+          return (
+            <button
+              key={t}
+              onClick={() => setFiltro(t)}
+              className={`text-sm font-semibold px-4 py-2 rounded-full border transition ${
+                ativo
+                  ? "bg-primary text-primary-foreground border-primary shadow"
+                  : "bg-card text-foreground/80 border-border hover:border-primary hover:text-primary"
+              }`}
+            >
+              {FILTRO_LABEL[t]} <span className="opacity-60 ml-1 text-xs">({count})</span>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {lista.map((s) => {
+          const meta = TYPE_META[s.tipo];
           const Icon = meta.icon;
           return (
             <a
@@ -139,14 +193,23 @@ function InformePage() {
               className="group bg-card border border-border rounded-3xl overflow-hidden hover:border-primary hover:-translate-y-1 hover:shadow-xl transition flex flex-col"
             >
               <div className="relative aspect-[16/9] overflow-hidden bg-secondary">
-                <img
-                  src={s.image}
-                  alt={s.title}
-                  loading="lazy"
-                  width={800}
-                  height={450}
-                  className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                />
+                {s.image ? (
+                  <img
+                    src={s.image}
+                    alt={s.title}
+                    loading="lazy"
+                    width={800}
+                    height={450}
+                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                  />
+                ) : (
+                  <div
+                    className="w-full h-full flex items-center justify-center"
+                    style={{ background: meta.bg }}
+                  >
+                    <Icon className="w-16 h-16 text-white/90 drop-shadow group-hover:scale-110 transition" />
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 <span
                   className="absolute top-3 left-3 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-background/95 backdrop-blur"
@@ -158,7 +221,7 @@ function InformePage() {
                 <ExternalLink className="absolute top-3 right-3 w-5 h-5 text-white drop-shadow opacity-0 group-hover:opacity-100 transition" />
               </div>
               <div className="p-6 flex-1 flex flex-col">
-                <h3 className="font-display text-xl font-bold text-primary leading-tight">
+                <h3 className="font-display text-lg font-bold text-primary leading-tight">
                   {s.title}
                 </h3>
                 <div className="text-xs font-semibold text-foreground/60 mt-1">
@@ -167,6 +230,9 @@ function InformePage() {
                 <p className="text-sm text-foreground/75 mt-3 leading-relaxed">
                   {s.description}
                 </p>
+                <div className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-primary group-hover:underline">
+                  Acessar fonte <ExternalLink className="w-3 h-3" />
+                </div>
               </div>
             </a>
           );
