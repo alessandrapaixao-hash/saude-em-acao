@@ -34,6 +34,39 @@ const SOL = "var(--sun)";
 const BERRY = "var(--berry)";
 const ACCENT = "var(--accent)";
 
+// Mapa nome do alimento -> termos de busca para imagem real (Flickr via LoremFlickr)
+const IMG_QUERY: Record<string, string> = {
+  "Morango": "strawberry,fruit", "Uva": "grape,bunch", "Laranja": "orange,fruit",
+  "Abacaxi": "pineapple", "Maçã": "apple,red", "Banana": "banana,bunch",
+  "Manga": "mango,fruit", "Abacate": "avocado", "Melão": "melon,cantaloupe",
+  "Melancia": "watermelon", "Pera": "pear,fruit", "Pêssego": "peach,fruit",
+  "Goiaba": "guava,fruit", "Limão": "lemon,fruit", "Mexerica / Tangerina": "tangerine,mandarin",
+  "Mamão": "papaya", "Maracujá": "passionfruit", "Kiwi": "kiwi,fruit",
+  "Ameixa": "plum,fruit", "Caju": "cashew,fruit", "Acerola": "acerola,cherry",
+  "Mirtilo / Amora": "blueberry,berry",
+  "Alface": "lettuce,green", "Couve": "kale,leaf", "Espinafre": "spinach,leaf",
+  "Rúcula": "arugula,rocket", "Agrião": "watercress", "Repolho": "cabbage",
+  "Brócolis": "broccoli", "Couve-flor": "cauliflower",
+  "Chicória / Almeirão": "chicory,endive", "Mostarda (folha)": "mustard,greens",
+  "Salsa / Coentro": "parsley,cilantro",
+  "Pimentão": "bell-pepper,red", "Tomate": "tomato,red", "Pepino": "cucumber",
+  "Abobrinha": "zucchini", "Berinjela": "eggplant,aubergine", "Chuchu": "chayote,squash",
+  "Quiabo": "okra", "Abóbora": "pumpkin,squash", "Vagem": "green-beans",
+  "Ervilha": "peas,pod", "Milho verde": "sweet-corn,cob",
+  "Cenoura": "carrot,orange", "Batata": "potato,raw", "Batata-doce": "sweet-potato",
+  "Beterraba": "beetroot,beet", "Mandioca": "cassava,manioc", "Inhame": "yam,taro",
+  "Rabanete": "radish,red",
+  "Arroz": "rice,grains", "Feijão": "beans,brown", "Trigo": "wheat,field",
+  "Soja": "soybeans,green", "Aveia": "oats,flakes", "Milho (grão)": "corn,kernels",
+  "Cebola": "onion,bulb", "Alho": "garlic,cloves",
+};
+
+function foodImage(nome: string) {
+  const q = IMG_QUERY[nome] ?? "fresh,food";
+  const lock = Math.abs(nome.split("").reduce((a, c) => a + c.charCodeAt(0), 0)) % 999;
+  return `https://loremflickr.com/600/400/${encodeURIComponent(q)}?lock=${lock}`;
+}
+
 const ALIMENTOS: Card[] = [
   // ====== FRUTAS ======
   { emoji: "🍓", nome: "Morango", rank: "Campeão de contaminação", categoria: "Frutas", cor: TOMATE,
