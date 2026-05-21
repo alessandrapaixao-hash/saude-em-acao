@@ -313,13 +313,22 @@ function AlimentosPage() {
             className="group bg-card border border-border rounded-3xl overflow-hidden hover:-translate-y-1 hover:shadow-xl transition flex flex-col"
           >
             <div
-              className="h-32 flex items-center justify-center text-7xl relative"
+              className="relative aspect-[4/3] overflow-hidden"
               style={{ background: `color-mix(in oklab, ${a.cor} 18%, var(--background))` }}
             >
-              <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-background/80 text-foreground/70">
+              <img
+                src={foodImage(a.nome)}
+                alt={a.nome}
+                loading="lazy"
+                width={600}
+                height={400}
+                className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-background/90 backdrop-blur text-foreground/80">
                 {a.categoria}
               </span>
-              <span className="drop-shadow-sm group-hover:scale-110 transition">
+              <span className="absolute bottom-3 right-3 text-3xl drop-shadow-lg">
                 {a.emoji}
               </span>
             </div>
