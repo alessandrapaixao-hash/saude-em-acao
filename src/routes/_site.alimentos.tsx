@@ -34,38 +34,81 @@ const SOL = "var(--sun)";
 const BERRY = "var(--berry)";
 const ACCENT = "var(--accent)";
 
-// Mapa nome do alimento -> termos de busca para imagem real (Flickr via LoremFlickr)
-const IMG_QUERY: Record<string, string> = {
-  "Morango": "strawberry,fruit", "Uva": "grape,bunch", "Laranja": "orange,fruit",
-  "Abacaxi": "pineapple", "Maçã": "apple,red", "Banana": "banana,bunch",
-  "Manga": "mango,fruit", "Abacate": "avocado", "Melão": "melon,cantaloupe",
-  "Melancia": "watermelon", "Pera": "pear,fruit", "Pêssego": "peach,fruit",
-  "Goiaba": "guava,fruit", "Limão": "lemon,fruit", "Mexerica / Tangerina": "tangerine,mandarin",
-  "Mamão": "papaya", "Maracujá": "passionfruit", "Kiwi": "kiwi,fruit",
-  "Ameixa": "plum,fruit", "Caju": "cashew,fruit", "Acerola": "acerola,cherry",
-  "Mirtilo / Amora": "blueberry,berry",
-  "Alface": "lettuce,green", "Couve": "kale,leaf", "Espinafre": "spinach,leaf",
-  "Rúcula": "arugula,rocket", "Agrião": "watercress", "Repolho": "cabbage",
-  "Brócolis": "broccoli", "Couve-flor": "cauliflower",
-  "Chicória / Almeirão": "chicory,endive", "Mostarda (folha)": "mustard,greens",
-  "Salsa / Coentro": "parsley,cilantro",
-  "Pimentão": "bell-pepper,red", "Tomate": "tomato,red", "Pepino": "cucumber",
-  "Abobrinha": "zucchini", "Berinjela": "eggplant,aubergine", "Chuchu": "chayote,squash",
-  "Quiabo": "okra", "Abóbora": "pumpkin,squash", "Vagem": "green-beans",
-  "Ervilha": "peas,pod", "Milho verde": "sweet-corn,cob",
-  "Cenoura": "carrot,orange", "Batata": "potato,raw", "Batata-doce": "sweet-potato",
-  "Beterraba": "beetroot,beet", "Mandioca": "cassava,manioc", "Inhame": "yam,taro",
-  "Rabanete": "radish,red",
-  "Arroz": "rice,grains", "Feijão": "beans,brown", "Trigo": "wheat,field",
-  "Soja": "soybeans,green", "Aveia": "oats,flakes", "Milho (grão)": "corn,kernels",
-  "Cebola": "onion,bulb", "Alho": "garlic,cloves",
+// Mapa nome do alimento -> arquivo real no Wikimedia Commons
+const IMG_FILE: Record<string, string> = {
+  // Frutas
+  "Morango": "Strawberry_gariguette_DSC03061.JPG",
+  "Uva": "Table_grapes_on_white.jpg",
+  "Laranja": "Orange-Whole-%26-Split.jpg",
+  "Abacaxi": "Pineapple_and_cross_section.jpg",
+  "Maçã": "Red_Apple.jpg",
+  "Banana": "Bananavarieties.jpg",
+  "Manga": "Mango_and_cross_section.jpg",
+  "Abacate": "Avocado_Hass_-_single_and_halved.jpg",
+  "Melão": "Cantaloupe_in_white_background.jpg",
+  "Melancia": "Watermelon_cross_BNC.jpg",
+  "Pera": "Pears.jpg",
+  "Pêssego": "Autumn_Red_peaches.jpg",
+  "Goiaba": "Psidium_guajava_fruit.jpg",
+  "Limão": "Lemon-Whole-%26-Split.jpg",
+  "Mexerica / Tangerina": "Tangerine_(Citrus_reticulata).jpg",
+  "Mamão": "Carica_papaya_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-184.jpg",
+  "Maracujá": "Passionfruits_-_whole_and_halved.jpg",
+  "Kiwi": "Kiwi_aka.jpg",
+  "Ameixa": "Plum_and_cross_section.jpg",
+  "Caju": "Cashew_apples.JPG",
+  "Acerola": "Acerola_Fruit_(Hi-Res).jpg",
+  "Mirtilo / Amora": "Blueberries.jpg",
+  // Verduras
+  "Alface": "Lettuce_Iceberg.jpg",
+  "Couve": "Kale-Bundle.jpg",
+  "Espinafre": "Spinach_leaves.jpg",
+  "Rúcula": "Roquette.jpg",
+  "Agrião": "Nasturtium_officinale_bgiu.jpg",
+  "Repolho": "Cabbage_and_cross_section_on_white.jpg",
+  "Brócolis": "Broccoli_and_cross_section.jpg",
+  "Couve-flor": "Cauliflower.jpg",
+  "Chicória / Almeirão": "Cichorium-intybus-flowers.JPG",
+  "Mostarda (folha)": "Mustard_leaves_(India).jpg",
+  "Salsa / Coentro": "Parsley.jpg",
+  // Legumes
+  "Pimentão": "Red_Capsicum_and_cross_section.jpg",
+  "Tomate": "Bright_red_tomato_and_cross_section02.jpg",
+  "Pepino": "Cucumber_and_cross_section.jpg",
+  "Abobrinha": "Courgette_and_cross_section.jpg",
+  "Berinjela": "Solanum_melongena_24_08_2012_(1).JPG",
+  "Chuchu": "Chayote_Cross_Section_BNC.jpg",
+  "Quiabo": "Okra_pods.jpg",
+  "Abóbora": "Pumpkin.jpg",
+  "Vagem": "Green_beans_(1).jpg",
+  "Ervilha": "Pea_pods_-_Studio.jpg",
+  "Milho verde": "Corncobs.jpg",
+  // Tubérculos
+  "Cenoura": "Vegetable-Carrot-Bundle-wStalks.jpg",
+  "Batata": "Patates.jpg",
+  "Batata-doce": "Ipomoea_batatas_006.JPG",
+  "Beterraba": "Beetroot_(Beta_vulgaris)_cross_section.jpg",
+  "Mandioca": "Manihot_esculenta_dsc07325.jpg",
+  "Inhame": "Yam_(Dioscorea_alata).jpg",
+  "Rabanete": "Red_radishes.jpg",
+  // Grãos
+  "Arroz": "White_rice.JPG",
+  "Feijão": "Frijoles_negros.jpg",
+  "Trigo": "Wheat_close-up.JPG",
+  "Soja": "Soybean.USDA.jpg",
+  "Aveia": "Rolled_oats.jpg",
+  "Milho (grão)": "VegCorn.jpg",
+  // Outros
+  "Cebola": "Bulb_and_cross_section_of_onion.jpg",
+  "Alho": "Garlic.jpg",
 };
 
 function foodImage(nome: string) {
-  const q = IMG_QUERY[nome] ?? "fresh,food";
-  const lock = Math.abs(nome.split("").reduce((a, c) => a + c.charCodeAt(0), 0)) % 999;
-  return `https://loremflickr.com/600/400/${encodeURIComponent(q)}?lock=${lock}`;
+  const file = IMG_FILE[nome];
+  if (!file) return "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Foods.jpg/600px-Foods.jpg";
+  return `https://en.wikipedia.org/wiki/Special:FilePath/${file}?width=600`;
 }
+
 
 const ALIMENTOS: Card[] = [
   // ====== FRUTAS ======
