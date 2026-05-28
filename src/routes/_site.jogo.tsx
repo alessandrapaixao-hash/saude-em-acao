@@ -6,7 +6,7 @@ export const Route = createFileRoute("/_site/jogo")({
   head: () => ({
     meta: [
       { title: "NutriClean — O Jogo · Saúde em Ação" },
-      { name: "description", content: "Jogo educativo: descubra se o alimento é campeão de agrotóxicos ou está entre os mais limpos. Inspirado nos dados da Anvisa." },
+      { name: "description", content: "Jogo educativo: descubra se o alimento é campeão de defensores agrícolas ou está entre os mais limpos. Inspirado nos dados da Anvisa." },
       { property: "og:title", content: "NutriClean — O Jogo" },
       { property: "og:description", content: "Aprenda brincando: contaminado ou limpo?" },
       { property: "og:url", content: "/jogo" },
@@ -27,7 +27,7 @@ type Item = {
 
 const RODADA: Item[] = [
   { nome: "Morango", emoji: "🍓", query: "strawberry", contaminado: true,
-    fato: "Campeão de contaminação no PARA/Anvisa — até 4 agrotóxicos diferentes em uma única amostra." },
+    fato: "Campeão de contaminação no PARA/Anvisa — até 4 defensores agrícolas diferentes em uma única amostra." },
   { nome: "Pimentão", emoji: "🫑", query: "bellpepper", contaminado: true,
     fato: "Aparece no topo da lista da Anvisa com substâncias proibidas em outros países, como acefato." },
   { nome: "Abacate", emoji: "🥑", query: "avocado", contaminado: false,
@@ -111,7 +111,7 @@ export default function JogoPage() {
           Contaminado ou limpo?
         </h1>
         <p className="mt-4 text-foreground/75">
-          Veja o alimento e decida: ele está entre os <strong>campeões de agrotóxicos</strong> ou
+          Veja o alimento e decida: ele está entre os <strong>campeões de defensores agrícolas</strong> ou
           é um dos <strong>mais limpos</strong> segundo a Anvisa? Aprenda os dados reais a cada rodada.
         </p>
       </header>

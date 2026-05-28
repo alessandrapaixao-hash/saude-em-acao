@@ -17,10 +17,10 @@ import {
 export const Route = createFileRoute("/_site/")({
   head: () => ({
     meta: [
-      { title: "Saúde em Ação — Agrotóxicos nos alimentos e a ODS 3" },
-      { name: "description", content: "Projeto educativo sobre o impacto dos agrotóxicos na saúde humana, alinhado à ODS 3 da ONU." },
-      { property: "og:title", content: "Saúde em Ação — Agrotóxicos e ODS 3" },
-      { property: "og:description", content: "Conheça os riscos dos agrotóxicos presentes nos alimentos." },
+      { title: "Saúde em Ação — Defensores Agrícolas nos alimentos e a ODS 3" },
+      { name: "description", content: "Projeto educativo sobre o impacto dos defensores agrícolas na saúde humana, alinhado à ODS 3 da ONU." },
+      { property: "og:title", content: "Saúde em Ação — Defensores Agrícolas e ODS 3" },
+      { property: "og:description", content: "Conheça os riscos dos defensores agrícolas presentes nos alimentos." },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -64,7 +64,7 @@ function HomePage() {
             O que está no seu prato pode estar adoecendo você.
           </h1>
           <p className="mt-6 text-lg md:text-xl text-foreground/90 max-w-2xl font-semibold">
-            Os agrotóxicos presentes nos alimentos são uma ameaça invisível à
+            Os defensores agrícolas presentes nos alimentos são uma ameaça invisível à
             <span className="text-primary"> saúde e bem-estar</span> de
             milhões de pessoas. O <em>Saúde em Ação</em> existe para mudar isso.
           </p>
@@ -101,17 +101,17 @@ function HomePage() {
             Você está comendo veneno — e nem percebe.
           </h2>
           <p className="mt-5 text-lg md:text-xl max-w-3xl text-white/95 font-semibold">
-            O Brasil é o <strong>maior consumidor mundial de agrotóxicos</strong>.
+            O Brasil é o <strong>maior consumidor mundial de defensores agrícolas</strong>.
             Despejamos mais de <strong>540 mil toneladas por ano</strong> nas
             lavouras — e os resíduos chegam ao seu prato, à sua água e ao corpo
             do seu filho. Os efeitos são lentos, silenciosos e <em>irreversíveis</em>.
           </p>
 
           <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <ShockStat n="1 em 5" t="amostras da Anvisa têm resíduos acima do permitido ou agrotóxicos proibidos no país." />
-            <ShockStat n="34.000" t="brasileiros intoxicados por agrotóxicos a cada ano segundo o SUS — e estima-se 50× mais casos não notificados." />
-            <ShockStat n="7 em 10" t="amostras de leite materno analisadas no PR/MT tinham resíduos de agrotóxicos (UFMG/Fiocruz)." />
-            <ShockStat n="+20" t="agrotóxicos usados no Brasil são proibidos na União Europeia por causarem câncer e mutações." />
+            <ShockStat n="1 em 5" t="amostras da Anvisa têm resíduos acima do permitido ou defensores agrícolas proibidos no país." />
+            <ShockStat n="34.000" t="brasileiros intoxicados por defensores agrícolas a cada ano segundo o SUS — e estima-se 50× mais casos não notificados." />
+            <ShockStat n="7 em 10" t="amostras de leite materno analisadas no PR/MT tinham resíduos de defensores agrícolas (UFMG/Fiocruz)." />
+            <ShockStat n="+20" t="defensores agrícolas usados no Brasil são proibidos na União Europeia por causarem câncer e mutações." />
           </div>
 
           <p className="mt-8 text-sm text-white/80 max-w-3xl">
@@ -129,10 +129,10 @@ function HomePage() {
               O problema
             </span>
             <h2 className="mt-3 text-4xl md:text-5xl font-bold text-primary">
-              Agrotóxicos: um veneno que chega à mesa.
+              Defensores Agrícolas: um veneno que chega à mesa.
             </h2>
             <p className="mt-5 text-foreground/80 leading-relaxed">
-              O Brasil é um dos maiores consumidores mundiais de agrotóxicos. A
+              O Brasil é um dos maiores consumidores mundiais de defensores agrícolas. A
               cada ano, mais de <strong>540 mil toneladas</strong> são
               despejadas nas lavouras — e parte significativa permanece nos
               alimentos que consumimos diariamente.
@@ -141,14 +141,14 @@ function HomePage() {
               Esses produtos químicos foram associados a intoxicações agudas,
               doenças crônicas, distúrbios hormonais, problemas neurológicos e
               diversos tipos de câncer, segundo o INCA, a Anvisa e o
-              Ministério da Saúde. <strong>Mais de 30%</strong> dos agrotóxicos
+              Ministério da Saúde. <strong>Mais de 30%</strong> dos defensores agrícolas
               usados no Brasil estão <strong>proibidos na União Europeia</strong>.
             </p>
           </div>
           <div className="grid gap-4">
             <Stat number="20%" label="das amostras analisadas pela Anvisa apresentam resíduos acima do permitido ou de substâncias proibidas." />
-            <Stat number="+540 mil t" label="de agrotóxicos consumidos por ano no Brasil — campeão mundial." />
-            <Stat number="34 mil" label="notificações anuais de intoxicação por agrotóxicos no SUS." />
+            <Stat number="+540 mil t" label="de defensores agrícolas consumidos por ano no Brasil — campeão mundial." />
+            <Stat number="34 mil" label="notificações anuais de intoxicação por defensores agrícolas no SUS." />
           </div>
         </div>
       </section>
@@ -177,7 +177,7 @@ function HomePage() {
             <Pillar
               icon={<AlertTriangle className="w-6 h-6" />}
               title="Reconhecer o risco"
-              text="Saber quais alimentos têm maior contaminação e quais agrotóxicos estão envolvidos."
+              text="Saber quais alimentos têm maior contaminação e quais defensores agrícolas estão envolvidos."
             />
             <Pillar
               icon={<HeartPulse className="w-6 h-6" />}
@@ -200,7 +200,7 @@ function HomePage() {
             <Flame className="w-3.5 h-3.5" /> Impactos comprovados na sua saúde
           </span>
           <h2 className="mt-3 text-4xl md:text-5xl font-bold text-primary">
-            O preço silencioso dos agrotóxicos
+            O preço silencioso dos defensores agrícolas
           </h2>
           <p className="text-foreground/75 mt-4">
             A exposição contínua, mesmo em pequenas doses, é cumulativa.
@@ -214,7 +214,7 @@ function HomePage() {
           <DamageCard
             icon={<Skull className="w-5 h-5" />}
             title="Câncer"
-            text="O INCA reconhece os agrotóxicos como fator de risco para leucemia, linfomas não-Hodgkin, câncer de próstata, mama, cérebro, pulmão, fígado e estômago. Crianças expostas têm até 7× mais risco de leucemia."
+            text="O INCA reconhece os defensores agrícolas como fator de risco para leucemia, linfomas não-Hodgkin, câncer de próstata, mama, cérebro, pulmão, fígado e estômago. Crianças expostas têm até 7× mais risco de leucemia."
           />
           <DamageCard
             icon={<Brain className="w-5 h-5" />}
@@ -253,7 +253,7 @@ function HomePage() {
             </h3>
             <p className="mt-2 text-foreground/85 leading-relaxed">
               Pesquisadores da Faculdade de Medicina da UFMG alertam:
-              "os efeitos dos agrotóxicos sobre a saúde humana só serão
+              "os efeitos dos defensores agrícolas sobre a saúde humana só serão
               percebidos no <strong>futuro</strong>". Ou seja — o câncer, o
               Parkinson e a infertilidade que aparecerão daqui a 10, 20, 30
               anos estão sendo plantados no prato de hoje.

@@ -83,7 +83,7 @@ export function SiteLayout() {
             </div>
             <p className="mt-2 text-muted-foreground">
               Projeto educativo alinhado à ODS 3 — Saúde e Bem-Estar — sobre os
-              riscos dos agrotóxicos nos alimentos.
+              riscos dos defensores agrícolas nos alimentos.
             </p>
           </div>
           <div>

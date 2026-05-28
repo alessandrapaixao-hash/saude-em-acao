@@ -5,10 +5,10 @@ import { useMemo, useState } from "react";
 export const Route = createFileRoute("/_site/alimentos")({
   head: () => ({
     meta: [
-      { title: "Alimentos e agrotóxicos — Saúde em Ação" },
-      { name: "description", content: "60 alimentos brasileiros, os agrotóxicos mais encontrados e os riscos à saúde — segundo Anvisa, IDEC, INCA, Greenpeace e reportagens." },
-      { property: "og:title", content: "Alimentos com mais agrotóxicos" },
-      { property: "og:description", content: "Os principais alimentos contaminados, os agrotóxicos usados e os riscos." },
+      { title: "Alimentos e defensores agrícolas — Saúde em Ação" },
+      { name: "description", content: "60 alimentos brasileiros, os defensores agrícolas mais encontrados e os riscos à saúde — segundo Anvisa, IDEC, INCA, Greenpeace e reportagens." },
+      { property: "og:title", content: "Alimentos com mais defensores agrícolas" },
+      { property: "og:description", content: "Os principais alimentos contaminados, os defensores agrícolas usados e os riscos." },
       { property: "og:url", content: "/alimentos" },
     ],
     links: [{ rel: "canonical", href: "/alimentos" }],
@@ -34,79 +34,81 @@ const SOL = "var(--sun)";
 const BERRY = "var(--berry)";
 const ACCENT = "var(--accent)";
 
-// Fotos curadas no Unsplash (CDN direto). Cada URL aponta para uma foto real e bonita do alimento.
+// Fotos reais dos alimentos. Itens problemáticos usam Wikimedia Commons (mais confiável).
+const WIKI = (file: string) =>
+  `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=800`;
+
 const IMG_URL: Record<string, string> = {
   // Frutas
-  "Morango": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6",
-  "Uva": "https://images.unsplash.com/photo-1599819811279-d5ad9cccf838",
-  "Laranja": "https://images.unsplash.com/photo-1547514701-42782101795e",
-  "Abacaxi": "https://images.unsplash.com/photo-1550258987-190a2d41a8ba",
-  "Maçã": "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb",
-  "Banana": "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e",
-  "Manga": "https://images.unsplash.com/photo-1553279768-865429fa0078",
-  "Abacate": "https://images.unsplash.com/photo-1601039641847-7857b994d704",
-  "Melão": "https://images.unsplash.com/photo-1571575173700-afb9492e6a50",
-  "Melancia": "https://images.unsplash.com/photo-1587049352846-4a222e784d38",
-  "Pera": "https://images.unsplash.com/photo-1514756331096-242fdeb70d4a",
-  "Pêssego": "https://images.unsplash.com/photo-1595124747890-2c1f4d51c1f8",
-  "Goiaba": "https://images.unsplash.com/photo-1536511132770-e5058c7e8c46",
-  "Limão": "https://images.unsplash.com/photo-1582287014914-1db836e23bf3",
-  "Mexerica / Tangerina": "https://images.unsplash.com/photo-1601493700631-2b16ec4b4716",
-  "Mamão": "https://images.unsplash.com/photo-1617112848923-cc2234396a8d",
-  "Maracujá": "https://images.unsplash.com/photo-1604153272260-e1e5fda1e3ea",
-  "Kiwi": "https://images.unsplash.com/photo-1591287083773-9a5c8c8f9b5c",
-  "Ameixa": "https://images.unsplash.com/photo-1601493700750-58da8dbf2c2a",
-  "Caju": "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e",
-  "Acerola": "https://images.unsplash.com/photo-1591287083773-9a5c8c8f9b5c",
-  "Mirtilo / Amora": "https://images.unsplash.com/photo-1498557850523-fd3d118b962e",
+  "Morango": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=800&q=80",
+  "Uva": "https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?auto=format&fit=crop&w=800&q=80",
+  "Laranja": "https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=800&q=80",
+  "Abacaxi": "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?auto=format&fit=crop&w=800&q=80",
+  "Maçã": "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?auto=format&fit=crop&w=800&q=80",
+  "Banana": "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=800&q=80",
+  "Manga": "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=800&q=80",
+  "Abacate": "https://images.unsplash.com/photo-1601039641847-7857b994d704?auto=format&fit=crop&w=800&q=80",
+  "Melão": "https://images.unsplash.com/photo-1571575173700-afb9492e6a50?auto=format&fit=crop&w=800&q=80",
+  "Melancia": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=80",
+  "Pera": "https://images.unsplash.com/photo-1514756331096-242fdeb70d4a?auto=format&fit=crop&w=800&q=80",
+  "Pêssego": WIKI("Autumn_Red_peaches.jpg"),
+  "Goiaba": "https://images.unsplash.com/photo-1536511132770-e5058c7e8c46?auto=format&fit=crop&w=800&q=80",
+  "Limão": WIKI("Lemon.jpg"),
+  "Mexerica / Tangerina": WIKI("Tangerines_and_cross_section.jpg"),
+  "Mamão": "https://images.unsplash.com/photo-1617112848923-cc2234396a8d?auto=format&fit=crop&w=800&q=80",
+  "Maracujá": WIKI("Passion_fruit_and_cross_section.jpg"),
+  "Kiwi": WIKI("Kiwi_aka.jpg"),
+  "Ameixa": WIKI("Plums.jpg"),
+  "Caju": WIKI("Cashew_apples.jpg"),
+  "Acerola": WIKI("Acerola_(Malpighia_emarginata).jpg"),
+  "Mirtilo / Amora": "https://images.unsplash.com/photo-1498557850523-fd3d118b962e?auto=format&fit=crop&w=800&q=80",
   // Verduras
-  "Alface": "https://images.unsplash.com/photo-1622205313162-be1d5712a43f",
-  "Couve": "https://images.unsplash.com/photo-1524179091875-bf99a9a6af57",
-  "Espinafre": "https://images.unsplash.com/photo-1576045057995-568f588f82fb",
-  "Rúcula": "https://images.unsplash.com/photo-1611891487122-207bfbc7f053",
-  "Agrião": "https://images.unsplash.com/photo-1576181256399-834e3b3a49bf",
-  "Repolho": "https://images.unsplash.com/photo-1551888419-7b7a520fe0ca",
-  "Brócolis": "https://images.unsplash.com/photo-1583663848850-46af132dc08e",
-  "Couve-flor": "https://images.unsplash.com/photo-1568584711271-6c929fb49b60",
-  "Chicória / Almeirão": "https://images.unsplash.com/photo-1576181256399-834e3b3a49bf",
-  "Mostarda (folha)": "https://images.unsplash.com/photo-1576045057995-568f588f82fb",
-  "Salsa / Coentro": "https://images.unsplash.com/photo-1600692367862-21bf6a01dc4f",
+  "Alface": "https://images.unsplash.com/photo-1622205313162-be1d5712a43f?auto=format&fit=crop&w=800&q=80",
+  "Couve": "https://images.unsplash.com/photo-1524179091875-bf99a9a6af57?auto=format&fit=crop&w=800&q=80",
+  "Espinafre": "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=800&q=80",
+  "Rúcula": WIKI("Roquette_(eruca_sativa).jpg"),
+  "Agrião": WIKI("Watercress_2.jpg"),
+  "Repolho": WIKI("Cabbage_and_cross_section_on_white.jpg"),
+  "Brócolis": "https://images.unsplash.com/photo-1583663848850-46af132dc08e?auto=format&fit=crop&w=800&q=80",
+  "Couve-flor": WIKI("Cauliflower_white.jpg"),
+  "Chicória / Almeirão": WIKI("Cichorium_intybus_-_harvested_chicory.jpg"),
+  "Mostarda (folha)": WIKI("Mustard_greens.jpg"),
+  "Salsa / Coentro": WIKI("Petroselinum_crispum_2_2007.jpg"),
   // Legumes
-  "Pimentão": "https://images.unsplash.com/photo-1563565375-f3fdfdbefa83",
-  "Tomate": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea",
-  "Pepino": "https://images.unsplash.com/photo-1604977042946-1eecc30f269e",
-  "Abobrinha": "https://images.unsplash.com/photo-1596524430615-b46475ddff6f",
-  "Berinjela": "https://images.unsplash.com/photo-1659261200833-ec8761558af7",
-  "Chuchu": "https://images.unsplash.com/photo-1635340912875-bd17b35c9930",
-  "Quiabo": "https://images.unsplash.com/photo-1664478528267-43e7848e6abf",
-  "Abóbora": "https://images.unsplash.com/photo-1570586437263-ab629fccc818",
-  "Vagem": "https://images.unsplash.com/photo-1567375698348-5d9d5ae99de0",
-  "Ervilha": "https://images.unsplash.com/photo-1587735243615-c03f25aaff15",
-  "Milho verde": "https://images.unsplash.com/photo-1601593768799-76d3947f7c41",
+  "Pimentão": "https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=800&q=80",
+  "Tomate": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80",
+  "Pepino": "https://images.unsplash.com/photo-1604977042946-1eecc30f269e?auto=format&fit=crop&w=800&q=80",
+  "Abobrinha": WIKI("Courgettes.jpg"),
+  "Berinjela": WIKI("Solanum_melongena_24_08_2012_(1).JPG"),
+  "Chuchu": WIKI("Chayote_Sechium_edule.jpg"),
+  "Quiabo": WIKI("Okra_in_a_basket.jpg"),
+  "Abóbora": "https://images.unsplash.com/photo-1570586437263-ab629fccc818?auto=format&fit=crop&w=800&q=80",
+  "Vagem": "https://images.unsplash.com/photo-1567375698348-5d9d5ae99de0?auto=format&fit=crop&w=800&q=80",
+  "Ervilha": WIKI("Peas_in_pods_-_Studio.jpg"),
   // Tubérculos
-  "Cenoura": "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37",
-  "Batata": "https://images.unsplash.com/photo-1518977676601-b53f82aba655",
-  "Batata-doce": "https://images.unsplash.com/photo-1596097635121-14b63b7a0c23",
-  "Beterraba": "https://images.unsplash.com/photo-1593105544559-ecb03bf76f82",
-  "Mandioca": "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37",
-  "Inhame": "https://images.unsplash.com/photo-1591080816985-58e0036aa106",
-  "Rabanete": "https://images.unsplash.com/photo-1576181256399-834e3b3a49bf",
+  "Cenoura": "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=800&q=80",
+  "Batata": "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=800&q=80",
+  "Batata-doce": "https://images.unsplash.com/photo-1596097635121-14b63b7a0c23?auto=format&fit=crop&w=800&q=80",
+  "Beterraba": "https://images.unsplash.com/photo-1593105544559-ecb03bf76f82?auto=format&fit=crop&w=800&q=80",
+  "Mandioca": WIKI("Manihot_esculenta_dsc07325.jpg"),
+  "Inhame": WIKI("Yam_(Dioscorea_alata).jpg"),
+  "Rabanete": WIKI("Radishes.jpg"),
   // Grãos
-  "Arroz": "https://images.unsplash.com/photo-1586201375761-83865001e31c",
-  "Feijão": "https://images.unsplash.com/photo-1551462147-ff29053bfc14",
-  "Trigo": "https://images.unsplash.com/photo-1574323347407-f5e1c5a1ec21",
-  "Soja": "https://images.unsplash.com/photo-1601000938259-9e92002320b2",
-  "Aveia": "https://images.unsplash.com/photo-1614961233913-a5113a4a34ed",
-  "Milho (grão)": "https://images.unsplash.com/photo-1601593768799-76d3947f7c41",
+  "Arroz": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=800&q=80",
+  "Feijão": WIKI("Various_dry_beans.jpg"),
+  "Trigo": WIKI("Wheat_close-up.JPG"),
+  "Soja": WIKI("SOYBEANS.jpg"),
+  "Aveia": "https://images.unsplash.com/photo-1614961233913-a5113a4a34ed?auto=format&fit=crop&w=800&q=80",
+  "Milho": WIKI("Corncobs.jpg"),
   // Outros
-  "Cebola": "https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31",
-  "Alho": "https://images.unsplash.com/photo-1615477550927-6ec8445fcfe6",
+  "Cebola": "https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?auto=format&fit=crop&w=800&q=80",
+  "Alho": "https://images.unsplash.com/photo-1615477550927-6ec8445fcfe6?auto=format&fit=crop&w=800&q=80",
 };
 
 function foodImage(nome: string) {
-  const base = IMG_URL[nome] ?? "https://images.unsplash.com/photo-1490818387583-1baba5e638af";
-  return `${base}?auto=format&fit=crop&w=800&q=80`;
+  return IMG_URL[nome] ?? "https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=800&q=80";
 }
+
 
 
 
@@ -166,12 +168,13 @@ const ALIMENTOS: Card[] = [
   { emoji: "🥝", nome: "Kiwi", rank: "Importação com resíduos", categoria: "Frutas", cor: FOLHA,
     agrotoxicos: ["Iprodiona", "Boscalida", "Fludioxonil"],
     riscos: ["Suspeita de carcinogenicidade", "Toxicidade hepática", "Disrupção endócrina"] },
-  { emoji: "🍑", nome: "Ameixa", rank: "Resíduos persistentes", categoria: "Frutas", cor: BERRY,
+  { emoji: "🟣", nome: "Ameixa", rank: "Resíduos persistentes", categoria: "Frutas", cor: BERRY,
     agrotoxicos: ["Carbendazim", "Tebuconazol", "Iprodiona"],
     riscos: ["Disrupção hormonal", "Risco reprodutivo", "Suspeita de câncer"] },
-  { emoji: "🥥", nome: "Caju", rank: "Cultivo no Nordeste", categoria: "Frutas", cor: TOMATE,
+  { emoji: "🌰", nome: "Caju", rank: "Cultivo no Nordeste", categoria: "Frutas", cor: TOMATE,
     agrotoxicos: ["Mancozebe", "Endosulfan", "Cipermetrina"],
     riscos: ["Neurotoxicidade", "Disrupção tireoidiana", "Substância proibida em vários países"] },
+
   { emoji: "🍒", nome: "Acerola", rank: "Pulverização intensa", categoria: "Frutas", cor: TOMATE,
     agrotoxicos: ["Abamectina", "Imidacloprido", "Tiametoxam"],
     riscos: ["Toxicidade neurológica", "Risco infantil", "Disrupção endócrina"] },
@@ -233,7 +236,7 @@ const ALIMENTOS: Card[] = [
   { emoji: "🥒", nome: "Chuchu", rank: "Resíduos detectados (PARA)", categoria: "Legumes", cor: FOLHA,
     agrotoxicos: ["Acefato", "Clorpirifós", "Carbendazim"],
     riscos: ["Neurotoxicidade", "Disrupção endócrina", "Toxicidade reprodutiva"] },
-  { emoji: "🌶️", nome: "Quiabo", rank: "Pulverização constante", categoria: "Legumes", cor: FOLHA,
+  { emoji: "🥒", nome: "Quiabo", rank: "Pulverização constante", categoria: "Legumes", cor: FOLHA,
     agrotoxicos: ["Cipermetrina", "Acefato", "Lambda-cialotrina"],
     riscos: ["Neurotoxicidade", "Disrupção hormonal", "Risco infantil"] },
   { emoji: "🎃", nome: "Abóbora", rank: "Resíduos persistentes", categoria: "Legumes", cor: SOL,
@@ -245,9 +248,7 @@ const ALIMENTOS: Card[] = [
   { emoji: "🫛", nome: "Ervilha", rank: "Cultivo intensivo", categoria: "Legumes", cor: FOLHA,
     agrotoxicos: ["Clorpirifós", "Lambda-cialotrina", "Imidacloprido"],
     riscos: ["Neurotoxicidade", "Risco infantil", "Disrupção endócrina"] },
-  { emoji: "🌽", nome: "Milho verde", rank: "Cultura geneticamente modificada", categoria: "Legumes", cor: SOL,
-    agrotoxicos: ["Atrazina", "Glifosato", "Clorpirifós"],
-    riscos: ["Disrupção endócrina", "Provável carcinógeno (IARC)", "Neurotoxicidade"] },
+
 
   // ====== TUBÉRCULOS / RAÍZES ======
   { emoji: "🥕", nome: "Cenoura", rank: "Absorção pelas raízes", categoria: "Tubérculos", cor: ACCENT,
@@ -262,15 +263,16 @@ const ALIMENTOS: Card[] = [
   { emoji: "🍠", nome: "Beterraba", rank: "Raiz com retenção", categoria: "Tubérculos", cor: BERRY,
     agrotoxicos: ["Clorpirifós", "Lambda-cialotrina", "Carbendazim"],
     riscos: ["Neurotoxicidade", "Disrupção endócrina", "Suspeita de câncer"] },
-  { emoji: "🥔", nome: "Mandioca", rank: "Cultivo amplo", categoria: "Tubérculos", cor: ACCENT,
+  { emoji: "🌱", nome: "Mandioca", rank: "Cultivo amplo", categoria: "Tubérculos", cor: ACCENT,
     agrotoxicos: ["Glifosato", "2,4-D", "Atrazina"],
     riscos: ["Provável carcinógeno (IARC)", "Disrupção endócrina", "Neurotoxicidade"] },
-  { emoji: "🥔", nome: "Inhame", rank: "Resíduos no solo", categoria: "Tubérculos", cor: ACCENT,
+  { emoji: "🍠", nome: "Inhame", rank: "Resíduos no solo", categoria: "Tubérculos", cor: ACCENT,
     agrotoxicos: ["Glifosato", "Carbofurano", "Clorpirifós"],
     riscos: ["Neurotoxicidade", "Possível câncer", "Toxicidade reprodutiva"] },
-  { emoji: "🌶️", nome: "Rabanete", rank: "Raiz rápida e contaminada", categoria: "Tubérculos", cor: TOMATE,
+  { emoji: "🟥", nome: "Rabanete", rank: "Raiz rápida e contaminada", categoria: "Tubérculos", cor: TOMATE,
     agrotoxicos: ["Clorpirifós", "Permetrina", "Acefato"],
     riscos: ["Neurotoxicidade", "Disrupção hormonal", "Risco infantil"] },
+
 
   // ====== GRÃOS / CEREAIS ======
   { emoji: "🌾", nome: "Arroz", rank: "Base da alimentação", categoria: "Grãos", cor: SOL,
@@ -282,15 +284,16 @@ const ALIMENTOS: Card[] = [
   { emoji: "🌾", nome: "Trigo", rank: "Aplicação pré-colheita", categoria: "Grãos", cor: SOL,
     agrotoxicos: ["Glifosato", "Tebuconazol", "Clorpirifós"],
     riscos: ["Provável carcinógeno (IARC)", "Disrupção hormonal", "Toxicidade hepática"] },
-  { emoji: "🌱", nome: "Soja", rank: "Cultivo com mais agrotóxicos no Brasil", categoria: "Grãos", cor: FOLHA,
+  { emoji: "🌱", nome: "Soja", rank: "Cultivo com mais defensores agrícolas no Brasil", categoria: "Grãos", cor: FOLHA,
     agrotoxicos: ["Glifosato", "2,4-D", "Imidacloprido"],
     riscos: ["Provável carcinógeno", "Disrupção endócrina", "Contaminação ambiental"] },
   { emoji: "🌾", nome: "Aveia", rank: "Resíduos pré-colheita", categoria: "Grãos", cor: SOL,
     agrotoxicos: ["Glifosato", "Clorpirifós", "Tebuconazol"],
     riscos: ["Provável carcinógeno", "Neurotoxicidade", "Disrupção endócrina"] },
-  { emoji: "🌽", nome: "Milho (grão)", rank: "Transgênico majoritário", categoria: "Grãos", cor: SOL,
+  { emoji: "🌽", nome: "Milho", rank: "Transgênico majoritário", categoria: "Grãos", cor: SOL,
     agrotoxicos: ["Glifosato", "Atrazina", "Clorpirifós"],
     riscos: ["Provável carcinógeno", "Disrupção endócrina", "Neurotoxicidade"] },
+
 
   // ====== OUTROS ======
   { emoji: "🧅", nome: "Cebola", rank: "Cultivo com resíduos", categoria: "Outros", cor: BERRY,
@@ -383,7 +386,7 @@ function AlimentosPage() {
 
               <div className="mt-5">
                 <div className="text-xs font-bold uppercase text-foreground/60">
-                  Agrotóxicos mais usados
+                  Defensores Agrícolas mais usados
                 </div>
                 <div className="mt-2 flex flex-wrap gap-1.5">
                   {a.agrotoxicos.map((t) => (
