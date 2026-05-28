@@ -5,10 +5,10 @@ import { useMemo, useState } from "react";
 export const Route = createFileRoute("/_site/alimentos")({
   head: () => ({
     meta: [
-      { title: "Alimentos e agrotóxicos — Saúde em Ação" },
-      { name: "description", content: "60 alimentos brasileiros, os agrotóxicos mais encontrados e os riscos à saúde — segundo Anvisa, IDEC, INCA, Greenpeace e reportagens." },
-      { property: "og:title", content: "Alimentos com mais agrotóxicos" },
-      { property: "og:description", content: "Os principais alimentos contaminados, os agrotóxicos usados e os riscos." },
+      { title: "Alimentos e defensores agrícolas — Saúde em Ação" },
+      { name: "description", content: "60 alimentos brasileiros, os defensores agrícolas mais encontrados e os riscos à saúde — segundo Anvisa, IDEC, INCA, Greenpeace e reportagens." },
+      { property: "og:title", content: "Alimentos com mais defensores agrícolas" },
+      { property: "og:description", content: "Os principais alimentos contaminados, os defensores agrícolas usados e os riscos." },
       { property: "og:url", content: "/alimentos" },
     ],
     links: [{ rel: "canonical", href: "/alimentos" }],
@@ -284,7 +284,7 @@ const ALIMENTOS: Card[] = [
   { emoji: "🌾", nome: "Trigo", rank: "Aplicação pré-colheita", categoria: "Grãos", cor: SOL,
     agrotoxicos: ["Glifosato", "Tebuconazol", "Clorpirifós"],
     riscos: ["Provável carcinógeno (IARC)", "Disrupção hormonal", "Toxicidade hepática"] },
-  { emoji: "🌱", nome: "Soja", rank: "Cultivo com mais agrotóxicos no Brasil", categoria: "Grãos", cor: FOLHA,
+  { emoji: "🌱", nome: "Soja", rank: "Cultivo com mais defensores agrícolas no Brasil", categoria: "Grãos", cor: FOLHA,
     agrotoxicos: ["Glifosato", "2,4-D", "Imidacloprido"],
     riscos: ["Provável carcinógeno", "Disrupção endócrina", "Contaminação ambiental"] },
   { emoji: "🌾", nome: "Aveia", rank: "Resíduos pré-colheita", categoria: "Grãos", cor: SOL,
@@ -386,7 +386,7 @@ function AlimentosPage() {
 
               <div className="mt-5">
                 <div className="text-xs font-bold uppercase text-foreground/60">
-                  Agrotóxicos mais usados
+                  Defensores Agrícolas mais usados
                 </div>
                 <div className="mt-2 flex flex-wrap gap-1.5">
                   {a.agrotoxicos.map((t) => (
