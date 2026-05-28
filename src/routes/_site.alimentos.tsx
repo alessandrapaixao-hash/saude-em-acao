@@ -235,7 +235,7 @@ const ALIMENTOS: Card[] = [
   { emoji: "🥒", nome: "Chuchu", rank: "Resíduos detectados (PARA)", categoria: "Legumes", cor: FOLHA,
     agrotoxicos: ["Acefato", "Clorpirifós", "Carbendazim"],
     riscos: ["Neurotoxicidade", "Disrupção endócrina", "Toxicidade reprodutiva"] },
-  { emoji: "🌶️", nome: "Quiabo", rank: "Pulverização constante", categoria: "Legumes", cor: FOLHA,
+  { emoji: "🥒", nome: "Quiabo", rank: "Pulverização constante", categoria: "Legumes", cor: FOLHA,
     agrotoxicos: ["Cipermetrina", "Acefato", "Lambda-cialotrina"],
     riscos: ["Neurotoxicidade", "Disrupção hormonal", "Risco infantil"] },
   { emoji: "🎃", nome: "Abóbora", rank: "Resíduos persistentes", categoria: "Legumes", cor: SOL,
@@ -247,9 +247,7 @@ const ALIMENTOS: Card[] = [
   { emoji: "🫛", nome: "Ervilha", rank: "Cultivo intensivo", categoria: "Legumes", cor: FOLHA,
     agrotoxicos: ["Clorpirifós", "Lambda-cialotrina", "Imidacloprido"],
     riscos: ["Neurotoxicidade", "Risco infantil", "Disrupção endócrina"] },
-  { emoji: "🌽", nome: "Milho verde", rank: "Cultura geneticamente modificada", categoria: "Legumes", cor: SOL,
-    agrotoxicos: ["Atrazina", "Glifosato", "Clorpirifós"],
-    riscos: ["Disrupção endócrina", "Provável carcinógeno (IARC)", "Neurotoxicidade"] },
+
 
   // ====== TUBÉRCULOS / RAÍZES ======
   { emoji: "🥕", nome: "Cenoura", rank: "Absorção pelas raízes", categoria: "Tubérculos", cor: ACCENT,
@@ -264,15 +262,16 @@ const ALIMENTOS: Card[] = [
   { emoji: "🍠", nome: "Beterraba", rank: "Raiz com retenção", categoria: "Tubérculos", cor: BERRY,
     agrotoxicos: ["Clorpirifós", "Lambda-cialotrina", "Carbendazim"],
     riscos: ["Neurotoxicidade", "Disrupção endócrina", "Suspeita de câncer"] },
-  { emoji: "🥔", nome: "Mandioca", rank: "Cultivo amplo", categoria: "Tubérculos", cor: ACCENT,
+  { emoji: "🌱", nome: "Mandioca", rank: "Cultivo amplo", categoria: "Tubérculos", cor: ACCENT,
     agrotoxicos: ["Glifosato", "2,4-D", "Atrazina"],
     riscos: ["Provável carcinógeno (IARC)", "Disrupção endócrina", "Neurotoxicidade"] },
-  { emoji: "🥔", nome: "Inhame", rank: "Resíduos no solo", categoria: "Tubérculos", cor: ACCENT,
+  { emoji: "🍠", nome: "Inhame", rank: "Resíduos no solo", categoria: "Tubérculos", cor: ACCENT,
     agrotoxicos: ["Glifosato", "Carbofurano", "Clorpirifós"],
     riscos: ["Neurotoxicidade", "Possível câncer", "Toxicidade reprodutiva"] },
-  { emoji: "🌶️", nome: "Rabanete", rank: "Raiz rápida e contaminada", categoria: "Tubérculos", cor: TOMATE,
+  { emoji: "🟥", nome: "Rabanete", rank: "Raiz rápida e contaminada", categoria: "Tubérculos", cor: TOMATE,
     agrotoxicos: ["Clorpirifós", "Permetrina", "Acefato"],
     riscos: ["Neurotoxicidade", "Disrupção hormonal", "Risco infantil"] },
+
 
   // ====== GRÃOS / CEREAIS ======
   { emoji: "🌾", nome: "Arroz", rank: "Base da alimentação", categoria: "Grãos", cor: SOL,
