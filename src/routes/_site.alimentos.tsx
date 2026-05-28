@@ -168,12 +168,13 @@ const ALIMENTOS: Card[] = [
   { emoji: "🥝", nome: "Kiwi", rank: "Importação com resíduos", categoria: "Frutas", cor: FOLHA,
     agrotoxicos: ["Iprodiona", "Boscalida", "Fludioxonil"],
     riscos: ["Suspeita de carcinogenicidade", "Toxicidade hepática", "Disrupção endócrina"] },
-  { emoji: "🍑", nome: "Ameixa", rank: "Resíduos persistentes", categoria: "Frutas", cor: BERRY,
+  { emoji: "🟣", nome: "Ameixa", rank: "Resíduos persistentes", categoria: "Frutas", cor: BERRY,
     agrotoxicos: ["Carbendazim", "Tebuconazol", "Iprodiona"],
     riscos: ["Disrupção hormonal", "Risco reprodutivo", "Suspeita de câncer"] },
-  { emoji: "🥥", nome: "Caju", rank: "Cultivo no Nordeste", categoria: "Frutas", cor: TOMATE,
+  { emoji: "🌰", nome: "Caju", rank: "Cultivo no Nordeste", categoria: "Frutas", cor: TOMATE,
     agrotoxicos: ["Mancozebe", "Endosulfan", "Cipermetrina"],
     riscos: ["Neurotoxicidade", "Disrupção tireoidiana", "Substância proibida em vários países"] },
+
   { emoji: "🍒", nome: "Acerola", rank: "Pulverização intensa", categoria: "Frutas", cor: TOMATE,
     agrotoxicos: ["Abamectina", "Imidacloprido", "Tiametoxam"],
     riscos: ["Toxicidade neurológica", "Risco infantil", "Disrupção endócrina"] },
@@ -289,9 +290,10 @@ const ALIMENTOS: Card[] = [
   { emoji: "🌾", nome: "Aveia", rank: "Resíduos pré-colheita", categoria: "Grãos", cor: SOL,
     agrotoxicos: ["Glifosato", "Clorpirifós", "Tebuconazol"],
     riscos: ["Provável carcinógeno", "Neurotoxicidade", "Disrupção endócrina"] },
-  { emoji: "🌽", nome: "Milho (grão)", rank: "Transgênico majoritário", categoria: "Grãos", cor: SOL,
+  { emoji: "🌽", nome: "Milho", rank: "Transgênico majoritário", categoria: "Grãos", cor: SOL,
     agrotoxicos: ["Glifosato", "Atrazina", "Clorpirifós"],
     riscos: ["Provável carcinógeno", "Disrupção endócrina", "Neurotoxicidade"] },
+
 
   // ====== OUTROS ======
   { emoji: "🧅", nome: "Cebola", rank: "Cultivo com resíduos", categoria: "Outros", cor: BERRY,
