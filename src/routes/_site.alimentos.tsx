@@ -28,13 +28,20 @@ type Card = {
   cor: string;
 };
 
+type MetodoLimpeza = {
+  titulo: string;
+  passos: string[];
+  observacao: string;
+  fonte: string;
+};
+
 const TOMATE = "var(--tomato)";
 const FOLHA = "var(--leaf)";
 const SOL = "var(--sun)";
 const BERRY = "var(--berry)";
 const ACCENT = "var(--accent)";
 
-// Fotos reais dos alimentos. Itens problemáticos usam Wikimedia Commons (mais confiável).
+// Fotos reais dos alimentos. Itens com erro anterior usam links públicos verificados.
 const WIKI = (file: string) =>
   `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=800`;
 
@@ -51,55 +58,55 @@ const IMG_URL: Record<string, string> = {
   "Melão": "https://images.unsplash.com/photo-1571575173700-afb9492e6a50?auto=format&fit=crop&w=800&q=80",
   "Melancia": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=80",
   "Pera": "https://images.unsplash.com/photo-1514756331096-242fdeb70d4a?auto=format&fit=crop&w=800&q=80",
-  "Pêssego": WIKI("Autumn_Red_peaches.jpg"),
+  "Pêssego": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Illustration_Prunus_persica_clean_no_descr.jpg/960px-Illustration_Prunus_persica_clean_no_descr.jpg",
   "Goiaba": "https://images.unsplash.com/photo-1536511132770-e5058c7e8c46?auto=format&fit=crop&w=800&q=80",
-  "Limão": WIKI("Lemon.jpg"),
-  "Mexerica / Tangerina": WIKI("Tangerines_and_cross_section.jpg"),
+  "Limão": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/P1030323.JPG/960px-P1030323.JPG",
+  "Mexerica / Tangerina": "https://upload.wikimedia.org/wikipedia/commons/2/2a/TangerineFruit.jpg",
   "Mamão": "https://images.unsplash.com/photo-1617112848923-cc2234396a8d?auto=format&fit=crop&w=800&q=80",
-  "Maracujá": WIKI("Passion_fruit_and_cross_section.jpg"),
-  "Kiwi": WIKI("Kiwi_aka.jpg"),
-  "Ameixa": WIKI("Plums.jpg"),
-  "Caju": WIKI("Cashew_apples.jpg"),
-  "Acerola": WIKI("Acerola_(Malpighia_emarginata).jpg"),
+  "Maracujá": "https://upload.wikimedia.org/wikipedia/commons/9/91/Passiflora_edulis_forma_flavicarpa.jpg",
+  "Kiwi": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Actinidia_fruits.jpg/960px-Actinidia_fruits.jpg",
+  "Ameixa": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Plums_African_Rose_-_whole%2C_halved_and_slice.jpg/960px-Plums_African_Rose_-_whole%2C_halved_and_slice.jpg",
+  "Caju": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Cashew_apples.jpg/960px-Cashew_apples.jpg",
+  "Acerola": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Malpighia_glabra_blossom_and_unripe_fruits.jpg/960px-Malpighia_glabra_blossom_and_unripe_fruits.jpg",
   "Mirtilo / Amora": "https://images.unsplash.com/photo-1498557850523-fd3d118b962e?auto=format&fit=crop&w=800&q=80",
   // Verduras
   "Alface": "https://images.unsplash.com/photo-1622205313162-be1d5712a43f?auto=format&fit=crop&w=800&q=80",
   "Couve": "https://images.unsplash.com/photo-1524179091875-bf99a9a6af57?auto=format&fit=crop&w=800&q=80",
   "Espinafre": "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=800&q=80",
-  "Rúcula": WIKI("Roquette_(eruca_sativa).jpg"),
-  "Agrião": WIKI("Watercress_2.jpg"),
+  "Rúcula": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Eruca_vesicaria_BM010755249.jpg/960px-Eruca_vesicaria_BM010755249.jpg",
+  "Agrião": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Watercress_%282%29.JPG/960px-Watercress_%282%29.JPG",
   "Repolho": WIKI("Cabbage_and_cross_section_on_white.jpg"),
   "Brócolis": "https://images.unsplash.com/photo-1583663848850-46af132dc08e?auto=format&fit=crop&w=800&q=80",
-  "Couve-flor": WIKI("Cauliflower_white.jpg"),
-  "Chicória / Almeirão": WIKI("Cichorium_intybus_-_harvested_chicory.jpg"),
-  "Mostarda (folha)": WIKI("Mustard_greens.jpg"),
-  "Salsa / Coentro": WIKI("Petroselinum_crispum_2_2007.jpg"),
+  "Couve-flor": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Chou-fleur_02.jpg/960px-Chou-fleur_02.jpg",
+  "Chicória / Almeirão": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Cichorium_endivia_-_Botanischer_Garten_Mainz_IMG_5453.JPG/960px-Cichorium_endivia_-_Botanischer_Garten_Mainz_IMG_5453.JPG",
+  "Mostarda (folha)": "https://upload.wikimedia.org/wikipedia/commons/4/42/Brassica_juncea_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-168.jpg",
+  "Salsa / Coentro": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Petroselinum.jpg/960px-Petroselinum.jpg",
   // Legumes
   "Pimentão": "https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=800&q=80",
   "Tomate": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80",
   "Pepino": "https://images.unsplash.com/photo-1604977042946-1eecc30f269e?auto=format&fit=crop&w=800&q=80",
-  "Abobrinha": WIKI("Courgettes.jpg"),
-  "Berinjela": WIKI("Solanum_melongena_24_08_2012_(1).JPG"),
-  "Chuchu": WIKI("Chayote_Sechium_edule.jpg"),
-  "Quiabo": WIKI("Okra_in_a_basket.jpg"),
+  "Abobrinha": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/CSA-Striped-Zucchini.jpg/960px-CSA-Striped-Zucchini.jpg",
+  "Berinjela": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Solanum_melongena_24_08_2012_%281%29.JPG/960px-Solanum_melongena_24_08_2012_%281%29.JPG",
+  "Chuchu": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Chayote_BNC.jpg/960px-Chayote_BNC.jpg",
+  "Quiabo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Hong_Kong_Okra_Aug_25_2012.JPG/960px-Hong_Kong_Okra_Aug_25_2012.JPG",
   "Abóbora": "https://images.unsplash.com/photo-1570586437263-ab629fccc818?auto=format&fit=crop&w=800&q=80",
   "Vagem": "https://images.unsplash.com/photo-1567375698348-5d9d5ae99de0?auto=format&fit=crop&w=800&q=80",
-  "Ervilha": WIKI("Peas_in_pods_-_Studio.jpg"),
+  "Ervilha": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Peas_in_pods_-_Studio.jpg/960px-Peas_in_pods_-_Studio.jpg",
   // Tubérculos
   "Cenoura": "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=800&q=80",
   "Batata": "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=800&q=80",
   "Batata-doce": "https://images.unsplash.com/photo-1596097635121-14b63b7a0c23?auto=format&fit=crop&w=800&q=80",
   "Beterraba": "https://images.unsplash.com/photo-1593105544559-ecb03bf76f82?auto=format&fit=crop&w=800&q=80",
-  "Mandioca": WIKI("Manihot_esculenta_dsc07325.jpg"),
-  "Inhame": WIKI("Yam_(Dioscorea_alata).jpg"),
-  "Rabanete": WIKI("Radishes.jpg"),
+  "Mandioca": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Manihot_esculenta_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-090.jpg",
+  "Inhame": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Yam_at_monday_market_kaduna_state_01.jpg/960px-Yam_at_monday_market_kaduna_state_01.jpg",
+  "Rabanete": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Radish_3371103037_4ab07db0bf_o.jpg/960px-Radish_3371103037_4ab07db0bf_o.jpg",
   // Grãos
   "Arroz": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=800&q=80",
-  "Feijão": WIKI("Various_dry_beans.jpg"),
-  "Trigo": WIKI("Wheat_close-up.JPG"),
-  "Soja": WIKI("SOYBEANS.jpg"),
+  "Feijão": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/French_beans_J1.JPG/960px-French_beans_J1.JPG",
+  "Trigo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Vehn%C3%A4pelto_6.jpg/960px-Vehn%C3%A4pelto_6.jpg",
+  "Soja": "https://upload.wikimedia.org/wikipedia/commons/8/82/Soybean.USDA.jpg",
   "Aveia": "https://images.unsplash.com/photo-1614961233913-a5113a4a34ed?auto=format&fit=crop&w=800&q=80",
-  "Milho": WIKI("Corncobs.jpg"),
+  "Milho": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Zea_mays_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-283.jpg",
   // Outros
   "Cebola": "https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?auto=format&fit=crop&w=800&q=80",
   "Alho": "https://images.unsplash.com/photo-1615477550927-6ec8445fcfe6?auto=format&fit=crop&w=800&q=80",
@@ -107,6 +114,77 @@ const IMG_URL: Record<string, string> = {
 
 function foodImage(nome: string) {
   return IMG_URL[nome] ?? "https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=800&q=80";
+}
+
+function metodoLimpeza(categoria: Categoria): MetodoLimpeza {
+  switch (categoria) {
+    case "Frutas":
+      return {
+        titulo: "Frutas com casca fina",
+        passos: [
+          "Lave em água corrente e friccione a casca por cerca de 30 segundos.",
+          "Deixe de molho em solução com pequena quantidade de bicarbonato por até 15 minutos.",
+          "Enxágue novamente e, quando fizer sentido, descarte a casca.",
+        ],
+        observacao: "Ajuda a reduzir resíduos de superfície, mas não remove compostos sistêmicos já absorvidos pela polpa.",
+        fonte: "Baseado na reportagem do R7 sobre higienização e redução de resíduos de superfície.",
+      };
+    case "Verduras":
+      return {
+        titulo: "Folhas e ervas",
+        passos: [
+          "Separe folha por folha e retire partes machucadas.",
+          "Lave uma a uma em água corrente, com fricção suave para remover sujeira e resíduos externos.",
+          "Faça imersão curta em solução de bicarbonato e finalize com novo enxágue abundante.",
+        ],
+        observacao: "A higienização reduz a carga externa, mas não elimina resíduos sistêmicos absorvidos pela planta.",
+        fonte: "Adaptação do método descrito pelo R7 para alimentos de alta retenção superficial.",
+      };
+    case "Legumes":
+      return {
+        titulo: "Legumes de casca exposta",
+        passos: [
+          "Lave em água corrente e esfregue com as mãos ou escova limpa.",
+          "Deixe de molho em água com pequena quantidade de bicarbonato por até 15 minutos.",
+          "Enxágue bem e, se possível, retire casca ou partes mais expostas antes do preparo.",
+        ],
+        observacao: "Escovação e bicarbonato ajudam mais contra resíduos superficiais.",
+        fonte: "R7: água corrente, fricção, bicarbonato e descascar como formas de redução de risco.",
+      };
+    case "Tubérculos":
+      return {
+        titulo: "Raízes e tubérculos",
+        passos: [
+          "Escove bem a casca em água corrente para remover terra e resíduos externos.",
+          "Se desejar, faça imersão rápida em bicarbonato e enxágue em seguida.",
+          "Prefira descascar antes do consumo quando o alimento estiver entre os de maior risco.",
+        ],
+        observacao: "A limpeza externa ajuda, mas resíduos internos podem permanecer.",
+        fonte: "R7: fricção, bicarbonato e descasque em alimentos com concentração na superfície.",
+      };
+    case "Grãos":
+      return {
+        titulo: "Grãos e cereais",
+        passos: [
+          "Selecione e descarte impurezas visíveis antes do preparo.",
+          "Lave em água corrente até a água sair mais limpa.",
+          "Mantenha variedade no consumo semanal para reduzir exposição repetida a um único alimento.",
+        ],
+        observacao: "A lavagem remove poeira e parte do resíduo externo, mas não o que foi absorvido no cultivo.",
+        fonte: "R7: combinação entre lavagem básica e variedade alimentar para redução de exposição.",
+      };
+    case "Outros":
+      return {
+        titulo: "Bulbos e condimentos",
+        passos: [
+          "Lave a parte externa em água corrente antes de descascar ou cortar.",
+          "Retire as camadas externas mais expostas quando houver casca seca ou película.",
+          "Depois do corte, evite reaproveitar cascas e partes superficiais no preparo.",
+        ],
+        observacao: "Descartar as camadas externas tende a ser a etapa mais útil nesses itens.",
+        fonte: "Aplicação do princípio de lavagem externa e descarte da parte mais exposta citado nas fontes.",
+      };
+  }
 }
 
 
@@ -308,6 +386,7 @@ const CATEGORIAS: ("Todos" | Categoria)[] = ["Todos", "Frutas", "Verduras", "Leg
 
 function AlimentosPage() {
   const [filtro, setFiltro] = useState<"Todos" | Categoria>("Todos");
+  const [cardAberto, setCardAberto] = useState<string | null>(null);
 
   const lista = useMemo(
     () => (filtro === "Todos" ? ALIMENTOS : ALIMENTOS.filter((a) => a.categoria === filtro)),
@@ -353,66 +432,141 @@ function AlimentosPage() {
       </div>
 
       <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {lista.map((a) => (
-          <article
-            key={a.nome}
-            className="group bg-card border border-border rounded-3xl overflow-hidden hover:-translate-y-1 hover:shadow-xl transition flex flex-col"
-          >
+        {lista.map((a) => {
+          const aberto = cardAberto === a.nome;
+          const limpeza = metodoLimpeza(a.categoria);
+
+          return (
             <div
-              className="relative aspect-[4/3] overflow-hidden"
-              style={{ background: `color-mix(in oklab, ${a.cor} 18%, var(--background))` }}
+              key={a.nome}
+              role="button"
+              tabIndex={0}
+              onClick={() => setCardAberto(aberto ? null : a.nome)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setCardAberto(aberto ? null : a.nome);
+                }
+              }}
+              className="group text-left [perspective:1400px] cursor-pointer"
+              aria-pressed={aberto}
+              aria-label={`Virar card de ${a.nome} para ver o método de limpeza`}
             >
-              <img
-                src={foodImage(a.nome)}
-                alt={a.nome}
-                loading="lazy"
-                width={600}
-                height={400}
-                className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-              <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-background/90 backdrop-blur text-foreground/80">
-                {a.categoria}
-              </span>
-              <span className="absolute bottom-3 right-3 text-3xl drop-shadow-lg">
-                {a.emoji}
-              </span>
-            </div>
-            <div className="p-6 flex-1 flex flex-col">
-              <div className="text-[11px] font-bold uppercase tracking-wider" style={{ color: a.cor }}>
-                {a.rank}
-              </div>
-              <h3 className="font-display text-2xl font-bold text-primary mt-1">{a.nome}</h3>
-
-              <div className="mt-5">
-                <div className="text-xs font-bold uppercase text-foreground/60">
-                  Defensores Agrícolas mais usados
-                </div>
-                <div className="mt-2 flex flex-wrap gap-1.5">
-                  {a.agrotoxicos.map((t) => (
-                    <span key={t} className="text-xs font-semibold px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground">
-                      {t}
+              <article
+                className="relative min-h-[36rem] rounded-3xl [transform-style:preserve-3d] transition-transform duration-700"
+                style={{ transform: aberto ? "rotateY(180deg)" : "rotateY(0deg)" }}
+              >
+                <div
+                  className="absolute inset-0 bg-card border border-border rounded-3xl overflow-hidden hover:-translate-y-1 hover:shadow-xl transition flex flex-col [backface-visibility:hidden]"
+                >
+                  <div
+                    className="relative aspect-[4/3] overflow-hidden"
+                    style={{ background: `color-mix(in oklab, ${a.cor} 18%, var(--background))` }}
+                  >
+                    <img
+                      src={foodImage(a.nome)}
+                      alt={a.nome}
+                      loading="lazy"
+                      width={600}
+                      height={400}
+                      className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                    <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-background/90 backdrop-blur text-foreground/80">
+                      {a.categoria}
                     </span>
-                  ))}
-                </div>
-              </div>
+                    <span className="absolute bottom-3 right-3 text-3xl drop-shadow-lg">
+                      {a.emoji}
+                    </span>
+                  </div>
+                  <div className="p-6 flex-1 flex flex-col">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <div className="text-[11px] font-bold uppercase tracking-wider" style={{ color: a.cor }}>
+                          {a.rank}
+                        </div>
+                        <h3 className="font-display text-2xl font-bold text-primary mt-1">{a.nome}</h3>
+                      </div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground">
+                        Clique para virar
+                      </span>
+                    </div>
 
-              <div className="mt-5">
-                <div className="text-xs font-bold uppercase text-foreground/60">
-                  Riscos para a saúde
+                    <div className="mt-5">
+                      <div className="text-xs font-bold uppercase text-foreground/60">
+                        Defensores Agrícolas mais usados
+                      </div>
+                      <div className="mt-2 flex flex-wrap gap-1.5">
+                        {a.agrotoxicos.map((t) => (
+                          <span key={t} className="text-xs font-semibold px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mt-5">
+                      <div className="text-xs font-bold uppercase text-foreground/60">
+                        Riscos para a saúde
+                      </div>
+                      <ul className="mt-2 space-y-1.5">
+                        {a.riscos.map((r) => (
+                          <li key={r} className="flex gap-2 text-sm text-foreground/80">
+                            <AlertCircle className="w-4 h-4 mt-0.5 text-destructive shrink-0" />
+                            <span>{r}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-                <ul className="mt-2 space-y-1.5">
-                  {a.riscos.map((r) => (
-                    <li key={r} className="flex gap-2 text-sm text-foreground/80">
-                      <AlertCircle className="w-4 h-4 mt-0.5 text-destructive shrink-0" />
-                      <span>{r}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+
+                <div
+                  className="absolute inset-0 rounded-3xl border border-border overflow-hidden bg-card p-6 flex flex-col [backface-visibility:hidden]"
+                  style={{
+                    transform: "rotateY(180deg)",
+                    background: `linear-gradient(180deg, color-mix(in oklab, ${a.cor} 12%, var(--card)), var(--card))`,
+                  }}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <div className="text-[11px] font-bold uppercase tracking-wider" style={{ color: a.cor }}>
+                        Verso do card
+                      </div>
+                      <h3 className="font-display text-2xl font-bold text-primary mt-1">{a.nome}</h3>
+                    </div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-background/80 text-foreground/70">
+                      Clique para voltar
+                    </span>
+                  </div>
+
+                  <div className="mt-5 rounded-2xl border border-border/70 bg-background/70 p-4">
+                    <div className="text-xs font-bold uppercase text-foreground/60">Melhor método de limpeza</div>
+                    <p className="mt-2 text-lg font-semibold text-primary">{limpeza.titulo}</p>
+                    <ul className="mt-4 space-y-2.5">
+                      {limpeza.passos.map((passo) => (
+                        <li key={passo} className="flex gap-3 text-sm text-foreground/80 leading-relaxed">
+                          <span className="mt-1 h-2 w-2 rounded-full bg-primary shrink-0" />
+                          <span>{passo}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mt-4 rounded-2xl bg-secondary/70 p-4">
+                    <div className="text-xs font-bold uppercase text-foreground/60">Importante</div>
+                    <p className="mt-2 text-sm text-foreground/80 leading-relaxed">{limpeza.observacao}</p>
+                  </div>
+
+                  <div className="mt-auto pt-5 border-t border-border/70">
+                    <div className="text-xs font-bold uppercase text-foreground/60">Fonte do método</div>
+                    <p className="mt-2 text-sm text-foreground/80 leading-relaxed">{limpeza.fonte}</p>
+                  </div>
+                </div>
+              </article>
             </div>
-          </article>
-        ))}
+          );
+        })}
       </div>
 
       <p className="text-center text-xs text-muted-foreground mt-12 max-w-xl mx-auto">
