@@ -437,19 +437,27 @@ function AlimentosPage() {
           const limpeza = metodoLimpeza(a.categoria);
 
           return (
-            <button
+            <div
               key={a.nome}
-              type="button"
+              role="button"
+              tabIndex={0}
               onClick={() => setCardAberto(aberto ? null : a.nome)}
-              className="group text-left [perspective:1400px]"
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setCardAberto(aberto ? null : a.nome);
+                }
+              }}
+              className="group text-left [perspective:1400px] cursor-pointer"
               aria-pressed={aberto}
               aria-label={`Virar card de ${a.nome} para ver o método de limpeza`}
             >
-              <article className="relative min-h-[36rem] rounded-3xl [transform-style:preserve-3d] transition-transform duration-700">
+              <article
+                className="relative min-h-[36rem] rounded-3xl [transform-style:preserve-3d] transition-transform duration-700"
+                style={{ transform: aberto ? "rotateY(180deg)" : "rotateY(0deg)" }}
+              >
                 <div
-                  className={`absolute inset-0 bg-card border border-border rounded-3xl overflow-hidden hover:-translate-y-1 hover:shadow-xl transition flex flex-col [backface-visibility:hidden] ${
-                    aberto ? "rotate-y-180 opacity-0 pointer-events-none" : ""
-                  }`}
+                  className="absolute inset-0 bg-card border border-border rounded-3xl overflow-hidden hover:-translate-y-1 hover:shadow-xl transition flex flex-col [backface-visibility:hidden]"
                 >
                   <div
                     className="relative aspect-[4/3] overflow-hidden"
@@ -514,10 +522,11 @@ function AlimentosPage() {
                 </div>
 
                 <div
-                  className={`absolute inset-0 rounded-3xl border border-border overflow-hidden bg-card p-6 flex flex-col [backface-visibility:hidden] [transform:rotateY(180deg)] ${
-                    aberto ? "" : "opacity-0 pointer-events-none"
-                  }`}
-                  style={{ background: `linear-gradient(180deg, color-mix(in oklab, ${a.cor} 12%, var(--card)), var(--card))` }}
+                  className="absolute inset-0 rounded-3xl border border-border overflow-hidden bg-card p-6 flex flex-col [backface-visibility:hidden]"
+                  style={{
+                    transform: "rotateY(180deg)",
+                    background: `linear-gradient(180deg, color-mix(in oklab, ${a.cor} 12%, var(--card)), var(--card))`,
+                  }}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
@@ -555,7 +564,7 @@ function AlimentosPage() {
                   </div>
                 </div>
               </article>
-            </button>
+            </div>
           );
         })}
       </div>
