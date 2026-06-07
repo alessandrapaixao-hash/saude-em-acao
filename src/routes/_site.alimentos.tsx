@@ -67,7 +67,7 @@ const IMG_URL: Record<string, string> = {
   "Kiwi": "https://loremflickr.com/800/600/kiwi,fruit?lock=14",
   "Ameixa": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Plums_African_Rose_-_whole%2C_halved_and_slice.jpg/960px-Plums_African_Rose_-_whole%2C_halved_and_slice.jpg",
   "Caju": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Cashew_apples.jpg/960px-Cashew_apples.jpg",
-  "Acerola": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Malpighia_glabra_blossom_and_unripe_fruits.jpg/960px-Malpighia_glabra_blossom_and_unripe_fruits.jpg",
+  "Acerola": "https://loremflickr.com/800/600/acerola,cherry?lock=15",
   "Mirtilo / Amora": "https://images.unsplash.com/photo-1498557850523-fd3d118b962e?auto=format&fit=crop&w=800&q=80",
   // Verduras
   "Alface": "https://images.unsplash.com/photo-1622205313162-be1d5712a43f?auto=format&fit=crop&w=800&q=80",
