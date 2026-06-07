@@ -58,7 +58,7 @@ const IMG_URL: Record<string, string> = {
   "Melão": "https://images.unsplash.com/photo-1571575173700-afb9492e6a50?auto=format&fit=crop&w=800&q=80",
   "Melancia": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=80",
   "Pera": "https://images.unsplash.com/photo-1514756331096-242fdeb70d4a?auto=format&fit=crop&w=800&q=80",
-  "Pêssego": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Illustration_Prunus_persica_clean_no_descr.jpg/960px-Illustration_Prunus_persica_clean_no_descr.jpg",
+  "Pêssego": "https://loremflickr.com/800/600/peach,fruit?lock=12",
   "Goiaba": "https://images.unsplash.com/photo-1536511132770-e5058c7e8c46?auto=format&fit=crop&w=800&q=80",
   "Limão": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/P1030323.JPG/960px-P1030323.JPG",
   "Mexerica / Tangerina": "https://upload.wikimedia.org/wikipedia/commons/2/2a/TangerineFruit.jpg",
