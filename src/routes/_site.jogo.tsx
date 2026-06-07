@@ -206,12 +206,9 @@ export default function JogoPage() {
                   <p className="text-sm text-foreground/75 mt-1">{feedback.item.fato}</p>
                 </div>
               </div>
-              <button
-                onClick={proximo}
-                className="mt-4 w-full bg-primary text-primary-foreground font-bold px-6 py-3 rounded-full shadow hover:shadow-lg transition cursor-pointer"
-              >
-                {idx + 1 >= TOTAL ? "Ver resultado" : "Próximo alimento →"}
-              </button>
+              <p className="mt-3 text-xs text-foreground/50 text-center">
+                {idx + 1 >= TOTAL ? "Calculando seu resultado…" : "Próximo alimento…"}
+              </p>
             </div>
           )}
         </div>
