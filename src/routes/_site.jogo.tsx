@@ -19,36 +19,36 @@ export const Route = createFileRoute("/_site/jogo")({
 type Item = {
   nome: string;
   emoji: string;
-  query: string;
+  img: string;
   /** true = contaminado (alto resíduo) | false = relativamente limpo */
   contaminado: boolean;
   fato: string;
 };
 
 const RODADA: Item[] = [
-  { nome: "Morango", emoji: "🍓", query: "strawberry", contaminado: true,
+  { nome: "Morango", emoji: "🍓", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/PerfectStrawberry.jpg/800px-PerfectStrawberry.jpg", contaminado: true,
     fato: "Campeão de contaminação no PARA/Anvisa — até 4 defensores agrícolas diferentes em uma única amostra." },
-  { nome: "Pimentão", emoji: "🫑", query: "bellpepper", contaminado: true,
+  { nome: "Pimentão", emoji: "🫑", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Red_Capsicum_and_cross_section.jpg/800px-Red_Capsicum_and_cross_section.jpg", contaminado: true,
     fato: "Aparece no topo da lista da Anvisa com substâncias proibidas em outros países, como acefato." },
-  { nome: "Abacate", emoji: "🥑", query: "avocado", contaminado: false,
+  { nome: "Abacate", emoji: "🥑", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Persea_americana_fruit_2.JPG/800px-Persea_americana_fruit_2.JPG", contaminado: false,
     fato: "A casca grossa protege a polpa — está entre os mais seguros da lista." },
-  { nome: "Laranja", emoji: "🍊", query: "orange", contaminado: true,
+  { nome: "Laranja", emoji: "🍊", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Orange-Whole-%26-Split.jpg/800px-Orange-Whole-%26-Split.jpg", contaminado: true,
     fato: "Top da Anvisa 2024: resíduos passam direto para o suco coado em casa." },
-  { nome: "Cebola", emoji: "🧅", query: "onion", contaminado: false,
+  { nome: "Cebola", emoji: "🧅", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Onion_on_White.JPG/800px-Onion_on_White.JPG", contaminado: false,
     fato: "Por ter camadas externas que descartamos, a cebola é uma das mais limpas." },
-  { nome: "Uva", emoji: "🍇", query: "grape", contaminado: true,
+  { nome: "Uva", emoji: "🍇", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Table_grapes_on_white.jpg/800px-Table_grapes_on_white.jpg", contaminado: true,
     fato: "Recebe muitas aplicações de fungicidas; resíduos ficam na casca fina." },
-  { nome: "Abacaxi", emoji: "🍍", query: "pineapple", contaminado: false,
+  { nome: "Abacaxi", emoji: "🍍", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Pineapple_and_cross_section.jpg/800px-Pineapple_and_cross_section.jpg", contaminado: false,
     fato: "Apesar do uso de defensivos no campo, a casca espessa reduz a exposição na polpa." },
-  { nome: "Pepino", emoji: "🥒", query: "cucumber", contaminado: true,
+  { nome: "Pepino", emoji: "🥒", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Cucumber_BNC.jpg/800px-Cucumber_BNC.jpg", contaminado: true,
     fato: "Líder no monitoramento Anvisa 2024 — acefato e carbendazim acima do limite." },
-  { nome: "Banana", emoji: "🍌", query: "banana", contaminado: false,
+  { nome: "Banana", emoji: "🍌", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/800px-Banana-Single.jpg", contaminado: false,
     fato: "A casca não comestível atua como barreira — está entre as frutas mais seguras." },
-  { nome: "Goiaba", emoji: "🍈", query: "guava", contaminado: true,
+  { nome: "Goiaba", emoji: "🍈", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Guava_ID.jpg/800px-Guava_ID.jpg", contaminado: true,
     fato: "Reportagem da Agência Pública: campeã em resíduos acima do limite." },
-  { nome: "Melancia", emoji: "🍉", query: "watermelon", contaminado: false,
+  { nome: "Melancia", emoji: "🍉", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Watermelon_cross_BNC.jpg/800px-Watermelon_cross_BNC.jpg", contaminado: false,
     fato: "Casca grossa protege a polpa; aparece entre as frutas mais limpas da Anvisa." },
-  { nome: "Tomate", emoji: "🍅", query: "tomato", contaminado: true,
+  { nome: "Tomate", emoji: "🍅", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Tomato_je.jpg/800px-Tomato_je.jpg", contaminado: true,
     fato: "Consumo diário + casca fina = alta exposição cumulativa a fungicidas." },
 ];
 
@@ -145,7 +145,7 @@ export default function JogoPage() {
           <div className="relative aspect-[16/10] bg-secondary overflow-hidden">
             <img
               key={displayed.nome}
-              src={`https://loremflickr.com/800/500/${displayed.query},fresh?lock=${displayed.nome}`}
+              src={displayed.img}
               alt={displayed.nome}
               className="w-full h-full object-cover transition-opacity duration-300"
             />
