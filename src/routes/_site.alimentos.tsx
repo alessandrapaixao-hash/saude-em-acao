@@ -48,7 +48,7 @@ const WIKI = (file: string) =>
 const IMG_URL: Record<string, string> = {
   // Frutas
   "Morango": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=800&q=80",
-  "Uva": "https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?auto=format&fit=crop&w=800&q=80",
+  "Uva": "https://loremflickr.com/800/600/grape,fruit,bunch?lock=11",
   "Laranja": "https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=800&q=80",
   "Abacaxi": "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?auto=format&fit=crop&w=800&q=80",
   "Maçã": "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?auto=format&fit=crop&w=800&q=80",
