@@ -233,12 +233,22 @@ export default function JogoPage() {
             descasque sempre que possível e diversifique a alimentação para
             reduzir a exposição cumulativa.
           </p>
-          <button
-            onClick={recomeçar}
-            className="mt-6 inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold shadow hover:shadow-lg transition cursor-pointer"
-          >
-            <RotateCcw className="w-4 h-4" /> Jogar de novo
-          </button>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <button
+              onClick={recomeçar}
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold shadow hover:shadow-lg transition cursor-pointer"
+            >
+              <RotateCcw className="w-4 h-4" /> Jogar de novo
+            </button>
+            {score < TOTAL && (
+              <Link
+                to="/informe-se"
+                className="inline-flex items-center gap-2 bg-[var(--leaf)] text-white px-6 py-3 rounded-full font-bold shadow hover:shadow-lg transition"
+              >
+                <BookOpen className="w-4 h-4" /> Ir para Informe-se!
+              </Link>
+            )}
+          </div>
         </div>
       )}
     </section>
