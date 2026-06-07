@@ -144,16 +144,17 @@ export default function JogoPage() {
         <div className="mt-6 bg-card border border-border rounded-3xl overflow-hidden shadow-lg">
           <div className="relative aspect-[16/10] bg-secondary overflow-hidden">
             <img
-              src={`https://loremflickr.com/800/500/${current.query},fresh?lock=${idx + 100}`}
-              alt={current.nome}
-              className="w-full h-full object-cover"
+              key={displayed.nome}
+              src={`https://loremflickr.com/800/500/${displayed.query},fresh?lock=${displayed.nome}`}
+              alt={displayed.nome}
+              className="w-full h-full object-cover transition-opacity duration-300"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3">
               <h2 className="text-4xl md:text-5xl font-display font-bold text-white drop-shadow-lg">
-                {current.nome}
+                {displayed.nome}
               </h2>
-              <span className="text-5xl md:text-6xl drop-shadow-lg">{current.emoji}</span>
+              <span className="text-5xl md:text-6xl drop-shadow-lg">{displayed.emoji}</span>
             </div>
           </div>
 
