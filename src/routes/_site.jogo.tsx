@@ -69,24 +69,29 @@ export default function JogoPage() {
   const [score, setScore] = useState(0);
   const [feedback, setFeedback] = useState<null | { ok: boolean; item: Item }>(null);
   const [done, setDone] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const current = deck[idx];
+  // mostra a imagem do PRÓXIMO alimento assim que o usuário responde
+  const displayed = feedback ? (deck[idx + 1] ?? current) : current;
   const progresso = useMemo(() => Math.round((idx / TOTAL) * 100), [idx]);
+
+  useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
 
   function escolher(escolha: boolean) {
     if (feedback) return;
     const ok = escolha === current.contaminado;
+    const novoScore = ok ? score + 1 : score;
     setFeedback({ ok, item: current });
-    if (ok) setScore((s) => s + 1);
-  }
-
-  function proximo() {
-    setFeedback(null);
-    if (idx + 1 >= TOTAL) {
-      setDone(true);
-    } else {
-      setIdx((i) => i + 1);
-    }
+    if (ok) setScore(novoScore);
+    timerRef.current = setTimeout(() => {
+      setFeedback(null);
+      if (idx + 1 >= TOTAL) {
+        setDone(true);
+      } else {
+        setIdx((i) => i + 1);
+      }
+    }, 1600);
   }
 
   function recomeçar() {
