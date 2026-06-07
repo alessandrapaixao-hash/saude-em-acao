@@ -110,7 +110,7 @@ export default function JogoPage() {
 
       <header className="text-center max-w-2xl mx-auto">
         <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[var(--leaf)]">
-          <Sparkles className="w-3.5 h-3.5" /> NutriClean — O Jogo
+          <Sparkles className="w-3.5 h-3.5" /> NutriClean — O Quiz
         </span>
         <h1 className="mt-3 text-4xl md:text-6xl font-bold text-primary">
           Contaminado ou limpo?
