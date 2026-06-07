@@ -1,13 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { CheckCircle2, XCircle, Trophy, RotateCcw, Sparkles, Leaf, AlertTriangle } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { CheckCircle2, XCircle, Trophy, RotateCcw, Sparkles, Leaf, AlertTriangle, BookOpen } from "lucide-react";
 
 export const Route = createFileRoute("/_site/jogo")({
   head: () => ({
     meta: [
-      { title: "NutriClean — O Jogo · Saúde em Ação" },
-      { name: "description", content: "Jogo educativo: descubra se o alimento é campeão de defensores agrícolas ou está entre os mais limpos. Inspirado nos dados da Anvisa." },
-      { property: "og:title", content: "NutriClean — O Jogo" },
+      { title: "NutriClean — O Quiz · Saúde em Ação" },
+      { name: "description", content: "Quiz educativo: descubra se o alimento é campeão de defensores agrícolas ou está entre os mais limpos. Inspirado nos dados da Anvisa." },
+      { property: "og:title", content: "NutriClean — O Quiz" },
       { property: "og:description", content: "Aprenda brincando: contaminado ou limpo?" },
       { property: "og:url", content: "/jogo" },
     ],
