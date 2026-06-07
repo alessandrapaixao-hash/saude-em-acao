@@ -1,13 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { CheckCircle2, XCircle, Trophy, RotateCcw, Sparkles, Leaf, AlertTriangle } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { CheckCircle2, XCircle, Trophy, RotateCcw, Sparkles, Leaf, AlertTriangle, BookOpen } from "lucide-react";
 
 export const Route = createFileRoute("/_site/jogo")({
   head: () => ({
     meta: [
-      { title: "NutriClean — O Jogo · Saúde em Ação" },
-      { name: "description", content: "Jogo educativo: descubra se o alimento é campeão de defensores agrícolas ou está entre os mais limpos. Inspirado nos dados da Anvisa." },
-      { property: "og:title", content: "NutriClean — O Jogo" },
+      { title: "NutriClean — O Quiz · Saúde em Ação" },
+      { name: "description", content: "Quiz educativo: descubra se o alimento é campeão de defensores agrícolas ou está entre os mais limpos. Inspirado nos dados da Anvisa." },
+      { property: "og:title", content: "NutriClean — O Quiz" },
       { property: "og:description", content: "Aprenda brincando: contaminado ou limpo?" },
       { property: "og:url", content: "/jogo" },
     ],
@@ -69,24 +69,29 @@ export default function JogoPage() {
   const [score, setScore] = useState(0);
   const [feedback, setFeedback] = useState<null | { ok: boolean; item: Item }>(null);
   const [done, setDone] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const current = deck[idx];
+  // mostra a imagem do PRÓXIMO alimento assim que o usuário responde
+  const displayed = feedback ? (deck[idx + 1] ?? current) : current;
   const progresso = useMemo(() => Math.round((idx / TOTAL) * 100), [idx]);
+
+  useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
 
   function escolher(escolha: boolean) {
     if (feedback) return;
     const ok = escolha === current.contaminado;
+    const novoScore = ok ? score + 1 : score;
     setFeedback({ ok, item: current });
-    if (ok) setScore((s) => s + 1);
-  }
-
-  function proximo() {
-    setFeedback(null);
-    if (idx + 1 >= TOTAL) {
-      setDone(true);
-    } else {
-      setIdx((i) => i + 1);
-    }
+    if (ok) setScore(novoScore);
+    timerRef.current = setTimeout(() => {
+      setFeedback(null);
+      if (idx + 1 >= TOTAL) {
+        setDone(true);
+      } else {
+        setIdx((i) => i + 1);
+      }
+    }, 1600);
   }
 
   function recomeçar() {
@@ -105,7 +110,7 @@ export default function JogoPage() {
 
       <header className="text-center max-w-2xl mx-auto">
         <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[var(--leaf)]">
-          <Sparkles className="w-3.5 h-3.5" /> NutriClean — O Jogo
+          <Sparkles className="w-3.5 h-3.5" /> NutriClean — O Quiz
         </span>
         <h1 className="mt-3 text-4xl md:text-6xl font-bold text-primary">
           Contaminado ou limpo?
@@ -139,16 +144,17 @@ export default function JogoPage() {
         <div className="mt-6 bg-card border border-border rounded-3xl overflow-hidden shadow-lg">
           <div className="relative aspect-[16/10] bg-secondary overflow-hidden">
             <img
-              src={`https://loremflickr.com/800/500/${current.query},fresh?lock=${idx + 100}`}
-              alt={current.nome}
-              className="w-full h-full object-cover"
+              key={displayed.nome}
+              src={`https://loremflickr.com/800/500/${displayed.query},fresh?lock=${displayed.nome}`}
+              alt={displayed.nome}
+              className="w-full h-full object-cover transition-opacity duration-300"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3">
               <h2 className="text-4xl md:text-5xl font-display font-bold text-white drop-shadow-lg">
-                {current.nome}
+                {displayed.nome}
               </h2>
-              <span className="text-5xl md:text-6xl drop-shadow-lg">{current.emoji}</span>
+              <span className="text-5xl md:text-6xl drop-shadow-lg">{displayed.emoji}</span>
             </div>
           </div>
 
@@ -200,12 +206,9 @@ export default function JogoPage() {
                   <p className="text-sm text-foreground/75 mt-1">{feedback.item.fato}</p>
                 </div>
               </div>
-              <button
-                onClick={proximo}
-                className="mt-4 w-full bg-primary text-primary-foreground font-bold px-6 py-3 rounded-full shadow hover:shadow-lg transition cursor-pointer"
-              >
-                {idx + 1 >= TOTAL ? "Ver resultado" : "Próximo alimento →"}
-              </button>
+              <p className="mt-3 text-xs text-foreground/50 text-center">
+                {idx + 1 >= TOTAL ? "Calculando seu resultado…" : "Próximo alimento…"}
+              </p>
             </div>
           )}
         </div>
@@ -230,12 +233,22 @@ export default function JogoPage() {
             descasque sempre que possível e diversifique a alimentação para
             reduzir a exposição cumulativa.
           </p>
-          <button
-            onClick={recomeçar}
-            className="mt-6 inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold shadow hover:shadow-lg transition cursor-pointer"
-          >
-            <RotateCcw className="w-4 h-4" /> Jogar de novo
-          </button>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <button
+              onClick={recomeçar}
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold shadow hover:shadow-lg transition cursor-pointer"
+            >
+              <RotateCcw className="w-4 h-4" /> Jogar de novo
+            </button>
+            {score < TOTAL && (
+              <Link
+                to="/informe-se"
+                className="inline-flex items-center gap-2 bg-[var(--leaf)] text-white px-6 py-3 rounded-full font-bold shadow hover:shadow-lg transition"
+              >
+                <BookOpen className="w-4 h-4" /> Ir para Informe-se!
+              </Link>
+            )}
+          </div>
         </div>
       )}
     </section>
