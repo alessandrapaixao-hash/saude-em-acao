@@ -73,7 +73,7 @@ const IMG_URL: Record<string, string> = {
   "Alface": "https://images.unsplash.com/photo-1622205313162-be1d5712a43f?auto=format&fit=crop&w=800&q=80",
   "Couve": "https://images.unsplash.com/photo-1524179091875-bf99a9a6af57?auto=format&fit=crop&w=800&q=80",
   "Espinafre": "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=800&q=80",
-  "Rúcula": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Eruca_vesicaria_BM010755249.jpg/960px-Eruca_vesicaria_BM010755249.jpg",
+  "Rúcula": "https://loremflickr.com/800/600/arugula,rocket,salad?lock=16",
   "Agrião": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Watercress_%282%29.JPG/960px-Watercress_%282%29.JPG",
   "Repolho": WIKI("Cabbage_and_cross_section_on_white.jpg"),
   "Brócolis": "https://images.unsplash.com/photo-1583663848850-46af132dc08e?auto=format&fit=crop&w=800&q=80",
