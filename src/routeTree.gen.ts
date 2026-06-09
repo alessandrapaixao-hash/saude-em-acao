@@ -13,6 +13,7 @@ import { Route as SiteRouteImport } from './routes/_site'
 import { Route as SiteIndexRouteImport } from './routes/_site.index'
 import { Route as SiteJogoRouteImport } from './routes/_site.jogo'
 import { Route as SiteInformeSeRouteImport } from './routes/_site.informe-se'
+import { Route as SiteCriancasRouteImport } from './routes/_site.criancas'
 import { Route as SiteAlimentosRouteImport } from './routes/_site.alimentos'
 
 const SiteRoute = SiteRouteImport.update({
@@ -34,6 +35,11 @@ const SiteInformeSeRoute = SiteInformeSeRouteImport.update({
   path: '/informe-se',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteCriancasRoute = SiteCriancasRouteImport.update({
+  id: '/criancas',
+  path: '/criancas',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteAlimentosRoute = SiteAlimentosRouteImport.update({
   id: '/alimentos',
   path: '/alimentos',
@@ -43,11 +49,13 @@ const SiteAlimentosRoute = SiteAlimentosRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof SiteIndexRoute
   '/alimentos': typeof SiteAlimentosRoute
+  '/criancas': typeof SiteCriancasRoute
   '/informe-se': typeof SiteInformeSeRoute
   '/jogo': typeof SiteJogoRoute
 }
 export interface FileRoutesByTo {
   '/alimentos': typeof SiteAlimentosRoute
+  '/criancas': typeof SiteCriancasRoute
   '/informe-se': typeof SiteInformeSeRoute
   '/jogo': typeof SiteJogoRoute
   '/': typeof SiteIndexRoute
@@ -56,19 +64,21 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_site': typeof SiteRouteWithChildren
   '/_site/alimentos': typeof SiteAlimentosRoute
+  '/_site/criancas': typeof SiteCriancasRoute
   '/_site/informe-se': typeof SiteInformeSeRoute
   '/_site/jogo': typeof SiteJogoRoute
   '/_site/': typeof SiteIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/alimentos' | '/informe-se' | '/jogo'
+  fullPaths: '/' | '/alimentos' | '/criancas' | '/informe-se' | '/jogo'
   fileRoutesByTo: FileRoutesByTo
-  to: '/alimentos' | '/informe-se' | '/jogo' | '/'
+  to: '/alimentos' | '/criancas' | '/informe-se' | '/jogo' | '/'
   id:
     | '__root__'
     | '/_site'
     | '/_site/alimentos'
+    | '/_site/criancas'
     | '/_site/informe-se'
     | '/_site/jogo'
     | '/_site/'
@@ -108,6 +118,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteInformeSeRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/criancas': {
+      id: '/_site/criancas'
+      path: '/criancas'
+      fullPath: '/criancas'
+      preLoaderRoute: typeof SiteCriancasRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/alimentos': {
       id: '/_site/alimentos'
       path: '/alimentos'
@@ -120,6 +137,7 @@ declare module '@tanstack/react-router' {
 
 interface SiteRouteChildren {
   SiteAlimentosRoute: typeof SiteAlimentosRoute
+  SiteCriancasRoute: typeof SiteCriancasRoute
   SiteInformeSeRoute: typeof SiteInformeSeRoute
   SiteJogoRoute: typeof SiteJogoRoute
   SiteIndexRoute: typeof SiteIndexRoute
@@ -127,6 +145,7 @@ interface SiteRouteChildren {
 
 const SiteRouteChildren: SiteRouteChildren = {
   SiteAlimentosRoute: SiteAlimentosRoute,
+  SiteCriancasRoute: SiteCriancasRoute,
   SiteInformeSeRoute: SiteInformeSeRoute,
   SiteJogoRoute: SiteJogoRoute,
   SiteIndexRoute: SiteIndexRoute,
