@@ -6,6 +6,7 @@ import { useState } from "react";
 const NAV = [
   { to: "/", label: "Saúde em Ação" },
   { to: "/alimentos", label: "Alimentos" },
+  { to: "/criancas", label: "Crianças" },
   { to: "/jogo", label: "Quiz" },
   { to: "/informe-se", label: "Informe-se!" },
 ] as const;
