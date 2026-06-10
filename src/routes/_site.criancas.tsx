@@ -66,6 +66,8 @@ function CriancasPage() {
       <section className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-5">
         <a
           href="https://www.youtube.com/channel/UCT9joOAoMPjdDl56IaXhlUg"
+          target="_blank"
+          rel="noopener noreferrer"
           className="group rounded-3xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition flex items-center gap-5 text-white"
           style={{ background: "linear-gradient(135deg, #ff0000, #c4302b)" }}
         >
