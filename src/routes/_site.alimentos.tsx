@@ -522,7 +522,7 @@ function AlimentosPage() {
                 </div>
 
                 <div
-                  className="absolute inset-0 rounded-3xl border border-border overflow-hidden bg-card p-6 flex flex-col [backface-visibility:hidden]"
+                  className="absolute inset-0 rounded-3xl border border-border overflow-y-auto bg-card p-6 flex flex-col [backface-visibility:hidden]"
                   style={{
                     transform: "rotateY(180deg)",
                     background: `linear-gradient(180deg, color-mix(in oklab, ${a.cor} 12%, var(--card)), var(--card))`,
