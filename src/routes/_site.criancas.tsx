@@ -37,13 +37,18 @@ function CriancasPage() {
         <p className="mt-4 text-lg text-foreground/75">
           A minissérie dos Guardiões do Prato estará disponível em breve no nosso canal do YouTube. Fique de olho!
         </p>
+        <div className="mt-6 inline-block rounded-2xl border-2 border-dashed border-[var(--sun)] bg-[var(--sun)]/10 px-5 py-3 text-sm md:text-base font-semibold text-foreground/85">
+          ⚠️ Para entender os jogos, é necessário assistir à minissérie!
+        </div>
       </header>
 
       <section className="mt-12">
         <h2 className="text-2xl md:text-3xl font-bold text-primary text-center">
           Jogos para brincar e aprender
         </h2>
-        <p className="mt-2 text-center text-foreground/70">Escolha um jogo e divirta-se!</p>
+        <p className="mt-2 text-center text-foreground/70">
+          Assista primeiro à minissérie no YouTube para aproveitar ao máximo. Depois, escolha um jogo e divirta-se!
+        </p>
 
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {jogos.map(({ nome, href, img }) => (
