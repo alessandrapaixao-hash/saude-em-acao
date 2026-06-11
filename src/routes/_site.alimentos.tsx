@@ -453,7 +453,7 @@ function AlimentosPage() {
               aria-label={`Virar card de ${a.nome} para ver o método de limpeza`}
             >
               <article
-                className="relative min-h-[36rem] rounded-3xl [transform-style:preserve-3d] transition-transform duration-700"
+                className="relative min-h-[44rem] sm:min-h-[46rem] rounded-3xl [transform-style:preserve-3d] transition-transform duration-700"
                 style={{ transform: aberto ? "rotateY(180deg)" : "rotateY(0deg)" }}
               >
                 <div
@@ -522,7 +522,7 @@ function AlimentosPage() {
                 </div>
 
                 <div
-                  className="absolute inset-0 rounded-3xl border border-border overflow-hidden bg-card p-6 flex flex-col [backface-visibility:hidden]"
+                  className="absolute inset-0 rounded-3xl border border-border overflow-y-auto bg-card p-6 flex flex-col [backface-visibility:hidden]"
                   style={{
                     transform: "rotateY(180deg)",
                     background: `linear-gradient(180deg, color-mix(in oklab, ${a.cor} 12%, var(--card)), var(--card))`,
