@@ -9,6 +9,22 @@ import newsPr from "@/assets/news-pr.jpg";
 import newsScielo from "@/assets/news-scielo.jpg";
 import newsMs from "@/assets/news-ms.jpg";
 import newsInca from "@/assets/news-inca.jpg";
+import informeMarketContamination from "@/assets/informe-market-contamination.jpg";
+import informeHealthRiskFood from "@/assets/informe-health-risk-food.jpg";
+import informeOrangePepperGuava from "@/assets/informe-orange-pepper-guava.jpg";
+import informeFruitWarning from "@/assets/informe-fruit-warning.jpg";
+import informeCucumberOrangeTesting from "@/assets/informe-cucumber-orange-testing.jpg";
+import informeWashingFruits from "@/assets/informe-washing-fruits.jpg";
+import informeLabMonitoringFood from "@/assets/informe-lab-monitoring-food.jpg";
+import informeBrazilianFruitResidue from "@/assets/informe-brazilian-fruit-residue.jpg";
+import informeCropSpraying from "@/assets/informe-crop-spraying.jpg";
+import informeUniversityResearch from "@/assets/informe-university-research.jpg";
+import informeOrangePineapple from "@/assets/informe-orange-pineapple.jpg";
+import informeStrawberryGrape from "@/assets/informe-strawberry-grape.jpg";
+import informeTvReport from "@/assets/informe-tv-report.jpg";
+import informeDocumentaryField from "@/assets/informe-documentary-field.jpg";
+import informeHealthImpact from "@/assets/informe-health-impact.jpg";
+import informeContaminatedPlate from "@/assets/informe-contaminated-plate.jpg";
 
 export const Route = createFileRoute("/_site/informe-se")({
   head: () => ({
@@ -58,85 +74,85 @@ const SOURCES: Source[] = [
   { title: "Quais são os alimentos mais contaminados por defensores agrícolas no Brasil", publisher: "Saúde Abril",
     url: "https://saude.abril.com.br/alimentacao/quais-sao-os-alimentos-mais-contaminados-por-agrotoxicos-e-os-mais-seguros-no-brasil/",
     tipo: "reportagem", description: "Lista dos alimentos com mais e menos resíduos detectados pela Anvisa.",
-    image: "https://loremflickr.com/800/450/fruits,vegetables,market?lock=11" },
+    image: informeMarketContamination },
   { title: "Alimentos com mais defensores agrícolas — riscos à saúde", publisher: "Metrópoles",
     url: "https://www.metropoles.com/saude/alimentos-mais-agrotoxicos-riscos",
     tipo: "reportagem", description: "Especialistas explicam os riscos por trás do consumo frequente de alimentos contaminados.",
-    image: "https://loremflickr.com/800/450/health,doctor,food?lock=12" },
+    image: informeHealthRiskFood },
   { title: "Laranja, pimentão e goiaba: campeões de defensores agrícolas acima do limite", publisher: "Agência Pública",
     url: "https://apublica.org/2020/10/laranja-pimentao-e-goiaba-alimentos-campeoes-de-agrotoxicos-acima-do-limite/",
     tipo: "reportagem", description: "Investigação independente sobre os alimentos com mais resíduos irregulares.",
-    image: "https://loremflickr.com/800/450/orange,pepper,guava?lock=13" },
+    image: informeOrangePepperGuava },
   { title: "Anvisa alerta: 2 frutas populares no Brasil têm defensores agrícolas em excesso", publisher: "UOL VivaBem",
     url: "https://www.uol.com.br/vivabem/noticias/redacao/2025/01/07/anvisa-alerta-2-frutas-populares-no-brasil-tem-agrotoxicos-em-excesso.htm",
     tipo: "reportagem", description: "Alerta da Anvisa sobre frutas amplamente consumidas e com níveis irregulares.",
-    image: "https://loremflickr.com/800/450/fruit,brazil,warning?lock=14" },
+    image: informeFruitWarning },
   { title: "Anvisa divulga lista com os 10 alimentos mais afetados por defensores agrícolas", publisher: "O Tempo",
     url: "https://www.otempo.com.br/brasil/anvisa-divulga-lista-com-os-dez-alimentos-mais-afetados-por-agrotoxicos-1.436431",
     tipo: "reportagem", description: "Ranking oficial dos alimentos mais contaminados segundo o PARA da Anvisa.",
-    image: "https://loremflickr.com/800/450/vegetables,supermarket?lock=15" },
+    image: informeMarketContamination },
   { title: "Pepino e laranja: alimentos campeões de defensores agrícolas (Anvisa 2024)", publisher: "Repórter Brasil",
     url: "https://reporterbrasil.org.br/2025/12/pepino-laranja-alimentos-campeoes-agrotoxicos-anvisa/",
     tipo: "reportagem", description: "Análise dos dados mais recentes do Programa de Análise de Resíduos da Anvisa.",
-    image: "https://loremflickr.com/800/450/cucumber,orange?lock=16" },
+    image: informeCucumberOrangeTesting },
   { title: "Quais frutas acumulam mais defensores agrícolas e como se proteger", publisher: "R7 Notícias",
     url: "https://noticias.r7.com/giro-10/quais-frutas-acumulam-mais-agrotoxicos-e-como-proteger-se-18032026/",
     tipo: "reportagem", description: "Lista prática das frutas com mais resíduos e dicas para reduzir a exposição.",
-    image: "https://loremflickr.com/800/450/fruits,washing,water?lock=17" },
+    image: informeWashingFruits },
   { title: "Anvisa divulga resultados do monitoramento de defensores agrícolas — Ciclo 2024", publisher: "G1 Saúde",
     url: "https://g1.globo.com/saude/noticia/2025/12/17/anvisa-divulga-resultados-do-monitoramento-de-agrotoxicos-em-alimentos-ciclo-2024.ghtml",
     tipo: "reportagem", description: "Cobertura do G1 sobre os números oficiais do monitoramento de defensores agrícolas.",
-    image: "https://loremflickr.com/800/450/laboratory,food,analysis?lock=18" },
+    image: informeLabMonitoringFood },
   { title: "A fruta brasileira com maior teor de defensores agrícolas, segundo a Anvisa", publisher: "TudoGostoso",
     url: "https://www.tudogostoso.com.br/noticias/a-fruta-brasileira-com-maior-teor-de-agrotoxicos-segundo-a-anvisa-a24169.htm",
     tipo: "reportagem", description: "Matéria sobre a fruta líder em resíduos de defensores agrícolas no monitoramento da Anvisa.",
-    image: "https://loremflickr.com/800/450/brazilian,fruit?lock=19" },
+    image: informeBrazilianFruitResidue },
   { title: "Veneno no prato dos outros é refresco", publisher: "Greenpeace Brasil",
     url: "https://www.greenpeace.org/brasil/blog/veneno-no-prato-dos-outros-e-refresco/",
     tipo: "artigo", description: "Análise crítica do Greenpeace sobre a flexibilização das regras de defensores agrícolas no Brasil.",
-    image: "https://loremflickr.com/800/450/pesticide,spray,crop?lock=20" },
+    image: informeCropSpraying },
   { title: "Núcleo de Estudos NUQUALI — Defensores Agrícolas em alimentos", publisher: "UFLA",
     url: "http://www.nucleoestudo.ufla.br/nuquali/?p=357",
     tipo: "artigo", description: "Estudo acadêmico da Universidade Federal de Lavras sobre qualidade dos alimentos.",
-    image: "https://loremflickr.com/800/450/university,research,food?lock=21" },
+    image: informeUniversityResearch },
   { title: "Laranja e abacaxi no topo da contaminação por defensores agrícolas", publisher: "O Globo",
     url: "https://oglobo.globo.com/brasil/sustentabilidade/laranja-abacaxi-estao-no-topo-da-contaminacao-por-agrotoxicos-20542450",
     tipo: "reportagem", description: "Reportagem do O Globo sobre as frutas com maior detecção de resíduos.",
-    image: "https://loremflickr.com/800/450/orange,pineapple?lock=22" },
+    image: informeOrangePineapple },
   { title: "As frutas mais venenosas que os brasileiros adoram", publisher: "TudoGostoso",
     url: "https://www.tudogostoso.com.br/noticias/poucos-sabem-mas-essas-sao-as-frutas-mais-venenosas-elas-estao-cheia-de-pesticidas-mas-os-brasileiros-as-adoram-a18752.htm",
     tipo: "reportagem", description: "Frutas amplamente consumidas no país com altos níveis de pesticidas.",
-    image: "https://loremflickr.com/800/450/strawberry,grape,fruit?lock=23" },
+    image: informeStrawberryGrape },
 
   // Vídeos
   { title: "Reportagem especial sobre defensores agrícolas (Globoplay)", publisher: "Globoplay",
     url: "https://globoplay.globo.com/v/6737676/",
     tipo: "video", description: "Reportagem em vídeo sobre o cenário dos defensores agrícolas no Brasil.",
-    image: "https://loremflickr.com/800/450/television,news,brazil?lock=24" },
+    image: informeTvReport },
   { title: "Defensores Agrícolas no Brasil — documentário", publisher: "YouTube",
     url: "https://www.youtube.com/watch?v=dPwDVAqZdG4",
     tipo: "video", description: "Conteúdo audiovisual com depoimentos e dados sobre contaminação alimentar.",
-    image: "https://loremflickr.com/800/450/documentary,farm,brazil?lock=25" },
+    image: informeDocumentaryField },
   { title: "Impacto dos defensores agrícolas na saúde", publisher: "YouTube",
     url: "https://www.youtube.com/watch?v=v-77ASNWPHY",
     tipo: "video", description: "Vídeo explicativo sobre os efeitos dos defensores agrícolas no organismo.",
-    image: "https://loremflickr.com/800/450/health,human,body?lock=26" },
+    image: informeHealthImpact },
   { title: "Reportagem Globoplay — defensores agrícolas no campo", publisher: "Globoplay",
     url: "https://globoplay.globo.com/v/5564567/",
     tipo: "video", description: "Cobertura televisiva sobre o uso de defensores agrícolas no agronegócio brasileiro.",
-    image: "https://loremflickr.com/800/450/agriculture,field,tractor?lock=27" },
+    image: informeDocumentaryField },
   { title: "Defensores Agrícolas e câncer — debate", publisher: "YouTube",
     url: "https://www.youtube.com/watch?v=UYJwEK-XwRk",
     tipo: "video", description: "Debate com especialistas sobre a relação entre defensores agrícolas e câncer.",
-    image: "https://loremflickr.com/800/450/cancer,research,medicine?lock=28" },
+    image: informeHealthImpact },
   { title: "Reportagem Globoplay — alimentos contaminados", publisher: "Globoplay",
     url: "https://globoplay.globo.com/v/2921523/",
     tipo: "video", description: "Reportagem investigativa sobre alimentos com resíduos de defensores agrícolas.",
-    image: "https://loremflickr.com/800/450/food,contamination,investigation?lock=29" },
+    image: informeContaminatedPlate },
   { title: "Como os defensores agrícolas chegam ao seu prato", publisher: "YouTube",
     url: "https://www.youtube.com/watch?v=R5-2t6VJDAg",
     tipo: "video", description: "Vídeo que explica o caminho dos defensores agrícolas da lavoura até a mesa do consumidor.",
-    image: "https://loremflickr.com/800/450/plate,food,dinner?lock=30" },
+    image: informeContaminatedPlate },
 ];
 
 const TYPE_META: Record<Tipo, { label: string; icon: typeof Play; color: string; bg: string }> = {
