@@ -25,6 +25,9 @@ import informeTvReport from "@/assets/informe-tv-report.jpg";
 import informeDocumentaryField from "@/assets/informe-documentary-field.jpg";
 import informeHealthImpact from "@/assets/informe-health-impact.jpg";
 import informeContaminatedPlate from "@/assets/informe-contaminated-plate.jpg";
+import informeFieldSprayingReport from "@/assets/informe-field-spraying-report.jpg";
+import informeCancerDebate from "@/assets/informe-cancer-debate.jpg";
+import informeFarmToPlate from "@/assets/informe-farm-to-plate.jpg";
 
 export const Route = createFileRoute("/_site/informe-se")({
   head: () => ({
@@ -140,11 +143,11 @@ const SOURCES: Source[] = [
   { title: "Reportagem Globoplay — defensores agrícolas no campo", publisher: "Globoplay",
     url: "https://globoplay.globo.com/v/5564567/",
     tipo: "video", description: "Cobertura televisiva sobre o uso de defensores agrícolas no agronegócio brasileiro.",
-    image: informeDocumentaryField },
+    image: informeFieldSprayingReport },
   { title: "Defensores Agrícolas e câncer — debate", publisher: "YouTube",
     url: "https://www.youtube.com/watch?v=UYJwEK-XwRk",
     tipo: "video", description: "Debate com especialistas sobre a relação entre defensores agrícolas e câncer.",
-    image: informeHealthImpact },
+    image: informeCancerDebate },
   { title: "Reportagem Globoplay — alimentos contaminados", publisher: "Globoplay",
     url: "https://globoplay.globo.com/v/2921523/",
     tipo: "video", description: "Reportagem investigativa sobre alimentos com resíduos de defensores agrícolas.",
@@ -152,7 +155,7 @@ const SOURCES: Source[] = [
   { title: "Como os defensores agrícolas chegam ao seu prato", publisher: "YouTube",
     url: "https://www.youtube.com/watch?v=R5-2t6VJDAg",
     tipo: "video", description: "Vídeo que explica o caminho dos defensores agrícolas da lavoura até a mesa do consumidor.",
-    image: informeContaminatedPlate },
+    image: informeFarmToPlate },
 ];
 
 const TYPE_META: Record<Tipo, { label: string; icon: typeof Play; color: string; bg: string }> = {
