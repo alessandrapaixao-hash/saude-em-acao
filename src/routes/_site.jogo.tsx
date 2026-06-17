@@ -5,9 +5,9 @@ import { CheckCircle2, XCircle, Trophy, RotateCcw, Sparkles, Leaf, AlertTriangle
 export const Route = createFileRoute("/_site/jogo")({
   head: () => ({
     meta: [
-      { title: "NutriClean — O Quiz · Saúde em Ação" },
+      { title: "Saúde em Ação — O Quiz" },
       { name: "description", content: "Quiz educativo: descubra se o alimento é campeão de defensores agrícolas ou está entre os mais limpos. Inspirado nos dados da Anvisa." },
-      { property: "og:title", content: "NutriClean — O Quiz" },
+      { property: "og:title", content: "Saúde em Ação — O Quiz" },
       { property: "og:description", content: "Aprenda brincando: contaminado ou limpo?" },
       { property: "og:url", content: "/jogo" },
     ],
@@ -110,7 +110,7 @@ export default function JogoPage() {
 
       <header className="text-center max-w-2xl mx-auto">
         <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[var(--leaf)]">
-          <Sparkles className="w-3.5 h-3.5" /> NutriClean — O Quiz
+          <Sparkles className="w-3.5 h-3.5" /> Saúde em Ação — O Quiz
         </span>
         <h1 className="mt-3 text-4xl md:text-6xl font-bold text-primary">
           Contaminado ou limpo?
@@ -220,7 +220,7 @@ export default function JogoPage() {
           <Trophy className="w-16 h-16 text-[var(--sun)] mx-auto" />
           <h2 className="mt-4 text-3xl md:text-5xl font-bold text-primary">
             {score === TOTAL
-              ? "Especialista NutriClean!"
+              ? "Especialista Saúde em Ação!"
               : score >= TOTAL * 0.7
                 ? "Muito bem!"
                 : "Hora de se informar mais"}
