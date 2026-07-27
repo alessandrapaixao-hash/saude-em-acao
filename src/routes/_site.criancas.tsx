@@ -85,8 +85,15 @@ function CriancasPage() {
                 "repeating-linear-gradient(45deg, transparent 0 22px, rgba(255,255,255,.06) 22px 24px)",
             }}
           />
-          <div className="relative grid md:grid-cols-[1.1fr_1fr] gap-6 p-6 md:p-10 items-center text-white">
-            <div className="order-2 md:order-1">
+          <div className="relative flex flex-col items-center text-center gap-6 p-6 md:p-10 text-white">
+            <div className="flex justify-center w-full">
+              <img
+                src={vsAsset.url}
+                alt="Guardiões do Prato VS Turma da Contaminação"
+                className="mx-auto w-full max-w-sm drop-shadow-[0_10px_30px_rgba(168,85,247,0.6)] group-hover:scale-105 group-hover:rotate-1 transition duration-500"
+              />
+            </div>
+            <div className="flex flex-col items-center">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--sun)] text-[#1a1300] text-[10px] font-black uppercase tracking-widest shadow">
                 🎮 Jogo principal
               </span>
@@ -94,21 +101,15 @@ function CriancasPage() {
                 Guardiões do Prato
                 <span className="block text-[var(--sun)]">VS Turma da Contaminação</span>
               </h2>
-              <p className="mt-4 text-white/85 text-base md:text-lg max-w-md">
+              <p className="mt-4 text-white/85 text-base md:text-lg max-w-md mx-auto">
                 Entre na batalha entre os heróis dos alimentos saudáveis e os vilões do veneno. Uma aventura interativa que ensina enquanto diverte!
               </p>
               <div className="mt-6 inline-flex items-center gap-2 bg-[var(--sun)] text-[#1a1300] px-6 py-3 rounded-full font-black shadow-lg group-hover:scale-105 group-hover:shadow-2xl transition">
                 ▶ Jogar agora
               </div>
             </div>
-            <div className="order-1 md:order-2 flex justify-center">
-              <img
-                src={vsAsset.url}
-                alt="Guardiões do Prato VS Turma da Contaminação"
-                className="w-full max-w-sm drop-shadow-[0_10px_30px_rgba(168,85,247,0.6)] group-hover:scale-105 group-hover:rotate-1 transition duration-500"
-              />
-            </div>
           </div>
+
         </a>
       </section>
 
