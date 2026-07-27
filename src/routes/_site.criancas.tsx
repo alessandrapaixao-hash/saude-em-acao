@@ -137,8 +137,9 @@ function CriancasPage() {
                 <img
                   src={img}
                   alt={`Logo do jogo ${nome}`}
-                  className="max-h-44 w-auto drop-shadow-lg group-hover:scale-105 transition duration-300"
+                  className="mx-auto block max-h-44 w-auto drop-shadow-lg group-hover:scale-105 transition duration-300"
                 />
+
               </div>
               <div className="relative px-6 pb-5 flex items-center justify-between text-sm font-bold text-foreground/80">
                 <span>Jogar {nome}</span>
