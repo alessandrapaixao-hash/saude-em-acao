@@ -11,10 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SiteRouteImport } from './routes/_site'
 import { Route as SiteIndexRouteImport } from './routes/_site.index'
-import { Route as SiteJogoRouteImport } from './routes/_site.jogo'
-import { Route as SiteInformeSeRouteImport } from './routes/_site.informe-se'
-import { Route as SiteCriancasRouteImport } from './routes/_site.criancas'
 import { Route as SiteAlimentosRouteImport } from './routes/_site.alimentos'
+import { Route as SiteCriancasRouteImport } from './routes/_site.criancas'
+import { Route as SiteInformeSeRouteImport } from './routes/_site.informe-se'
+import { Route as SiteJogoRouteImport } from './routes/_site.jogo'
 
 const SiteRoute = SiteRouteImport.update({
   id: '/_site',
@@ -25,14 +25,9 @@ const SiteIndexRoute = SiteIndexRouteImport.update({
   path: '/',
   getParentRoute: () => SiteRoute,
 } as any)
-const SiteJogoRoute = SiteJogoRouteImport.update({
-  id: '/jogo',
-  path: '/jogo',
-  getParentRoute: () => SiteRoute,
-} as any)
-const SiteInformeSeRoute = SiteInformeSeRouteImport.update({
-  id: '/informe-se',
-  path: '/informe-se',
+const SiteAlimentosRoute = SiteAlimentosRouteImport.update({
+  id: '/alimentos',
+  path: '/alimentos',
   getParentRoute: () => SiteRoute,
 } as any)
 const SiteCriancasRoute = SiteCriancasRouteImport.update({
@@ -40,9 +35,14 @@ const SiteCriancasRoute = SiteCriancasRouteImport.update({
   path: '/criancas',
   getParentRoute: () => SiteRoute,
 } as any)
-const SiteAlimentosRoute = SiteAlimentosRouteImport.update({
-  id: '/alimentos',
-  path: '/alimentos',
+const SiteInformeSeRoute = SiteInformeSeRouteImport.update({
+  id: '/informe-se',
+  path: '/informe-se',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteJogoRoute = SiteJogoRouteImport.update({
+  id: '/jogo',
+  path: '/jogo',
   getParentRoute: () => SiteRoute,
 } as any)
 
@@ -104,18 +104,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteIndexRouteImport
       parentRoute: typeof SiteRoute
     }
-    '/_site/jogo': {
-      id: '/_site/jogo'
-      path: '/jogo'
-      fullPath: '/jogo'
-      preLoaderRoute: typeof SiteJogoRouteImport
-      parentRoute: typeof SiteRoute
-    }
-    '/_site/informe-se': {
-      id: '/_site/informe-se'
-      path: '/informe-se'
-      fullPath: '/informe-se'
-      preLoaderRoute: typeof SiteInformeSeRouteImport
+    '/_site/alimentos': {
+      id: '/_site/alimentos'
+      path: '/alimentos'
+      fullPath: '/alimentos'
+      preLoaderRoute: typeof SiteAlimentosRouteImport
       parentRoute: typeof SiteRoute
     }
     '/_site/criancas': {
@@ -125,11 +118,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteCriancasRouteImport
       parentRoute: typeof SiteRoute
     }
-    '/_site/alimentos': {
-      id: '/_site/alimentos'
-      path: '/alimentos'
-      fullPath: '/alimentos'
-      preLoaderRoute: typeof SiteAlimentosRouteImport
+    '/_site/informe-se': {
+      id: '/_site/informe-se'
+      path: '/informe-se'
+      fullPath: '/informe-se'
+      preLoaderRoute: typeof SiteInformeSeRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/jogo': {
+      id: '/_site/jogo'
+      path: '/jogo'
+      fullPath: '/jogo'
+      preLoaderRoute: typeof SiteJogoRouteImport
       parentRoute: typeof SiteRoute
     }
   }
@@ -159,13 +159,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
