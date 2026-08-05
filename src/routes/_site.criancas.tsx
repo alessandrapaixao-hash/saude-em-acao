@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Youtube, Sparkles } from "lucide-react";
-import memoriaAsset from "@/assets/memoria.png.asset.json";
-import forcaAsset from "@/assets/forca.png.asset.json";
-import desembaralheAsset from "@/assets/desembaralhe.png.asset.json";
-import cacaPalavrasAsset from "@/assets/cacapalavras.png.asset.json";
+import memoriaImg from "@/assets/logo-memoria.png";
+import forcaImg from "@/assets/logo-forca.png";
+import desembaralheImg from "@/assets/logo-desembaralhe.png";
+import cacaPalavrasImg from "@/assets/logo-cacapalavras.png";
 import vsAsset from "@/assets/guardioes-vs-contaminacao.png.asset.json";
 
 export const Route = createFileRoute("/_site/criancas")({
