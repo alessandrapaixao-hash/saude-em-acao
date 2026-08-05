@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Youtube, Sparkles } from "lucide-react";
-import memoriaAsset from "@/assets/memoria.png.asset.json";
-import forcaAsset from "@/assets/forca.png.asset.json";
-import desembaralheAsset from "@/assets/desembaralhe.png.asset.json";
-import cacaPalavrasAsset from "@/assets/cacapalavras.png.asset.json";
+import memoriaImg from "@/assets/logo-memoria.png";
+import forcaImg from "@/assets/logo-forca.png";
+import desembaralheImg from "@/assets/logo-desembaralhe.png";
+import cacaPalavrasImg from "@/assets/logo-cacapalavras.png";
 import vsAsset from "@/assets/guardioes-vs-contaminacao.png.asset.json";
 
 export const Route = createFileRoute("/_site/criancas")({
@@ -24,28 +24,28 @@ const jogos = [
   {
     nome: "Jogo da Memória",
     href: "https://learningapps.org/view52003284",
-    img: memoriaAsset.url,
+    img: memoriaImg,
     gradient: "from-[var(--leaf)]/15 via-[var(--leaf)]/5 to-transparent",
     ring: "hover:ring-[var(--leaf)]",
   },
   {
     nome: "Desembaralhe",
     href: "https://wordwall.net/resource/114702835",
-    img: desembaralheAsset.url,
+    img: desembaralheImg,
     gradient: "from-[var(--berry)]/20 via-[var(--berry)]/5 to-transparent",
     ring: "hover:ring-[var(--berry)]",
   },
   {
     nome: "Caça-palavras",
     href: "https://learningapps.org/view52003825",
-    img: cacaPalavrasAsset.url,
+    img: cacaPalavrasImg,
     gradient: "from-[var(--sun)]/20 via-[var(--sun)]/5 to-transparent",
     ring: "hover:ring-[var(--sun)]",
   },
   {
     nome: "Forca",
     href: "https://learningapps.org/view52021417",
-    img: forcaAsset.url,
+    img: forcaImg,
     gradient: "from-[var(--tomato)]/15 via-[var(--tomato)]/5 to-transparent",
     ring: "hover:ring-[var(--tomato)]",
   },
