@@ -14,7 +14,7 @@ import informeHealthRiskFood from "@/assets/informe-health-risk-food.jpg";
 import informeOrangePepperGuava from "@/assets/informe-orange-pepper-guava.jpg";
 import informeFruitWarning from "@/assets/informe-fruit-warning.jpg";
 import informeCucumberOrangeTesting from "@/assets/informe-cucumber-orange-testing.jpg";
-import informeWashingFruits from "@/assets/informe-washing-fruits.jpg";
+
 import informeLabMonitoringFood from "@/assets/informe-lab-monitoring-food.jpg";
 import informeBrazilianFruitResidue from "@/assets/informe-brazilian-fruit-residue.jpg";
 import informeCropSpraying from "@/assets/informe-crop-spraying.jpg";
