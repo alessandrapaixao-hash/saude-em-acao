@@ -14,7 +14,7 @@ import informeHealthRiskFood from "@/assets/informe-health-risk-food.jpg";
 import informeOrangePepperGuava from "@/assets/informe-orange-pepper-guava.jpg";
 import informeFruitWarning from "@/assets/informe-fruit-warning.jpg";
 import informeCucumberOrangeTesting from "@/assets/informe-cucumber-orange-testing.jpg";
-import informeWashingFruits from "@/assets/informe-washing-fruits.jpg";
+
 import informeLabMonitoringFood from "@/assets/informe-lab-monitoring-food.jpg";
 import informeBrazilianFruitResidue from "@/assets/informe-brazilian-fruit-residue.jpg";
 import informeCropSpraying from "@/assets/informe-crop-spraying.jpg";
@@ -98,10 +98,6 @@ const SOURCES: Source[] = [
     url: "https://reporterbrasil.org.br/2025/12/pepino-laranja-alimentos-campeoes-agrotoxicos-anvisa/",
     tipo: "reportagem", description: "Análise dos dados mais recentes do Programa de Análise de Resíduos da Anvisa.",
     image: informeCucumberOrangeTesting },
-  { title: "Quais frutas acumulam mais defensores agrícolas e como se proteger", publisher: "R7 Notícias",
-    url: "https://noticias.r7.com/giro-10/quais-frutas-acumulam-mais-agrotoxicos-e-como-proteger-se-18032026/",
-    tipo: "reportagem", description: "Lista prática das frutas com mais resíduos e dicas para reduzir a exposição.",
-    image: informeWashingFruits },
   { title: "Anvisa divulga resultados do monitoramento de defensores agrícolas — Ciclo 2024", publisher: "G1 Saúde",
     url: "https://g1.globo.com/saude/noticia/2025/12/17/anvisa-divulga-resultados-do-monitoramento-de-agrotoxicos-em-alimentos-ciclo-2024.ghtml",
     tipo: "reportagem", description: "Cobertura do G1 sobre os números oficiais do monitoramento de defensores agrícolas.",
