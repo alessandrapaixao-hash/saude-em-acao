@@ -28,6 +28,7 @@ import informeContaminatedPlate from "@/assets/informe-contaminated-plate.jpg";
 import informeFieldSprayingReport from "@/assets/informe-field-spraying-report.jpg";
 import informeCancerDebate from "@/assets/informe-cancer-debate.jpg";
 import informeFarmToPlate from "@/assets/informe-farm-to-plate.jpg";
+import informeCarbofuranoBan from "@/assets/informe-carbofurano-ban.jpg";
 
 export const Route = createFileRoute("/_site/informe-se")({
   head: () => ({
@@ -122,6 +123,11 @@ const SOURCES: Source[] = [
     url: "https://www.tudogostoso.com.br/noticias/poucos-sabem-mas-essas-sao-as-frutas-mais-venenosas-elas-estao-cheia-de-pesticidas-mas-os-brasileiros-as-adoram-a18752.htm",
     tipo: "reportagem", description: "Frutas amplamente consumidas no país com altos níveis de pesticidas.",
     image: informeStrawberryGrape },
+
+  { title: "Termina prazo de descontinuação do uso de carbofurano", publisher: "Anvisa · Gov.br",
+    url: "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2018/termina-prazo-de-descontinuacao-do-uso-de-carbofurano",
+    tipo: "reportagem", description: "Anvisa anuncia o fim do prazo para uso do carbofurano, banido no Brasil por riscos à saúde.",
+    image: informeCarbofuranoBan },
 
   // Vídeos
   { title: "Reportagem especial sobre defensores agrícolas (Globoplay)", publisher: "Globoplay",
