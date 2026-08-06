@@ -124,6 +124,11 @@ const SOURCES: Source[] = [
     tipo: "reportagem", description: "Frutas amplamente consumidas no país com altos níveis de pesticidas.",
     image: informeStrawberryGrape },
 
+  { title: "Termina prazo de descontinuação do uso de carbofurano", publisher: "Anvisa · Gov.br",
+    url: "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2018/termina-prazo-de-descontinuacao-do-uso-de-carbofurano",
+    tipo: "reportagem", description: "Anvisa anuncia o fim do prazo para uso do carbofurano, banido no Brasil por riscos à saúde.",
+    image: informeCarbofuranoBan },
+
   // Vídeos
   { title: "Reportagem especial sobre defensores agrícolas (Globoplay)", publisher: "Globoplay",
     url: "https://globoplay.globo.com/v/6737676/",
