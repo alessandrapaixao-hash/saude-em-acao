@@ -28,6 +28,7 @@ import informeContaminatedPlate from "@/assets/informe-contaminated-plate.jpg";
 import informeFieldSprayingReport from "@/assets/informe-field-spraying-report.jpg";
 import informeCancerDebate from "@/assets/informe-cancer-debate.jpg";
 import informeFarmToPlate from "@/assets/informe-farm-to-plate.jpg";
+import informeCarbofuranoBan from "@/assets/informe-carbofurano-ban.jpg";
 
 export const Route = createFileRoute("/_site/informe-se")({
   head: () => ({
