@@ -7,7 +7,7 @@ import newsAnvisa from "@/assets/news-anvisa.jpg";
 import newsUfmg from "@/assets/news-ufmg.jpg";
 import newsPr from "@/assets/news-pr.jpg";
 import newsScielo from "@/assets/news-scielo.jpg";
-import newsMs from "@/assets/news-ms.jpg";
+
 import newsInca from "@/assets/news-inca.jpg";
 import informeMarketContamination from "@/assets/informe-market-contamination.jpg";
 import informeHealthRiskFood from "@/assets/informe-health-risk-food.jpg";
