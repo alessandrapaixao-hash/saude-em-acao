@@ -85,6 +85,27 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Vídeo de apresentação */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 py-14 md:py-20">
+        <h2 className="font-display text-3xl md:text-4xl font-bold text-primary text-center">
+          Conheça a nossa proposta:
+        </h2>
+        <div className="mt-6 rounded-3xl overflow-hidden border border-border shadow-xl bg-card">
+          <div className="relative w-full aspect-video">
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/HwNs7iGHnTg"
+              title="Conheça a nossa proposta — Saúde em Ação"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </section>
+
+
+
       {/* RED ALERT — sensationalist but data-backed */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[var(--tomato)] to-[oklch(0.45_0.22_28)] text-white">
         <div aria-hidden className="absolute inset-0 opacity-20"

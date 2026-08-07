@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Youtube, Sparkles } from "lucide-react";
 import memoriaImg from "@/assets/logo-memoria.png";
-import forcaImg from "@/assets/logo-forca.png";
+import forcaAsset from "@/assets/forca-logo.png.asset.json";
 import desembaralheImg from "@/assets/logo-desembaralhe.png";
 import cacaPalavrasImg from "@/assets/logo-cacapalavras.png";
 import vsAsset from "@/assets/guardioes-vs-contaminacao.png.asset.json";
@@ -45,7 +45,7 @@ const jogos = [
   {
     nome: "Forca",
     href: "https://learningapps.org/view52021417",
-    img: forcaImg,
+    img: forcaAsset.url,
     gradient: "from-[var(--tomato)]/15 via-[var(--tomato)]/5 to-transparent",
     ring: "hover:ring-[var(--tomato)]",
   },
