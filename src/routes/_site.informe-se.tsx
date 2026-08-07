@@ -29,6 +29,7 @@ import informeFieldSprayingReport from "@/assets/informe-field-spraying-report.j
 import informeCancerDebate from "@/assets/informe-cancer-debate.jpg";
 import informeFarmToPlate from "@/assets/informe-farm-to-plate.jpg";
 import informeCarbofuranoBan from "@/assets/informe-carbofurano-ban.jpg";
+import informeUnicampHortalicas from "@/assets/informe-unicamp-hortalicas.jpg";
 
 export const Route = createFileRoute("/_site/informe-se")({
   head: () => ({
@@ -128,6 +129,11 @@ const SOURCES: Source[] = [
     url: "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2018/termina-prazo-de-descontinuacao-do-uso-de-carbofurano",
     tipo: "reportagem", description: "Anvisa anuncia o fim do prazo para uso do carbofurano, banido no Brasil por riscos à saúde.",
     image: informeCarbofuranoBan },
+
+  { title: "Defensores agrícolas em legumes e hortaliças: estudo da Unicamp", publisher: "FCF · Unicamp",
+    url: "https://www.fcf.unicamp.br/2022/12/15/agrotoxicos-legumes-hortalicas/",
+    tipo: "artigo", description: "Pesquisa da Faculdade de Ciências Farmacêuticas da Unicamp sobre resíduos de defensores agrícolas em legumes e hortaliças.",
+    image: informeUnicampHortalicas },
 
   // Vídeos
   { title: "Reportagem especial sobre defensores agrícolas (Globoplay)", publisher: "Globoplay",
