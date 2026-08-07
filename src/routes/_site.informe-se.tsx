@@ -70,8 +70,6 @@ const SOURCES: Source[] = [
     tipo: "artigo", description: "Página oficial do governo do PR sobre sinais, sintomas e protocolos de intoxicação aguda.", image: newsPr },
   { title: "Defensores Agrícolas e saúde — análise crítica", publisher: "SciELO · Saúde em Debate", url: "https://www.scielo.br/j/sdeb/a/bGBYRZvVVKMrV4yzqfwwKtP/?lang=pt",
     tipo: "artigo", description: "Artigo científico revisado por pares sobre saúde pública e defensores agrícolas no Brasil.", image: newsScielo },
-  { title: "Intoxicação por defensores agrícolas — Cartilha", publisher: "BVS / Ministério da Saúde", url: "https://bvsms.saude.gov.br/intoxicacao-por-agrotoxicos/",
-    tipo: "artigo", description: "Conteúdo oficial do Ministério da Saúde sobre prevenção, reconhecimento e atendimento.", image: newsMs },
   { title: "Um alerta sobre os impactos dos defensores agrícolas na saúde", publisher: "INCA — Instituto Nacional de Câncer", url: "https://ninho.inca.gov.br/jspui/bitstream/123456789/12520/1/Um%20alerta%20sobre%20os%20impactos%20dos%20agrot%C3%B3xicos%20na%20sa%C3%BAde..pdf",
     tipo: "artigo", description: "Documento técnico do INCA com evidências científicas sobre câncer e defensores agrícolas.", image: newsInca },
 
