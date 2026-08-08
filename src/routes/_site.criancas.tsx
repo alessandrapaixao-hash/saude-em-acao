@@ -113,6 +113,23 @@ function CriancasPage() {
         </a>
       </section>
 
+      {/* Vídeo: Conheça os Guardiões do Prato */}
+      <section className="mt-16">
+        <h2 className="text-center text-2xl md:text-3xl font-display font-bold text-primary">
+          Conheça os Guardiões do Prato:
+        </h2>
+        <div className="mt-6 mx-auto max-w-3xl aspect-video overflow-hidden rounded-3xl border border-border shadow-xl bg-black">
+          <iframe
+            className="w-full h-full"
+            src="https://www.youtube.com/embed/NOQNEPZstes"
+            title="Conheça os Guardiões do Prato"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        </div>
+      </section>
+
       <section className="mt-16">
         <div className="text-center">
           <h2 className="text-2xl md:text-3xl font-display font-bold text-primary">
