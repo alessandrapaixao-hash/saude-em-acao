@@ -23,7 +23,7 @@ import informeOrangePineapple from "@/assets/informe-orange-pineapple.jpg";
 import informeStrawberryGrape from "@/assets/informe-strawberry-grape.jpg";
 import informeTvReport from "@/assets/informe-tv-report.jpg";
 import informeDocumentaryField from "@/assets/informe-documentary-field.jpg";
-import informeHealthImpact from "@/assets/informe-health-impact.jpg";
+
 import informeContaminatedPlate from "@/assets/informe-contaminated-plate.jpg";
 import informeFieldSprayingReport from "@/assets/informe-field-spraying-report.jpg";
 import informeCancerDebate from "@/assets/informe-cancer-debate.jpg";
