@@ -23,7 +23,7 @@ import informeOrangePineapple from "@/assets/informe-orange-pineapple.jpg";
 import informeStrawberryGrape from "@/assets/informe-strawberry-grape.jpg";
 import informeTvReport from "@/assets/informe-tv-report.jpg";
 import informeDocumentaryField from "@/assets/informe-documentary-field.jpg";
-import informeHealthImpact from "@/assets/informe-health-impact.jpg";
+
 import informeContaminatedPlate from "@/assets/informe-contaminated-plate.jpg";
 import informeFieldSprayingReport from "@/assets/informe-field-spraying-report.jpg";
 import informeCancerDebate from "@/assets/informe-cancer-debate.jpg";
@@ -142,10 +142,6 @@ const SOURCES: Source[] = [
     url: "https://www.youtube.com/watch?v=dPwDVAqZdG4",
     tipo: "video", description: "Conteúdo audiovisual com depoimentos e dados sobre contaminação alimentar.",
     image: informeDocumentaryField },
-  { title: "Impacto dos defensores agrícolas na saúde", publisher: "YouTube",
-    url: "https://www.youtube.com/watch?v=v-77ASNWPHY",
-    tipo: "video", description: "Vídeo explicativo sobre os efeitos dos defensores agrícolas no organismo.",
-    image: informeHealthImpact },
   { title: "Reportagem Globoplay — defensores agrícolas no campo", publisher: "Globoplay",
     url: "https://globoplay.globo.com/v/5564567/",
     tipo: "video", description: "Cobertura televisiva sobre o uso de defensores agrícolas no agronegócio brasileiro.",
