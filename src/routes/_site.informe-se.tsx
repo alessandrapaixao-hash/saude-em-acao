@@ -30,6 +30,8 @@ import informeCancerDebate from "@/assets/informe-cancer-debate.jpg";
 import informeFarmToPlate from "@/assets/informe-farm-to-plate.jpg";
 import informeCarbofuranoBan from "@/assets/informe-carbofurano-ban.jpg";
 import informeUnicampHortalicas from "@/assets/informe-unicamp-hortalicas.jpg";
+import informeGreenpeaceFood from "@/assets/informe-greenpeace-food.jpg";
+
 
 export const Route = createFileRoute("/_site/informe-se")({
   head: () => ({
@@ -134,10 +136,15 @@ const SOURCES: Source[] = [
     image: informeUnicampHortalicas },
 
   // Vídeos
+  { title: "O que tem de errado com o alimento que comemos?", publisher: "Greenpeace Brasil",
+    url: "https://youtu.be/olwr1aK6e4w",
+    tipo: "video", description: "Vídeo do Greenpeace Brasil que questiona os problemas dos alimentos que consumimos e os impactos dos defensores agrícolas.",
+    image: informeGreenpeaceFood },
   { title: "Reportagem especial sobre defensores agrícolas (Globoplay)", publisher: "Globoplay",
     url: "https://globoplay.globo.com/v/6737676/",
     tipo: "video", description: "Reportagem em vídeo sobre o cenário dos defensores agrícolas no Brasil.",
     image: informeTvReport },
+
   { title: "Defensores Agrícolas no Brasil — documentário", publisher: "YouTube",
     url: "https://www.youtube.com/watch?v=dPwDVAqZdG4",
     tipo: "video", description: "Conteúdo audiovisual com depoimentos e dados sobre contaminação alimentar.",
