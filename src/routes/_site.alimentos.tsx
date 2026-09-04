@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AlertCircle } from "lucide-react";
 import { useMemo, useState } from "react";
+import { ALIMENTOS, CATEGORIAS, foodImage, metodoLimpeza, type Categoria } from "@/lib/catalogo-alimentos";
 
 export const Route = createFileRoute("/_site/alimentos")({
   head: () => ({
@@ -15,7 +16,6 @@ export const Route = createFileRoute("/_site/alimentos")({
   }),
   component: AlimentosPage,
 });
-import { ALIMENTOS, CATEGORIAS, foodImage, metodoLimpeza, type Categoria } from "@/lib/catalogo-alimentos";
 
 
 function AlimentosPage() {
