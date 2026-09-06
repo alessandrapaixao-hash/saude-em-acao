@@ -30,14 +30,14 @@ export function SiteLayout() {
               <div className="text-[11px] text-muted-foreground -mt-0.5">ODS 3 · Alimentação consciente</div>
             </div>
           </Link>
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-0.5">
             {NAV.map((n) => {
               const active = pathname === n.to;
               return (
                 <Link
                   key={n.to}
                   to={n.to}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold transition ${
+                  className={`px-3 py-2 rounded-full text-[13px] font-semibold transition ${
                     active
                       ? "bg-primary text-primary-foreground shadow-sm"
                       : "text-foreground hover:bg-secondary"
@@ -49,7 +49,7 @@ export function SiteLayout() {
             })}
           </nav>
           <button
-            className="md:hidden p-2 rounded-lg hover:bg-secondary"
+            className="lg:hidden p-2 rounded-lg hover:bg-secondary"
             onClick={() => setOpen((v) => !v)}
             aria-label="Menu"
           >
@@ -57,7 +57,7 @@ export function SiteLayout() {
           </button>
         </div>
         {open && (
-          <div className="md:hidden border-t border-border bg-background">
+          <div className="lg:hidden border-t border-border bg-background">
             <div className="px-4 py-2 flex flex-col gap-1">
               {NAV.map((n) => (
                 <Link
