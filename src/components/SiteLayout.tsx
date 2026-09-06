@@ -6,10 +6,14 @@ import { useState } from "react";
 const NAV = [
   { to: "/", label: "Saúde em Ação" },
   { to: "/alimentos", label: "Alimentos" },
+  { to: "/manual", label: "Manual" },
+  { to: "/meu-dia", label: "Meu Dia" },
+  { to: "/meu-perfil", label: "Meu Perfil" },
   { to: "/jogo", label: "Quiz" },
   { to: "/informe-se", label: "Informe-se!" },
   { to: "/criancas", label: "Área Kids" },
 ] as const;
+
 
 export function SiteLayout() {
   const { pathname } = useLocation();
