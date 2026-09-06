@@ -85,6 +85,36 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Como está seu dia? */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 pt-12">
+        <div className="rounded-3xl border border-border bg-card p-6 sm:p-8 text-center shadow-sm">
+          <div className="text-3xl">🌱</div>
+          <h2 className="mt-2 font-display text-2xl md:text-3xl font-bold text-primary">
+            Como está seu dia?
+          </h2>
+          <p className="mt-2 text-foreground/75 max-w-xl mx-auto">
+            Registre o que você comeu, conheça cada alimento e marque os cuidados que já faz.
+            Sem cobrança, no seu ritmo.
+          </p>
+          <div className="mt-5 flex flex-wrap justify-center gap-3">
+            <Link
+              to="/meu-dia"
+              className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground font-semibold px-6 py-3 hover:opacity-90 transition"
+            >
+              Registrar meu dia <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              to="/manual"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-background font-semibold px-6 py-3 hover:border-primary transition"
+            >
+              Manual de Alimentos
+            </Link>
+          </div>
+        </div>
+      </section>
+
+
+
       {/* Vídeo de apresentação */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 py-14 md:py-20">
         <h2 className="font-display text-3xl md:text-4xl font-bold text-primary text-center">
