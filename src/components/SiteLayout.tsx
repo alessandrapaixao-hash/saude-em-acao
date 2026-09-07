@@ -64,13 +64,16 @@ export function SiteLayout() {
               );
             })}
           </nav>
-          <button
-            className="lg:hidden p-2 rounded-lg hover:bg-secondary"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Menu"
-          >
-            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          <div className="flex items-center gap-2">
+            <MenuPerfil />
+            <button
+              className="lg:hidden p-2 rounded-lg hover:bg-secondary"
+              onClick={() => setOpen((v) => !v)}
+              aria-label="Menu"
+            >
+              {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
         {open && (
           <div className="lg:hidden border-t border-border bg-background">
