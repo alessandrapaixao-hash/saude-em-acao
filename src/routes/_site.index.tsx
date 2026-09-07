@@ -104,10 +104,10 @@ function HomePage() {
               Registrar meu dia <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              to="/manual"
+              to="/alimentos"
               className="inline-flex items-center gap-2 rounded-full border border-border bg-background font-semibold px-6 py-3 hover:border-primary transition"
             >
-              Manual de Alimentos
+              Ver alimentos
             </Link>
           </div>
         </div>

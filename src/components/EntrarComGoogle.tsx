@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { lovable } from "@/integrations/lovable/index";
+import { guardarDestinoPosLogin, limparDestinoPosLogin } from "@/lib/pos-login";
 
 export function EntrarComGoogle({
-  titulo = "Entre para começar sua jornada",
-  descricao = "Seu diário e seus pontos ficam guardados na sua conta — só você vê o que registrou.",
+  titulo = "Entre para acompanhar seu dia",
+  descricao = "Registre suas refeições, acompanhe seus cuidados e conquiste pontos no Saúde em Ação.",
 }: {
   titulo?: string;
   descricao?: string;
@@ -13,16 +14,20 @@ export function EntrarComGoogle({
 
   async function entrar() {
     setCarregando(true);
+    guardarDestinoPosLogin(window.location.pathname);
     const resultado = await lovable.auth.signInWithOAuth("google", {
       redirect_uri: window.location.origin,
     });
     if (resultado.error) {
       setCarregando(false);
+      limparDestinoPosLogin();
       toast.error("Não foi possível entrar agora. Tente novamente.");
       return;
     }
     if (resultado.redirected) return;
-    window.location.reload();
+    // Login por janela: a sessão já está pronta, seguimos na mesma página.
+    limparDestinoPosLogin();
+    setCarregando(false);
   }
 
   return (
@@ -35,7 +40,7 @@ export function EntrarComGoogle({
         disabled={carregando}
         className="mt-6 w-full inline-flex items-center justify-center gap-3 rounded-full bg-primary text-primary-foreground font-semibold px-6 py-3 hover:opacity-90 transition disabled:opacity-60"
       >
-        {carregando ? "Abrindo…" : "Entrar com o Google"}
+        {carregando ? "Abrindo…" : "Continuar com Google"}
       </button>
       <p className="mt-4 text-xs text-muted-foreground">
         Usamos sua conta apenas para guardar seu progresso com segurança.

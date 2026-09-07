@@ -15,7 +15,6 @@ import { Route as SiteAlimentosRouteImport } from './routes/_site.alimentos'
 import { Route as SiteCriancasRouteImport } from './routes/_site.criancas'
 import { Route as SiteInformeSeRouteImport } from './routes/_site.informe-se'
 import { Route as SiteJogoRouteImport } from './routes/_site.jogo'
-import { Route as SiteManualRouteImport } from './routes/_site.manual'
 import { Route as SiteMeuDiaRouteImport } from './routes/_site.meu-dia'
 import { Route as SiteMeuPerfilRouteImport } from './routes/_site.meu-perfil'
 
@@ -48,11 +47,6 @@ const SiteJogoRoute = SiteJogoRouteImport.update({
   path: '/jogo',
   getParentRoute: () => SiteRoute,
 } as any)
-const SiteManualRoute = SiteManualRouteImport.update({
-  id: '/manual',
-  path: '/manual',
-  getParentRoute: () => SiteRoute,
-} as any)
 const SiteMeuDiaRoute = SiteMeuDiaRouteImport.update({
   id: '/meu-dia',
   path: '/meu-dia',
@@ -70,7 +64,6 @@ export interface FileRoutesByFullPath {
   '/criancas': typeof SiteCriancasRoute
   '/informe-se': typeof SiteInformeSeRoute
   '/jogo': typeof SiteJogoRoute
-  '/manual': typeof SiteManualRoute
   '/meu-dia': typeof SiteMeuDiaRoute
   '/meu-perfil': typeof SiteMeuPerfilRoute
 }
@@ -79,7 +72,6 @@ export interface FileRoutesByTo {
   '/criancas': typeof SiteCriancasRoute
   '/informe-se': typeof SiteInformeSeRoute
   '/jogo': typeof SiteJogoRoute
-  '/manual': typeof SiteManualRoute
   '/meu-dia': typeof SiteMeuDiaRoute
   '/meu-perfil': typeof SiteMeuPerfilRoute
   '/': typeof SiteIndexRoute
@@ -91,7 +83,6 @@ export interface FileRoutesById {
   '/_site/criancas': typeof SiteCriancasRoute
   '/_site/informe-se': typeof SiteInformeSeRoute
   '/_site/jogo': typeof SiteJogoRoute
-  '/_site/manual': typeof SiteManualRoute
   '/_site/meu-dia': typeof SiteMeuDiaRoute
   '/_site/meu-perfil': typeof SiteMeuPerfilRoute
   '/_site/': typeof SiteIndexRoute
@@ -104,7 +95,6 @@ export interface FileRouteTypes {
     | '/criancas'
     | '/informe-se'
     | '/jogo'
-    | '/manual'
     | '/meu-dia'
     | '/meu-perfil'
   fileRoutesByTo: FileRoutesByTo
@@ -113,7 +103,6 @@ export interface FileRouteTypes {
     | '/criancas'
     | '/informe-se'
     | '/jogo'
-    | '/manual'
     | '/meu-dia'
     | '/meu-perfil'
     | '/'
@@ -124,7 +113,6 @@ export interface FileRouteTypes {
     | '/_site/criancas'
     | '/_site/informe-se'
     | '/_site/jogo'
-    | '/_site/manual'
     | '/_site/meu-dia'
     | '/_site/meu-perfil'
     | '/_site/'
@@ -178,13 +166,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteJogoRouteImport
       parentRoute: typeof SiteRoute
     }
-    '/_site/manual': {
-      id: '/_site/manual'
-      path: '/manual'
-      fullPath: '/manual'
-      preLoaderRoute: typeof SiteManualRouteImport
-      parentRoute: typeof SiteRoute
-    }
     '/_site/meu-dia': {
       id: '/_site/meu-dia'
       path: '/meu-dia'
@@ -207,7 +188,6 @@ interface SiteRouteChildren {
   SiteCriancasRoute: typeof SiteCriancasRoute
   SiteInformeSeRoute: typeof SiteInformeSeRoute
   SiteJogoRoute: typeof SiteJogoRoute
-  SiteManualRoute: typeof SiteManualRoute
   SiteMeuDiaRoute: typeof SiteMeuDiaRoute
   SiteMeuPerfilRoute: typeof SiteMeuPerfilRoute
   SiteIndexRoute: typeof SiteIndexRoute
@@ -218,7 +198,6 @@ const SiteRouteChildren: SiteRouteChildren = {
   SiteCriancasRoute: SiteCriancasRoute,
   SiteInformeSeRoute: SiteInformeSeRoute,
   SiteJogoRoute: SiteJogoRoute,
-  SiteManualRoute: SiteManualRoute,
   SiteMeuDiaRoute: SiteMeuDiaRoute,
   SiteMeuPerfilRoute: SiteMeuPerfilRoute,
   SiteIndexRoute: SiteIndexRoute,

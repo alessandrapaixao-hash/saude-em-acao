@@ -1,23 +1,39 @@
-import { Link, Outlet, useLocation } from "@tanstack/react-router";
+import { Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
 import logo from "@/assets/logo.png";
 import { Leaf, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { MenuPerfil } from "@/components/MenuPerfil";
+import { useSessao } from "@/hooks/use-sessao";
+import { lerDestinoPosLogin, limparDestinoPosLogin } from "@/lib/pos-login";
 
 const NAV = [
   { to: "/", label: "Saúde em Ação" },
   { to: "/alimentos", label: "Alimentos" },
-  { to: "/manual", label: "Manual" },
   { to: "/meu-dia", label: "Meu Dia" },
-  { to: "/meu-perfil", label: "Meu Perfil" },
   { to: "/jogo", label: "Quiz" },
   { to: "/informe-se", label: "Informe-se!" },
   { to: "/criancas", label: "Área Kids" },
 ] as const;
 
+/** Depois do login com Google, volta para a página que a pessoa queria abrir. */
+function useVoltarAoDestino() {
+  const { usuario } = useSessao();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (!usuario) return;
+    const destino = lerDestinoPosLogin();
+    if (!destino) return;
+    limparDestinoPosLogin();
+    if (destino !== pathname) navigate({ to: destino, replace: true });
+  }, [usuario, pathname, navigate]);
+}
 
 export function SiteLayout() {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
+  useVoltarAoDestino();
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -48,13 +64,16 @@ export function SiteLayout() {
               );
             })}
           </nav>
-          <button
-            className="lg:hidden p-2 rounded-lg hover:bg-secondary"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Menu"
-          >
-            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          <div className="flex items-center gap-2">
+            <MenuPerfil />
+            <button
+              className="lg:hidden p-2 rounded-lg hover:bg-secondary"
+              onClick={() => setOpen((v) => !v)}
+              aria-label="Menu"
+            >
+              {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
         {open && (
           <div className="lg:hidden border-t border-border bg-background">
