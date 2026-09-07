@@ -41,6 +41,8 @@ export function FichaAlimento({
     .filter((c) => marcados.includes(c.id))
     .reduce((t, c) => t + c.pontos, 0);
 
+  const nivelElevado = alimento.nivel_atencao === "atencao" || alimento.nivel_atencao === "maior";
+
   return (
     <div className="space-y-5">
       <div className="flex gap-4 items-start">
