@@ -41,6 +41,8 @@ export function FichaAlimento({
     .filter((c) => marcados.includes(c.id))
     .reduce((t, c) => t + c.pontos, 0);
 
+  const nivelElevado = alimento.nivel_atencao === "atencao" || alimento.nivel_atencao === "maior";
+
   return (
     <div className="space-y-5">
       <div className="flex gap-4 items-start">
@@ -98,6 +100,31 @@ export function FichaAlimento({
         <p className="mt-1.5 text-sm text-foreground/80 leading-relaxed">{alimento.cuidados_texto}</p>
         <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{AVISO_HIGIENIZACAO}</p>
       </section>
+
+      {nivelElevado && cuidados.length > 0 && (
+        <section className="rounded-2xl border-2 border-[var(--sun)]/60 bg-[var(--sun)]/10 p-4">
+          <h4 className="font-display text-lg font-bold text-primary">
+            🛡️ Medidas para reduzir os riscos
+          </h4>
+          <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+            Por estar no nível <strong>{NIVEL_ATENCAO[alimento.nivel_atencao]?.rotulo ?? "Atenção"}</strong>, este
+            alimento pede um cuidado extra. Siga estas medidas sempre que possível:
+          </p>
+          <ol className="mt-3 space-y-2">
+            {cuidados.map((c, i) => (
+              <li key={c.id} className="flex gap-2.5 text-sm text-foreground/85">
+                <span className="mt-0.5 w-5 h-5 rounded-full bg-primary text-primary-foreground text-[11px] font-bold flex items-center justify-center shrink-0">
+                  {i + 1}
+                </span>
+                <span>
+                  <span className="font-semibold">{c.nome}.</span>{" "}
+                  {c.descricao && <span className="text-foreground/75">{c.descricao}</span>}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
 
       {onSalvar && (
         <section className="rounded-2xl border border-border bg-background/70 p-4">
