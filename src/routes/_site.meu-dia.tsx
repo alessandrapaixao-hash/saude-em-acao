@@ -236,28 +236,41 @@ function CardRefeicao({
       {!naoFaco && refeicao.consumos.length > 0 && (
         <ul className="mt-4 space-y-2">
           {refeicao.consumos.map((c) => (
-            <li key={c.id} className="flex items-center gap-3 rounded-2xl border border-border bg-background/60 p-3">
-              {c.alimento.imagem_url && (
-                <img src={c.alimento.imagem_url} alt={c.alimento.nome} className="w-12 h-12 rounded-xl object-cover" />
-              )}
-              <button onClick={() => onAbrirFicha(c)} className="text-left flex-1">
-                <span className="block font-semibold text-sm">
-                  {c.alimento.emoji} {c.alimento.nome}
-                </span>
-                <span className="mt-1 flex items-center gap-2">
-                  <SeloAtencao nivel={c.alimento.nivel_atencao} />
-                  <span className="text-[11px] text-muted-foreground">
-                    {c.cuidados.length} {c.cuidados.length === 1 ? "cuidado" : "cuidados"}
+            <li key={c.id} className="rounded-2xl border border-border bg-background/60 p-3">
+              <div className="flex items-center gap-3">
+                {c.alimento.imagem_url && (
+                  <img src={c.alimento.imagem_url} alt={c.alimento.nome} className="w-12 h-12 rounded-xl object-cover" />
+                )}
+                <button onClick={() => onAbrirFicha(c)} className="text-left flex-1">
+                  <span className="block font-semibold text-sm">
+                    {c.alimento.emoji} {c.alimento.nome}
                   </span>
-                </span>
-              </button>
-              <button
-                onClick={() => onRemover(c.id)}
-                aria-label={`Remover ${c.alimento.nome}`}
-                className="p-2 rounded-lg hover:bg-secondary text-muted-foreground"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
+                  <span className="mt-1 flex items-center gap-2">
+                    <SeloAtencao nivel={c.alimento.nivel_atencao} />
+                    <span className="text-[11px] text-muted-foreground">
+                      {c.cuidados.length} {c.cuidados.length === 1 ? "cuidado" : "cuidados"}
+                    </span>
+                  </span>
+                </button>
+                <button
+                  onClick={() => onRemover(c.id)}
+                  aria-label={`Remover ${c.alimento.nome}`}
+                  className="p-2 rounded-lg hover:bg-secondary text-muted-foreground"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+
+              {cuidados.length > 0 && (
+                <div className="mt-3">
+                  <ChecklistCuidados
+                    compacto
+                    cuidados={cuidados}
+                    selecionados={c.cuidados}
+                    onSalvar={(ids) => onSalvarCuidados(c, ids)}
+                  />
+                </div>
+              )}
             </li>
           ))}
         </ul>
