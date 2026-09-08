@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { AlertCircle, BookOpen, Check } from "lucide-react";
+import { AlertCircle, BookOpen } from "lucide-react";
 import type { Alimento, Cuidado } from "@/lib/diario";
+import { ChecklistCuidados } from "@/components/ChecklistCuidados";
 import { AVISO_CLASSIFICACAO, AVISO_HIGIENIZACAO, NIVEL_ATENCAO } from "@/lib/pontos";
 
 export function SeloAtencao({ nivel }: { nivel: string }) {
