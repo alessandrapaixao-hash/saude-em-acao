@@ -127,9 +127,16 @@ export function FichaAlimento({
       )}
 
       {onSalvar && (
-        <section className="rounded-2xl border border-border bg-background/70 p-4">
-          <h4 className="font-display text-lg font-bold text-primary">O que você fez?</h4>
-          <p className="text-xs text-muted-foreground">Marque só o que realmente aconteceu. Nada aqui é obrigatório.</p>
+        <section className="rounded-2xl border-2 border-primary/60 bg-primary/10 p-4 shadow-[0_2px_12px_color-mix(in_oklab,var(--primary)_18%,transparent)]">
+          <h4 className="font-display text-lg font-bold text-primary flex items-center gap-2">
+            <span className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm shrink-0">
+              ✅
+            </span>
+            O que você fez?
+          </h4>
+          <p className="mt-1.5 text-xs font-semibold text-foreground/80">
+            Marque aqui embaixo as ações de higienização e cuidado que você realizou. Nada aqui é obrigatório.
+          </p>
           <div className="mt-3 space-y-2">
             {cuidados.map((c) => {
               const ativo = marcados.includes(c.id);
