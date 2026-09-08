@@ -26,21 +26,6 @@ export function FichaAlimento({
   selecionados?: string[];
   onSalvar?: (ids: string[]) => Promise<void> | void;
 }) {
-  const [marcados, setMarcados] = useState<string[]>(selecionados ?? []);
-  const [salvando, setSalvando] = useState(false);
-
-  useEffect(() => {
-    setMarcados(selecionados ?? []);
-  }, [selecionados, alimento.id]);
-
-  function alternar(id: string) {
-    setMarcados((atual) => (atual.includes(id) ? atual.filter((x) => x !== id) : [...atual, id]));
-  }
-
-  const pontosPossiveis = cuidados
-    .filter((c) => marcados.includes(c.id))
-    .reduce((t, c) => t + c.pontos, 0);
-
   const nivelElevado = alimento.nivel_atencao === "atencao" || alimento.nivel_atencao === "maior";
 
   return (
